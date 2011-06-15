@@ -24,7 +24,7 @@ kst=0.2711+0.01858*(2.5-A)**2
 
 #tTot=365.25*24 #numero total de muestras de tiempo (horas)
 tTot=24 #numero total de muestras de tiempo (horas)
-dT=10 #tamano de intervalo de tiempo (en minitos)
+dT=10 #tamano de intervalo de tiempo (en minutos)
 num=round(tTot*60/dT) #numero de intervalos
 num=int(num)
 longitude = 0
