@@ -1,7 +1,8 @@
 <?php 
 
 //el ID del fotovoltaico que quermos usar
-$IDfotovol=1;//need to get the terreno ID to find the caminoSolar for that fotovol
+//$IDfotovol=1;//need to get the terreno ID to find the caminoSolar for that fotovol
+$IDfotovol=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
 
 // Connects to your Database 
 $con=mysql_connect("158.97.19.235", "rodger", "comp4510n");
@@ -12,6 +13,57 @@ if (!$con)
  }
 
 mysql_select_db("ce_fotovoltaico", $con); 
+
+// Seccion para crear la tabla de fotorespuesta
+
+$sql = "DROP TABLE IF EXISTS CREATE DATABASE ce_fotovoltaico_respuesta_32t (
+		 id INT PRIMARY KEY AUTO_INCREMENT,
+		 tiempo TIMESTAMP,
+		 azFVt FLOAT(9,6),
+		 altFVt FLOAT(9,6),
+		 aeff INT,
+		 potenciaCS FLOAT(9,6),
+		 potenciaCL FLOAT(9,6))";
+
+if (mysql_query($sql,$con))
+	echo "Base de datos creada";
+else
+	die('Error al crear base de datos: ' . mysql_error());
+
+/////////////////////////
+
+// Seccion para leer los datos de la tabla ce_fotovoltaico
+
+$sql = "SELECT terreno, delL, delH, azFV, altFV, IR, QE, x, y, z, r FROM ce_fotovoltaico";
+while ($row = mysql_fecth_array($sql)) {
+	$terreno = $row['terreno'];
+	$delL = $row['delL'];
+	$delH = $row['delH'];
+	$azFV = $row['azFV'];
+	$altFV = $row['altFV'];
+	$IR = $row['IR'];
+	$QE = $row['QE'];
+	$x = $row['x'];
+	$y = $row['y'];
+	$z = $row['z'];
+	$r = $row['r'];
+}
+
+/////////////////////////
+
+// Seccion para leer los datos de la tabla ce_camino_solar_32t
+
+$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solrar_32t";
+while ($row = mysql_fecth_array($sql)) {
+	$tiempo = $row['terreno'];
+	$az = $row['delL'];
+	$alt = $row['delH'];
+	$incero = $row['azFV'];
+	$intuno = $row['altFV'];
+}
+
+/////////////////////////
+
 
 $sql = "INSERT INTO ce_fotovoltaico (terreno,delL,delH,azFV,altFV, IR, QE,x,y,z, respuesta) VALUES  ('$terreno','$delL','$delH','$azFV','$altFV','$IR','$QE','$x','$y','$z', '$respuesta')";
 
