@@ -26,7 +26,7 @@ $sql = "DROP TABLE IF EXISTS CREATE DATABASE ce_fotovoltaico_respuesta_32t (
 		 potenciaCL FLOAT(9,6))";
 
 if (mysql_query($sql,$con))
-	echo "Base de datos creada";
+	echo "Tabla creada";
 else
 	die('Error al crear base de datos: ' . mysql_error());
 
@@ -53,18 +53,18 @@ while ($row = mysql_fecth_array($sql)) {
 
 // Seccion para leer los datos de la tabla ce_camino_solar_32t
 
-$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solrar_32t";
+$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_32t";
 while ($row = mysql_fecth_array($sql)) {
-	$tiempo = $row['terreno'];
-	$az = $row['delL'];
-	$alt = $row['delH'];
-	$incero = $row['azFV'];
-	$intuno = $row['altFV'];
+	$tiempo = $row['tiempo'];
+	$azS = $row['az'];
+	$altS = $row['alt'];
+	$Icl = $row['intcero'];
+	$Ics = $row['intuno'];
 }
 
 /////////////////////////
 
-
+/* Este pedazo de codigo se comento, creo que ya no se ocupara y estaba en un principio para ejemplo
 $sql = "INSERT INTO ce_fotovoltaico (terreno,delL,delH,azFV,altFV, IR, QE,x,y,z, respuesta) VALUES  ('$terreno','$delL','$delH','$azFV','$altFV','$IR','$QE','$x','$y','$z', '$respuesta')";
 
 if (!mysql_query($sql,$con))
@@ -72,22 +72,24 @@ if (!mysql_query($sql,$con))
   die('Error: ' . mysql_error());
   }
 echo "1 record added \n";
-$area= ;//delL*del desde FotoVoltaico
-$nI=1.000277;//indice de refracion en aire desde FotoVoltaico
-$nT=1.54 ;//indice de refracion en vidrio desde FotoVoltaico =$IR
+*/
 
-$QE= ;//desde desde FotoVoltaico =$QE
-$altFV= ; //desde FotoVoltaico si azFV o altFV=var, puedo ser un funccion de posicion solar 
-$azFV= ; //desde FotoVoltaico si azFV o altFV=var, puedo ser un funccion de posicion solar 
+$area= $delL*$delH; //desde FotoVoltaico
+$nI=1.000277;//indice de refracion en aire desde FotoVoltaico
+$nT=$IR;//indice de refracion en vidrio desde FotoVoltaico =$IR
+
+//$QE= ;//desde desde FotoVoltaico =$QE
+//$altFV= ; //desde FotoVoltaico si azFV o altFV=var, puedo ser un funccion de posicion solar 
+//$azFV= ; //desde FotoVoltaico si azFV o altFV=var, puedo ser un funccion de posicion solar 
 
 //todo abajo es para cada tiempo
 
-$tiempo= ; //desde CaminoSolar
-$Icl= ;//desde CaminoSolar
-$Ics= ;//desde CaminoSolar    
+//$tiempo= ; //desde CaminoSolar
+//$Icl= ;//desde CaminoSolar
+//$Ics= ;//desde CaminoSolar    
 
-$azS= ; //desde CaminoSolar
-$altS= ; //desde camino solar
+//$azS= ; //desde CaminoSolar
+//$altS= ; //desde camino solar
 
 $daz=$azFV-$azS; //diferencia en azmuth
 $dalt=$altFV-$altS;//diferencia en altura
@@ -98,7 +100,7 @@ $cosDalt=cos($dalt);
 $dif=acos(sqrt($cosDalt^2+$cosDaz^2))//diferencia en angulo en la normal de la FV 
 //y el sol egual angulo del rayo incidente
 
-$Aper=cos($dif);//area efectivo del FV (%)
+$Aper=cos($dif)*$area;//area efectivo del FV (%)
 
 $thetaT=asin(sin($dif)*$nI/$nT); //angulo del rayo transmitido
 $sin2TH=sin(2*$thetaT)*sin(2*$dif);//
@@ -111,3 +113,6 @@ $Tperp=($sin2TH)/$sinSQ;  //T perpendicular
 $potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;         
 $potenciaCS=$Ics*$QE*$Aper*($Tpar+$Tperp)/2;
 //we want $potencia $tiempo ,$Aper
+
+echo "/n/n potenciaCL = " . $potenciaCL . "/n potenciaCS = " . $potenciaCS ."/n tiempo = " . $tiempo . "/n Aper = " . $Aper . "/n";
+?>
