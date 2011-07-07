@@ -87,8 +87,17 @@ while ($row = mysql_fetch_array($result)) {
 
 	$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;         
 	$potenciaCS=$Ics*$QE*$Aper*($Tpar+$Tperp)/2;
-	//queremos $potencia $tiempo ,$Aper
+	
+	// Hay que guardar los valores generados en la tabla de ce_fotovoltaico_reapuesta_32t
+	$sql = "INSERT INTO ce_fotovoltaico_respuesta_32t (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$daz','$dalt','$Aper', '$potenciaCS', '$potenciaCL')";
 
+	if (!mysql_query($sql,$con))
+	  {
+	  die('Error: ' . mysql_error());
+	  }
+	echo "1 record added \n";
+
+	//queremos $potencia $tiempo ,$Aper
 	echo "\npotenciaCL = " . $potenciaCL . "\npotenciaCS = " . $potenciaCS ."\ntiempo = " . $tiempo . "\nAper = " . $Aper . "\nDaz= " . $daz . "\nDalt= " . $dalt . "\n"; 
 }
 
