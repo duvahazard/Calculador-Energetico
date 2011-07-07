@@ -1,22 +1,27 @@
-<?php 
+<?php
 
 //el ID del fotovoltaico que quermos usar
 //$IDfotovol=1;//need to get the terreno ID to find the caminoSolar for that fotovol
 $IDfotovol=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
 
 // Connects to your Database 
-$con=mysql_connect("158.97.19.235", "rodger", "comp4510n");
+//$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
+$con=mysql_connect("127.0.0.1", "root", "");
 
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());
  }
 
-mysql_select_db("ce_fotovoltaico", $con); 
+mysql_select_db("calculador", $con); 
 
 // Seccion para crear la tabla de fotorespuesta
 
-$sql = "DROP TABLE IF EXISTS CREATE DATABASE ce_fotovoltaico_respuesta_32t (
+$sql = "DROP TABLE IF EXISTS ce_fotovoltaico_respuesta_32t";
+
+mysql_query($sql,$con);
+
+$sql = "CREATE TABLE ce_fotovoltaico_respuesta_32t (
 		 id INT PRIMARY KEY AUTO_INCREMENT,
 		 tiempo TIMESTAMP,
 		 azFVt FLOAT(9,6),
@@ -26,16 +31,17 @@ $sql = "DROP TABLE IF EXISTS CREATE DATABASE ce_fotovoltaico_respuesta_32t (
 		 potenciaCL FLOAT(9,6))";
 
 if (mysql_query($sql,$con))
-	echo "Tabla creada";
+	echo "\nTabla creada";
 else
-	die('Error al crear base de datos: ' . mysql_error());
+	die("\nError al crear tabla: " . mysql_error());
 
 /////////////////////////
 
 // Seccion para leer los datos de la tabla ce_fotovoltaico
 
-$sql = "SELECT terreno, delL, delH, azFV, altFV, IR, QE, x, y, z, r FROM ce_fotovoltaico";
-while ($row = mysql_fecth_array($sql)) {
+$sql = "SELECT terreno, delL, delH, azFV, altFV, IR, QE, x, y, z, respuesta FROM ce_fotovoltaico WHERE ID = 8";
+$result = mysql_query($sql,$con);
+while ($row = mysql_fetch_array($result)) {
 	$terreno = $row['terreno'];
 	$delL = $row['delL'];
 	$delH = $row['delH'];
@@ -46,15 +52,16 @@ while ($row = mysql_fecth_array($sql)) {
 	$x = $row['x'];
 	$y = $row['y'];
 	$z = $row['z'];
-	$r = $row['r'];
+	$r = $row['respuesta'];
 }
 
 /////////////////////////
 
 // Seccion para leer los datos de la tabla ce_camino_solar_32t
 
-$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_32t";
-while ($row = mysql_fecth_array($sql)) {
+$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_32t LIMIT 43,60";
+$result = mysql_query($sql,$con);
+while ($row = mysql_fetch_array($result)) {
 	$tiempo = $row['tiempo'];
 	$azS = $row['az'];
 	$altS = $row['alt'];
@@ -97,7 +104,7 @@ $dalt=$altFV-$altS;//diferencia en altura
 $cosDaz=cos($daz);
 $cosDalt=cos($dalt);
 
-$dif=acos(sqrt($cosDalt^2+$cosDaz^2))//diferencia en angulo en la normal de la FV 
+$dif=acos(sqrt($cosDalt^2+$cosDaz^2));//diferencia en angulo en la normal de la FV 
 //y el sol egual angulo del rayo incidente
 
 $Aper=cos($dif)*$area;//area efectivo del FV (%)
@@ -114,5 +121,5 @@ $potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;
 $potenciaCS=$Ics*$QE*$Aper*($Tpar+$Tperp)/2;
 //we want $potencia $tiempo ,$Aper
 
-echo "/n/n potenciaCL = " . $potenciaCL . "/n potenciaCS = " . $potenciaCS ."/n tiempo = " . $tiempo . "/n Aper = " . $Aper . "/n";
+echo "\n\npotenciaCL = " . $potenciaCL . "\npotenciaCS = " . $potenciaCS ."\ntiempo = " . $tiempo . "\nAper = " . $Aper . "\n";
 ?>
