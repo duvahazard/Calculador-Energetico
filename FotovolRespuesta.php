@@ -1,3 +1,18 @@
+/* A program to
+ 
+  Project Leader Rodger Evans, 2011-06-01
+  sunnycanuck@gmail.com
+  Collaborators Voxel Soluciones
+  http://www.voxelsoluciones.com
+  info@voxelsoluciones.com
+
+  Published under the Creative Commons Attribution-ShareAlike 2.5 Generic (CC BY-SA 2.5) licence
+  http://creativecommons.org/licenses/by-sa/2.5/
+
+  Publicado bajo la Licencia Creative Commons Atribuci√≥n-CompartirIgual 2.5 M√©xico (CC BY-SA 2.5) 
+  http://creativecommons.org/licenses/by-sa/2.5/mx/
+  
+*/
 <?php
 
 //el ID del fotovoltaico que quermos usar
