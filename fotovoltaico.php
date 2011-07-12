@@ -7,11 +7,15 @@
 //$list=array(1002, "Rancho Valle", 31.962957, -116.655998, 97, 82, 0, "");
 //$list=array(1003, "CICESE-FisicaAplicada", 31.868674, -116.664655, 44, 32, -9.6, "");
 $theta=pi();
-$phi=130*pi()/180;
+$phi=60*pi()/180;
+$phi2=90*pi()/180;
+$phi3=45*pi()/180;
+$phi4=110*pi()/180;
 
-$list=array("Pedigral Playitas", 1.58, 0.790, $theta,$phi, 1.6 ,21.6, 0,0,0,""); //Sanyo HIP-214NKHE5
-
-
+//$list=array(32, 1.58, 0.790, $theta,$phi, 1.6 ,21.6, 0,0,0,""); //Sanyo HIP-214NKHE5 en Las Playitas
+//$list=array(32, 1.58, 0.790, $theta,$phi2, 1.6 ,21.6, 0,0,0,""); // en Las Playitas
+//$list=array(34, 1.58, 0.790, $theta,$phi3, 1.6 ,21.6, 0,0,0,""); // En CICESE-FisicaAplicada
+$list=array(33, 1.58, 0.790, $theta,$phi4, 1.6 ,21.6, 0,0,0,""); // En Rancho Valle
 
 $terreno=$list[0];
 $delL=$list[1];
@@ -26,7 +30,8 @@ $z=$list[9];
 $respuesta=$list[10];
 
 // Connects to your Database 
-$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); 
+//$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
+$con=mysql_connect("127.0.0.1", "root", "");
 
 if (!$con)
   {
