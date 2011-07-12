@@ -48,60 +48,19 @@ else
 	die("\nError al crear tabla: " . mysql_error());
 
 // Seccion para leer los datos de la tabla ce_fotovoltaico_respuesta_32t
-$sql = "SELECT terreno, delL, delH, azFV, altFV, IR, QE, x, y, z, respuesta FROM ce_fotovoltaico WHERE ID = 8";
-$result = mysql_query($sql,$con);
-$row = mysql_fetch_array($result);
-$terreno = $row['terreno'];
-$delL = $row['delL'];
-$delH = $row['delH'];
-$azFV = $row['azFV'];
-$altFV = $row['altFV'];
-$IR = $row['IR'];
-$QE = $row['QE']/100;
-$x = $row['x'];
-$y = $row['y'];
-$z = $row['z'];
-$r = $row['respuesta'];
-
-// Seccion para leer los datos de la tabla ce_camino_solar_32t
-$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_32t LIMIT 43,60 ";
+$sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_32t";
 $result = mysql_query($sql,$con);
 while ($row = mysql_fetch_array($result)) {
 	$tiempo = $row['tiempo'];
-	$azS = $row['az'];
-	$altS = $row['alt'];
-	$Icl = $row['intcero'];
-	$Ics = $row['intuno'];
-
-	// Comienzan calculos para cada registro
-	$area= $delL*$delH; //desde FotoVoltaico
-	$nI=1.000277; //indice de refracion en aire desde FotoVoltaico
-	$nT=$IR; //indice de refracion en vidrio desde FotoVoltaico =$IR
-
-	$daz=$azFV-$azS; //diferencia en azmuth
-	$dalt=$altFV-$altS; //diferencia en altura
-
-	$cosDaz=cos($daz);
-	$cosDalt=cos($dalt);
-
-	$dif=acos($cosDalt-cos($altS)*cos($altFV)*(1-cos($dz))); //diferencia en angulo en la normal de la FV 
-	// y el sol igual angulo del rayo incidente
-
-	$Aper=cos($dif)*$area; //area efectiva del FV (%)
-
-	$thetaT=asin(sin($dif)*$nI/$nT); //angulo del rayo transmitido
-	$sin2TH=sin(2*$thetaT)*sin(2*$dif);
-	$sinSQ=(sin($dif+$thetaT))^2;
-	$cosSQ=(cos($dif-$thetaT))^2;
-
-	$Tpar=1-($sin2TH)/($sinSQ*$cosSQ); //T parallel
-	$Tperp=1-($sin2TH)/$sinSQ;  //T perpendicular
-
-	$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;         
-	$potenciaCS=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;//this should be CS !!
+	$aeff = $row['aeff'];
+	$potenciaCS = $row['potenciaCS'];
+	$potenciaCL = $row['potenciaCL'];
 	
-	// Hay que guardar los valores generados en la tabla de ce_fotovoltaico_reapuesta_32t
-	$sql = "INSERT INTO ce_fotovoltaico_respuesta_32t (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
+	// Aqui comienzan los calculos de GT Salida
+	
+	
+	// Hay que guardar los valores generados en la tabla de ce_gtsalida_32t
+	$sql = "INSERT INTO ce_gtsalida_32t (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
 
 	if (!mysql_query($sql,$con))
 	  {
