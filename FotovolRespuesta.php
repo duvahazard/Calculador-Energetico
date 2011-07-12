@@ -26,9 +26,9 @@ $sql = "CREATE TABLE ce_fotovoltaico_respuesta_32t (
 		 tiempo TIMESTAMP,
 		 azFVt FLOAT(9,6),
 		 altFVt FLOAT(9,6),
-		 aeff INT,
-		 potenciaCS FLOAT(9,6),
-		 potenciaCL FLOAT(9,6))";
+		 aeff FLOAT(9,6),
+		 potenciaCS FLOAT(9,3),
+		 potenciaCL FLOAT(9,3))";
 
 if (mysql_query($sql,$con))
 	echo "\nTabla creada";
@@ -45,7 +45,7 @@ $delH = $row['delH'];
 $azFV = $row['azFV'];
 $altFV = $row['altFV'];
 $IR = $row['IR'];
-$QE = $row['QE'];
+$QE = $row['QE']/100;
 $x = $row['x'];
 $y = $row['y'];
 $z = $row['z'];
@@ -72,7 +72,7 @@ while ($row = mysql_fetch_array($result)) {
 	$cosDaz=cos($daz);
 	$cosDalt=cos($dalt);
 
-	$dif=acos(sqrt($cosDalt^2+$cosDaz^2)); //diferencia en angulo en la normal de la FV 
+	$dif=acos($cosDalt-cos($altS)*cos($altFV)*(1-cos($dz))); //diferencia en angulo en la normal de la FV 
 	// y el sol igual angulo del rayo incidente
 
 	$Aper=cos($dif)*$area; //area efectiva del FV (%)
@@ -82,14 +82,14 @@ while ($row = mysql_fetch_array($result)) {
 	$sinSQ=(sin($dif+$thetaT))^2;
 	$cosSQ=(cos($dif-$thetaT))^2;
 
-	$Tpar=($sin2TH)/($sinSQ*$cosSQ); //T parallel
-	$Tperp=($sin2TH)/$sinSQ;  //T perpendicular
+	$Tpar=1-($sin2TH)/($sinSQ*$cosSQ); //T parallel
+	$Tperp=1-($sin2TH)/$sinSQ;  //T perpendicular
 
 	$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;         
-	$potenciaCS=$Ics*$QE*$Aper*($Tpar+$Tperp)/2;
+	$potenciaCS=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;//this should be CS !!
 	
 	// Hay que guardar los valores generados en la tabla de ce_fotovoltaico_reapuesta_32t
-	$sql = "INSERT INTO ce_fotovoltaico_respuesta_32t (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$daz','$dalt','$Aper', '$potenciaCS', '$potenciaCL')";
+	$sql = "INSERT INTO ce_fotovoltaico_respuesta_32t (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
 
 	if (!mysql_query($sql,$con))
 	  {
@@ -98,7 +98,7 @@ while ($row = mysql_fetch_array($result)) {
 	echo "1 record added \n";
 
 	//queremos $potencia $tiempo ,$Aper
-	echo "\npotenciaCL = " . $potenciaCL . "\npotenciaCS = " . $potenciaCS ."\ntiempo = " . $tiempo . "\nAper = " . $Aper . "\nDaz= " . $daz . "\nDalt= " . $dalt . "\n"; 
+	echo "\npotenciaCL = " . $potenciaCL . "\npotenciaCS = " . $potenciaCS ."\ntiempo = " . $tiempo . "\nAper = " . $Aper . "\nDaz= " . $Tperp . "\nDalt= " . $Tpar . "\n"; 
 }
 
 ?>
