@@ -36,7 +36,7 @@ $sql = "DROP TABLE IF EXISTS ce_gtsalida_32t";
 
 mysql_query($sql,$con);
 
-$sql = "CREATE TABLE ce_gtsalida_32t (
+$sql = "CREATE TABLE ce_gtsalida_32t_8fv (
 		 id INT PRIMARY KEY AUTO_INCREMENT,
 		 tiempo TIMESTAMP,
 		 ac110CL FLOAT(9,6),
@@ -57,7 +57,7 @@ while ($row = mysql_fetch_array($result)) {
 	$potenciaCL = $row['potenciaCL'];
 	
 	// Aqui comienzan los calculos de GT Salida
-	
+
 	
 	// Hay que guardar los valores generados en la tabla de ce_gtsalida_32t
 	$sql = "INSERT INTO ce_gtsalida_32t (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
