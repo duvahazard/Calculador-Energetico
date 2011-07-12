@@ -99,7 +99,7 @@ for i in range(num):
 	else:
 		intensidad=0
 
-	sql = "INSERT INTO ce_camino_solar_32t (tiempo, alt, az, intcero) VALUES ('%s','%f','%f','%d')" % (vdate,valt,vaz,intensidad)
+	sql = "INSERT INTO ce_camino_solar_%st (tiempo, alt, az, intcero) VALUES ('%s','%f','%f','%d')" % (id_terreno,vdate,valt,vaz,intensidad)
 	try:
 		# Execute the SQL command
 		cursor.execute(sql)
