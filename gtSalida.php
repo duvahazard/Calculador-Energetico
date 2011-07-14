@@ -40,6 +40,10 @@ if (mysql_query($sql,$con))
 else
 	die("\nError al crear tabla: " . mysql_error());
 
+// Aqui comienza la revision de cada fotovoltaico del terreno en cuestion para saber si esta creado y si no crearle su tabla de cd_fotovoltaico_respuesta_txfvx
+
+
+
 // Seccion para leer los datos de la tabla ce_fotovoltaico_respuesta_32t
 $sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_32t";
 $result = mysql_query($sql,$con);
