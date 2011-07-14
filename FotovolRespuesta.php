@@ -1,3 +1,4 @@
+<?php
 /* A program to
  
   Project Leader Rodger Evans, 2011-06-01
@@ -13,30 +14,24 @@
   http://creativecommons.org/licenses/by-sa/2.5/mx/
   
 */
-<?php
-
-//el ID del fotovoltaico que quermos usar
-//$IDfotovol=1;//need to get the terreno ID to find the caminoSolar for that fotovol
-$IDfotovol=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
+// estas 2 variables siguientes se tienen que proporcionar por el usuario
+$idterreno=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
+$idfotovol=18; // este es el id del fotovoltaico para el cual se va a calcular la respuesta
 
 // Connects to your Database 
 //$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
 $con=mysql_connect("127.0.0.1", "root", "");
-
-if (!$con)
-  {
+if (!$con) {
   die('Could not connect: ' . mysql_error());
- }
-
+}
 mysql_select_db("calculador", $con); 
 
 // Seccion para crear la tabla de fotorespuesta
-
-$sql = "DROP TABLE IF EXISTS ce_fotovoltaico_respuesta_32t";
+$sql = "DROP TABLE IF EXISTS ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol."";
 
 mysql_query($sql,$con);
 
-$sql = "CREATE TABLE ce_fotovoltaico_respuesta_32t (
+$sql = "CREATE TABLE ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol." (
 		 id INT PRIMARY KEY AUTO_INCREMENT,
 		 tiempo TIMESTAMP,
 		 azFVt FLOAT(9,6),
@@ -50,8 +45,13 @@ if (mysql_query($sql,$con))
 else
 	die("\nError al crear tabla: " . mysql_error());
 
+// Ya que se creo la tabla de respuesta para el fotovoltaico correspondiente, hay que indicar en la tabla de los fotovoltaicos que ya se creo su tabla y ponerle el indicador
+$nombretabla= "ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol.""; // nombre de la tabla del fotovoltaico que se genera
+$sql = "UPDATE ce_fotovoltaico SET respuesta='".$nombretabla."' WHERE ID=".$idfotovol."";
+$result = mysql_query($sql,$con);
+
 // Seccion para leer los datos de la tabla ce_fotovoltaico
-$sql = "SELECT terreno, delL, delH, azFV, altFV, IR, QE, x, y, z, respuesta FROM ce_fotovoltaico WHERE ID = 8";
+$sql = "SELECT terreno, delL, delH, azFV, altFV, IR, QE, x, y, z, respuesta FROM ce_fotovoltaico WHERE ID = ".$idfotovol."";
 $result = mysql_query($sql,$con);
 $row = mysql_fetch_array($result);
 $terreno = $row['terreno'];
@@ -103,8 +103,8 @@ while ($row = mysql_fetch_array($result)) {
 	$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;         
 	$potenciaCS=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;//this should be CS !!
 	
-	// Hay que guardar los valores generados en la tabla de ce_fotovoltaico_reapuesta_32t
-	$sql = "INSERT INTO ce_fotovoltaico_respuesta_32t (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
+	// Hay que guardar los valores generados en la tabla de ce_fotovoltaico_reapuesta_txfvx
+	$sql = "INSERT INTO ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
 
 	if (!mysql_query($sql,$con))
 	  {
@@ -115,5 +115,4 @@ while ($row = mysql_fetch_array($result)) {
 	//queremos $potencia $tiempo ,$Aper
 	echo "\npotenciaCL = " . $potenciaCL . "\npotenciaCS = " . $potenciaCS ."\ntiempo = " . $tiempo . "\nAper = " . $Aper . "\nDaz= " . $Tperp . "\nDalt= " . $Tpar . "\n"; 
 }
-
 ?>
