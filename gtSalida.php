@@ -1,3 +1,4 @@
+<?php
 /* A program to
  
   Project Leader Rodger Evans, 2011-06-01
@@ -13,30 +14,25 @@
   http://creativecommons.org/licenses/by-sa/2.5/mx/
   
 */
-<?php
 
-//el ID del fotovoltaico que quermos usar
-//$IDfotovol=1;//need to get the terreno ID to find the caminoSolar for that fotovol
-$IDfotovol=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
+// estas 2 variables siguientes se tienen que proporcionar por el usuario
+$idterreno=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
+$idfotovol=18; // este es el id del fotovoltaico para el cual se va a calcular la respuesta
+
 
 // Connects to your Database 
 //$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
 $con=mysql_connect("127.0.0.1", "root", "");
-
-if (!$con)
-  {
+if (!$con) {
   die('Could not connect: ' . mysql_error());
- }
-
+}
 mysql_select_db("calculador", $con); 
 
 // Seccion para crear la tabla de gtsalida
-
-$sql = "DROP TABLE IF EXISTS ce_gtsalida_32t";
-
+$sql = "DROP TABLE IF EXISTS ce_gtsalida_t32";
 mysql_query($sql,$con);
 
-$sql = "CREATE TABLE ce_gtsalida_32t_8fv (
+$sql = "CREATE TABLE ce_gtsalida_t32t_fv8 (
 		 id INT PRIMARY KEY AUTO_INCREMENT,
 		 tiempo TIMESTAMP,
 		 ac110CL FLOAT(9,6),
