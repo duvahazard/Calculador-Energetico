@@ -15,10 +15,7 @@
   
 */
 
-// estas 2 variables siguientes se tienen que proporcionar por el usuario
 $idterreno=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
-$idfotovol=18; // este es el id del fotovoltaico para el cual se va a calcular la respuesta
-
 
 // Connects to your Database 
 //$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
@@ -29,10 +26,10 @@ if (!$con) {
 mysql_select_db("calculador", $con); 
 
 // Seccion para crear la tabla de gtsalida
-$sql = "DROP TABLE IF EXISTS ce_gtsalida_t32";
+$sql = "DROP TABLE IF EXISTS ce_gtsalida_t".$idterreno."";
 mysql_query($sql,$con);
 
-$sql = "CREATE TABLE ce_gtsalida_t32t_fv8 (
+$sql = "CREATE TABLE ce_gtsalida_t".$idterreno." (
 		 id INT PRIMARY KEY AUTO_INCREMENT,
 		 tiempo TIMESTAMP,
 		 ac110CL FLOAT(9,6),
