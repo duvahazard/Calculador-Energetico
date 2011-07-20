@@ -40,9 +40,34 @@ if (mysql_query($sql,$con))
 else
 	die("\nError al crear tabla: " . mysql_error());
 
-// Aqui comienza la revision de cada fotovoltaico del terreno en cuestion para saber si esta creado y si no crearle su tabla de cd_fotovoltaico_respuesta_txfvx
+// Aqui comienza la revision de cada fotovoltaico del terreno en cuestion para saber si esta creado y si no crearle su tabla de ce_fotovoltaico_respuesta_txfvx
+$sql = "SELECT ID, respuesta FROM ce_fotovoltaico WHERE terreno = '".$idterreno."'";
+$result = mysql_query($sql,$con);
+while ($row = mysql_fetch_array($result)) {
+	$idfotovol = $row['ID'];
+	$respuesta = $row['respuesta'];
+	if (empty($respuesta)) {
+		// Aqui se manda llamar la funcion para crear la tabla de fotorespuesta
+		$sql = "CREATE TABLE ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol." (
+		 id INT PRIMARY KEY AUTO_INCREMENT,
+		 tiempo TIMESTAMP,
+		 azFVt FLOAT(9,6),
+		 altFVt FLOAT(9,6),
+		 aeff FLOAT(9,6),
+		 potenciaCS FLOAT(9,3),
+		 potenciaCL FLOAT(9,3))";
 
+		if (mysql_query($sql,$con))
+			echo "\nTabla creada ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol;
+		else
+			die("\nError al crear tabla: " . mysql_error());
 
+		// Ya que se creo la tabla de respuesta para el fotovoltaico correspondiente, hay que indicar en la tabla de los fotovoltaicos que ya se creo su tabla y ponerle el indicador
+		$nombretabla= "ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol.""; // nombre de la tabla del fotovoltaico que se genera
+		$sql = "UPDATE ce_fotovoltaico SET respuesta='".$nombretabla."' WHERE ID=".$idfotovol."";
+		$result = mysql_query($sql,$con);
+	}
+}
 
 // Seccion para leer los datos de la tabla ce_fotovoltaico_respuesta_32t
 $sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_32t";
