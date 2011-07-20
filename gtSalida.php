@@ -67,6 +67,49 @@ while ($row = mysql_fetch_array($result)) {
 		$sql = "UPDATE ce_fotovoltaico SET respuesta='".$nombretabla."' WHERE ID=".$idfotovol."";
 		$result = mysql_query($sql,$con);
 
+		// Por el momento se hara todo el trabajo de fotorespuesta aqui mismo para poder generar la tabla de gtsalida del terreno en cuestion pero la idea es que todo sea una funcion solamente
+
+		// Seccion para leer los datos de la tabla ce_camino_solar_TERRENOt
+		$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_".$idterreno."t LIMIT 43,60 ";
+		$result = mysql_query($sql,$con);
+		while ($row = mysql_fetch_array($result)) {
+			$tiempo = $row['tiempo'];
+			$azS = $row['az'];
+			$altS = $row['alt'];
+			$Icl = $row['intcero'];
+			$Ics = $row['intuno'];
+			// Comienzan calculos para cada registro
+			$area= $delL*$delH; //desde FotoVoltaico
+			$nI=1.000277; //indice de refracion en aire desde FotoVoltaico
+			$nT=$IR; //indice de refracion en vidrio desde FotoVoltaico =$IR
+			$daz=$azFV-$azS; //diferencia en azmuth
+			$dalt=$altFV-$altS; //diferencia en altura
+			$cosDaz=cos($daz);
+			$cosDalt=cos($dalt);
+			$dif=acos($cosDalt-cos($altS)*cos($altFV)*(1-cos($dz))); //diferencia en angulo en la normal de la FV 
+			// y el sol igual angulo del rayo incidente
+			$Aper=cos($dif)*$area; //area efectiva del FV (%)
+			$thetaT=asin(sin($dif)*$nI/$nT); //angulo del rayo transmitido
+			$sin2TH=sin(2*$thetaT)*sin(2*$dif);
+			$sinSQ=(sin($dif+$thetaT))^2;
+			$cosSQ=(cos($dif-$thetaT))^2;
+			$Tpar=1-($sin2TH)/($sinSQ*$cosSQ); //T parallel
+			$Tperp=1-($sin2TH)/$sinSQ;  //T perpendicular
+			$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;         
+			$potenciaCS=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;//this should be CS !!
+			
+			// Hay que guardar los valores generados en la tabla de ce_fotovoltaico_reapuesta_txfvx
+			$sql = "INSERT INTO ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol." (tiempo, azFVt, altFVt, aeff, 
+		potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
+			if (!mysql_query($sql,$con))
+			  {
+			  die('Error: ' . mysql_error());
+			  }
+			echo "1 record added \n";
+			//queremos $potencia $tiempo ,$Aper
+			echo "\npotenciaCL = " . $potenciaCL . "\npotenciaCS = " . $potenciaCS ."\ntiempo = " . $tiempo . "\nAper = " 
+		. $Aper . "\nDaz= " . $Tperp . "\nDalt= " . $Tpar . "\n"; 
+		}
 	}
 }
 
