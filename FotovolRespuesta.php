@@ -66,8 +66,8 @@ $y = $row['y'];
 $z = $row['z'];
 $r = $row['respuesta'];
 
-// Seccion para leer los datos de la tabla ce_camino_solar_32t
-$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_32t LIMIT 43,60 ";
+// Seccion para leer los datos de la tabla ce_camino_solar_TERRENOt
+$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_".$idterreno."t LIMIT 43,60 ";
 $result = mysql_query($sql,$con);
 while ($row = mysql_fetch_array($result)) {
 	$tiempo = $row['tiempo'];
