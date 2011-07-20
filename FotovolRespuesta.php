@@ -44,6 +44,7 @@ if (mysql_query($sql,$con))
 	echo "\nTabla creada";
 else
 	die("\nError al crear tabla: " . mysql_error());
+	
 
 // Ya que se creo la tabla de respuesta para el fotovoltaico correspondiente, hay que indicar en la tabla de los fotovoltaicos que ya se creo su tabla y ponerle el indicador
 $nombretabla= "ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol.""; // nombre de la tabla del fotovoltaico que se genera
