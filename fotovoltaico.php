@@ -61,7 +61,6 @@ while ($row = mysql_fetch_array($data)) {
 }
 
 mysql_close($con)
-
 ?>
 
 
