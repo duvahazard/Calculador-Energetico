@@ -14,17 +14,11 @@
   http://creativecommons.org/licenses/by-sa/2.5/mx/
   
 */
+include("db.inc.php"); // conexion a base de datos
+
 // estas 2 variables siguientes se tienen que proporcionar por el usuario
 $idterreno=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
 $idfotovol=18; // este es el id del fotovoltaico para el cual se va a calcular la respuesta
-
-// Connects to your Database 
-//$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
-$con=mysql_connect("127.0.0.1", "root", "");
-if (!$con) {
-  die('Could not connect: ' . mysql_error());
-}
-mysql_select_db("calculador", $con); 
 
 // Seccion para crear la tabla de fotorespuesta
 $sql = "DROP TABLE IF EXISTS ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol."";
@@ -45,7 +39,6 @@ if (mysql_query($sql,$con))
 else
 	die("\nError al crear tabla: " . mysql_error());
 	
-
 // Ya que se creo la tabla de respuesta para el fotovoltaico correspondiente, hay que indicar en la tabla de los fotovoltaicos que ya se creo su tabla y ponerle el indicador
 $nombretabla= "ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol.""; // nombre de la tabla del fotovoltaico que se genera
 $sql = "UPDATE ce_fotovoltaico SET respuesta='".$nombretabla."' WHERE ID=".$idfotovol."";

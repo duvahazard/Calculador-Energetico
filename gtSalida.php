@@ -14,16 +14,9 @@
   http://creativecommons.org/licenses/by-sa/2.5/mx/
   
 */
+include("db.inc.php"); // conexion a base de datos
 
 $idterreno=32; // este es el id del terreno para el cual existe la tabla ce_camino_solar_32t
-
-// Connects to your Database 
-//$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
-$con=mysql_connect("127.0.0.1", "root", "");
-if (!$con) {
-  die('Could not connect: ' . mysql_error());
-}
-mysql_select_db("calculador", $con); 
 
 // Seccion para crear la tabla de gtsalida
 $sql = "DROP TABLE IF EXISTS ce_gtsalida_t".$idterreno."";
