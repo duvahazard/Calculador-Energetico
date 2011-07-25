@@ -20,6 +20,7 @@ function crear_tabla_fvrespuesta($idterreno, $idfotovol) {
  * @param $idterreno: id del terreno para el cual hay que crear la tabla
  * @param $idfotovol: id del dispositivos fotovoltaico para el cual se genera la tabla
  */
+ 	include("db.inc.php");
 	$sql = "CREATE TABLE ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol." (
 			 id INT PRIMARY KEY AUTO_INCREMENT,
 			 tiempo TIMESTAMP,
