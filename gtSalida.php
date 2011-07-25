@@ -42,12 +42,18 @@ while ($row = mysql_fetch_array($result)) {
 	$respuesta = $row['respuesta'];
 	if (empty($respuesta)) {
 		// Aqui se manda llamar la funcion para crear la tabla de fotorespuesta
+		echo "Se manda llamar funcion con ".$idterreno." y ".$idfotovol.".";
 		crear_tabla_fvrespuesta($idterreno, $idfotovol);
 	}
 }
 
-// Seccion para leer los datos de la tabla ce_fotovoltaico_respuesta_TERRENOt
-$sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_".$idterrno."t";
+// Variables para ir acumulando la sumatoria de los valores de ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
+$aeffSum;
+$potenciaCSSum;
+$potenciaCLSum;
+
+// Seccion para leer los datos de las tablas ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
+$sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol."";
 $result = mysql_query($sql,$con);
 while ($row = mysql_fetch_array($result)) {
 	$tiempo = $row['tiempo'];
@@ -58,7 +64,7 @@ while ($row = mysql_fetch_array($result)) {
 	// Aqui comienzan los calculos de GT Salida
 
 	
-	// Hay que guardar los valores generados en la tabla de ce_gtsalida_TERRENOt
+	// Hay que guardar los valores generados en la tabla de ce_gtsalida_tTERRENO
 	$sql = "INSERT INTO ce_gtsalida_".$idterreno."t (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
 
 	if (!mysql_query($sql,$con))
@@ -67,8 +73,7 @@ while ($row = mysql_fetch_array($result)) {
 	  }
 	echo "1 record added \n";
 
-	//queremos $potencia $tiempo ,$Aper
-	echo "\npotenciaCL = " . $potenciaCL . "\npotenciaCS = " . $potenciaCS ."\ntiempo = " . $tiempo . "\nAper = " . $Aper . "\nDaz= " . $Tperp . "\nDalt= " . $Tpar . "\n"; 
+	
 }
-
+*/
 ?>
