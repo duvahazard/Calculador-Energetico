@@ -37,6 +37,7 @@ else
 // Aqui comienza la revision de cada fotovoltaico del terreno en cuestion para saber si esta creado y si no crearle su tabla de ce_fotovoltaico_respuesta_txfvx
 $sql = "SELECT ID, respuesta FROM ce_fotovoltaico WHERE terreno = '".$idterreno."'";
 $result = mysql_query($sql,$con);
+
 while ($row = mysql_fetch_array($result)) {
 	$idfotovol = $row['ID'];
 	$respuesta = $row['respuesta'];
@@ -45,12 +46,14 @@ while ($row = mysql_fetch_array($result)) {
 		echo "Se manda llamar funcion con ".$idterreno." y ".$idfotovol.".";
 		crear_tabla_fvrespuesta($idterreno, $idfotovol);
 	}
+	$nombreTablaRespuesta[] = $respuesta; // arreglo con acumulador del nombre de las tablas para irlas leyendo en la sumatoria mas adelante
 }
 
 // Variables para ir acumulando la sumatoria de los valores de ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
 $aeffSum;
 $potenciaCSSum;
 $potenciaCLSum;
+$numTablaRespuesta = count($nombreTablaRespuesta);
 
 // Seccion para leer los datos de las tablas ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
 $sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol."";
@@ -61,9 +64,10 @@ while ($row = mysql_fetch_array($result)) {
 	$potenciaCS = $row['potenciaCS'];
 	$potenciaCL = $row['potenciaCL'];
 	
-	// Aqui comienzan los calculos de GT Salida
-	$gts = 
+	// Aqui comienzan los calculos de GT Salida 
 	
+
+
 	// Hay que guardar los valores generados en la tabla de ce_gtsalida_tTERRENO
 	$sql = "INSERT INTO ce_gtsalida_".$idterreno."t (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
 
