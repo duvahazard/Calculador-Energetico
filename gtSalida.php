@@ -62,7 +62,7 @@ while ($row = mysql_fetch_array($result)) {
 	$potenciaCL = $row['potenciaCL'];
 	
 	// Aqui comienzan los calculos de GT Salida
-
+	$gts = 
 	
 	// Hay que guardar los valores generados en la tabla de ce_gtsalida_tTERRENO
 	$sql = "INSERT INTO ce_gtsalida_".$idterreno."t (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
