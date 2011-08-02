@@ -47,6 +47,7 @@ while ($row = mysql_fetch_array($result)) {
 		crear_tabla_fvrespuesta($idterreno, $idfotovol);
 	}
 	$nombreTablaRespuesta[] = $respuesta; // arreglo con acumulador del nombre de las tablas para irlas leyendo en la sumatoria mas adelante
+	$numFotovol[] = $idfotovol; // arreglo con acumulador de los id de lso fotovoltaicos de un terreno para hacer el ciclo para la sumatoria
 }
 
 // Variables para ir acumulando la sumatoria de los valores de ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
@@ -54,30 +55,34 @@ $aeffSum;
 $potenciaCSSum;
 $potenciaCLSum;
 $numTablaRespuesta = count($nombreTablaRespuesta);
+$totalFotovol = count($numFotovol);
 
-// Seccion para leer los datos de las tablas ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
-$sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_t".$idterreno."fv".$idfotovol."";
-$result = mysql_query($sql,$con);
-while ($row = mysql_fetch_array($result)) {
-	$tiempo = $row['tiempo'];
-	$aeff = $row['aeff'];
-	$potenciaCS = $row['potenciaCS'];
-	$potenciaCL = $row['potenciaCL'];
-	
-	// Aqui comienzan los calculos de GT Salida 
-	
+for ($i=0; $i<$totalFotovol; $i++) {
+	// Seccion para leer los datos de las tablas ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
+	$sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_t".$idterreno."fv".$numFotovol[$i]."";
+	$result = mysql_query($sql,$con);
+	while ($row = mysql_fetch_array($result)) {
+		$tiempo = $row['tiempo'];
+		$aeff = $row['aeff'];
+		$potenciaCS = $row['potenciaCS'];
+		$potenciaCL = $row['potenciaCL'];
+		
+		if $i==0 {
+			
+		} 
+		
 
 
-	// Hay que guardar los valores generados en la tabla de ce_gtsalida_tTERRENO
-	$sql = "INSERT INTO ce_gtsalida_".$idterreno."t (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
+		// Hay que guardar los valores generados en la tabla de ce_gtsalida_tTERRENO
+		$sql = "INSERT INTO ce_gtsalida_t".$idterreno." (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
 
-	if (!mysql_query($sql,$con))
-	  {
-	  die('Error: ' . mysql_error());
-	  }
-	echo "1 record added \n";
+		if (!mysql_query($sql,$con))
+		  {
+		  die('Error: ' . mysql_error());
+		  }
+		echo "1 record added \n";
 
-	
+		
+	}
 }
-*/
 ?>
