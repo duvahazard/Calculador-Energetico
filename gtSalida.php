@@ -67,22 +67,18 @@ for ($i=0; $i<$totalFotovol; $i++) {
 		$potenciaCS = $row['potenciaCS'];
 		$potenciaCL = $row['potenciaCL'];
 		
-		if $i==0 {
-			
-		} 
-		
-
+		$aeffSum += $aeff;
+		$potenciaCSSum += $potenciaCS;
+		$potenciaCLSum += $potenciaCL; 
 
 		// Hay que guardar los valores generados en la tabla de ce_gtsalida_tTERRENO
-		$sql = "INSERT INTO ce_gtsalida_t".$idterreno." (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$ac110CL','$ac110CS)";
+		$sql = "INSERT INTO ce_gtsalida_t".$idterreno." (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$potenciaCLSum','$potenciaCSSum)";
 
 		if (!mysql_query($sql,$con))
 		  {
 		  die('Error: ' . mysql_error());
 		  }
 		echo "1 record added \n";
-
-		
 	}
 }
 ?>
