@@ -26,13 +26,13 @@ mysql_query($sql,$con);
 $sql = "CREATE TABLE ce_gtsalida_t".$idterreno." (
 		 id INT PRIMARY KEY AUTO_INCREMENT,
 		 tiempo TIMESTAMP,
-		 ac110CL FLOAT(9,6),
-		 ac110CS FLOAT(9,6))";
+		 ac110CL FLOAT(12,6),
+		 ac110CS FLOAT(12,6))";
 
 if (mysql_query($sql,$con))
-	echo "\nTabla creada";
+	echo "\nTabla creada\n";
 else
-	die("\nError al crear tabla: " . mysql_error());
+	die("\nError al crear tabla: " . mysql_error() . "\n");
 
 // Aqui comienza la revision de cada fotovoltaico del terreno en cuestion para saber si esta creado y si no crearle su tabla de ce_fotovoltaico_respuesta_txfvx
 $sql = "SELECT ID, respuesta FROM ce_fotovoltaico WHERE terreno = '".$idterreno."'";
@@ -58,27 +58,44 @@ $numTablaRespuesta = count($nombreTablaRespuesta);
 $totalFotovol = count($numFotovol);
 
 for ($i=0; $i<$totalFotovol; $i++) {
+	echo "i = " .$i."\n";
+	echo "Numero de FV = ".$numFotovol[$i]."\n";
 	// Seccion para leer los datos de las tablas ce_fotovoltaico_respuesta_tTERRENOfvFOTOVOLTAICO
 	$sql = "SELECT tiempo, aeff, potenciaCS, potenciaCL FROM ce_fotovoltaico_respuesta_t".$idterreno."fv".$numFotovol[$i]."";
 	$result = mysql_query($sql,$con);
-	while ($row = mysql_fetch_array($result)) {
+	//while ($row = mysql_fetch_array($result)) {
+		$row = mysql_fetch_array($result);
 		$tiempo = $row['tiempo'];
 		$aeff = $row['aeff'];
 		$potenciaCS = $row['potenciaCS'];
 		$potenciaCL = $row['potenciaCL'];
+
+		echo "tiempo = ".$tiempo." potenciaCS = ".$potenciaCS." potenciaCL = ".$potenciaCL."\n";
 		
 		$aeffSum += $aeff;
 		$potenciaCSSum += $potenciaCS;
 		$potenciaCLSum += $potenciaCL; 
 
+		echo "potenciaCSSum = ".$potenciaCSSum." potenciaCLSum = ".$potenciaCLSum."\n";
+
+		// id del ultimo record insertado
+
 		// Hay que guardar los valores generados en la tabla de ce_gtsalida_tTERRENO
-		$sql = "INSERT INTO ce_gtsalida_t".$idterreno." (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$potenciaCLSum','$potenciaCSSum)";
+		
+		if ($i==0) {
+			$sql = "INSERT INTO ce_gtsalida_t".$idterreno." (tiempo, ac110CL, ac110CS) VALUES ('$tiempo','$potenciaCLSum','$potenciaCSSum')";
+		}
+		else {
+			$sql = "UPDATE ce_gtsalida_t".$idterreno." SET tiempo='$tiempo', ac110CL='$potenciaCLSum', ac110CS) VALUES ('$tiempo','$potenciaCLSum','$potenciaCSSum')";
+		}
 
 		if (!mysql_query($sql,$con))
 		  {
 		  die('Error: ' . mysql_error());
 		  }
 		echo "1 record added \n";
-	}
+		$ultimorecord = mysql_insert_id();
+		echo "Ultimo record = ".$ultimorecord."\n";
+	//}
 }
 ?>
