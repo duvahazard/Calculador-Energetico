@@ -45,7 +45,7 @@ num=int(num)
 longitude = 0
 latitude = 0
 
-id_terreno = '32' #id temporal del terreno a leer
+id_terreno = '32' #id temporal del terreno a leer para calculos
 
 #aqui vamos a generar la tabla para el numero de terreno
 cursor.execute("""DROP TABLE IF EXISTS ce_camino_solar_%st""" % (id_terreno))
