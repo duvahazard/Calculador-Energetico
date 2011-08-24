@@ -1,4 +1,21 @@
-<?php 
+<?php
+/* A program to
+ 
+  Project Leader Rodger Evans, 2011-06-01
+  sunnycanuck@gmail.com
+  Collaborators Voxel Soluciones
+  http://www.voxelsoluciones.com
+  info@voxelsoluciones.com
+
+  Published under the Creative Commons Attribution-ShareAlike 2.5 Generic (CC BY-SA 2.5) licence
+  http://creativecommons.org/licenses/by-sa/2.5/
+
+  Publicado bajo la Licencia Creative Commons Atribuci√≥n-CompartirIgual 2.5 M√©xico (CC BY-SA 2.5) 
+  http://creativecommons.org/licenses/by-sa/2.5/mx/
+  
+*/
+include("db.inc.php"); // conexion a base de datos
+
 //azFV y altFV estan medicaciones de la normal del FV y son en RAD donde azFV=0 es norte y sube en rotatacion a la este, seria pi a S.
 //altFV es 0 cuando esta puntando a la horizon y pi/2 cuando esta puntando a la horizon
 
@@ -28,17 +45,6 @@ $x=$list[7];
 $y=$list[8];
 $z=$list[9];
 $respuesta=$list[10];
-
-// Connects to your Database 
-//$con=mysql_connect("158.97.19.235", "rodger", "comp4510n"); // para Rodger
-$con=mysql_connect("127.0.0.1", "root", "");
-
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
- }
-
-mysql_select_db("calculador", $con); 
 
 $sql = "INSERT INTO ce_fotovoltaico (terreno,delL,delH,azFV,altFV, IR, QE,x,y,z, respuesta) VALUES  ('$terreno','$delL','$delH','$azFV','$altFV','$IR','$QE','$x','$y','$z', '$respuesta')";
 
