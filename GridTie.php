@@ -26,11 +26,12 @@ $caso= //input to function
 //find all grid tie devices used in this case (buscar dispositivos en el caso con ce_dispositivos:tipo=4) make a list
 
 //for each fv (ce_dispositivo) en ce_casos make response table ce_fotovoltaico_respuesta_XXc (XX=ce_casos:ID)
+//crear una table con una fila para cada mes. Uso el tabla "HorarsDelMes" como base para como larga esta la tiempo.
 
 
 while () {  //cycle through each dispositivo
 	//make tabe called ce_gridTie_"$caso"caso
-	//for each response table ce_fotovoltaico_respuesta_XXc (XX=ce_casos:ID) sum all the values in each month and add the monthly values to ce_gridTie_XXcaso
+	//for each response table ce_fotovoltaico_respuesta_XXc (XX=ce_casos:ID) sum all the values in each month and add the monthly values to ce_gridTie_XXcaso.
 }
 
 ?>

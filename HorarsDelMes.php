@@ -1,5 +1,5 @@
 <?php    
-/* A program to calculate the change in energy consumpution with the change of installed lighting for the calculado_energetico.
+/* A program to calculate the number of each days of the week in a given range of months; for the calculado_energetico.
  
   Project Leader Rodger Evans, 2011-11-09
   sunnycanuck@gmail.com
@@ -16,14 +16,8 @@
   http://creativecommons.org/licenses/by-sa/2.5/mx/
   
 */
-//look for casos ce_dispositivos:tipo=2
-//for the above subset (called lamps) cycle through the cases
-$caso=1;
-while (){
-	if{ //if there is a lamp with that case number
-		$potencia=//ce_dispositivo:factor in kW
-		
-	}
-}
+$fetchaIn= ;//fetcha inicio
+$fetchaFinal= ;//fetcha final
+//hacer una table con mes año, # de dias en {lunes, martes, mercioles, jueves, viernes, sabado, domingo} empesando en $fetchaIn hasta $fetchaFinal
 
 ?>
