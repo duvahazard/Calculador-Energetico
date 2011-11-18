@@ -1,0 +1,336 @@
+div.spacer_2{height:2px; background:#010532;}
+div.spacer_10{height:10px;}
+div.spacer_20{height:20px;}
+div.spacer_25{height:25px;}
+div.spacer_50{height:50px;}
+div.spacer_100{
+	height:100px;
+	clear:both;
+	display:block;
+}
+.center{text-align:center;}
+fieldset{
+	border:1px dashed #666666;
+	padding:10px;
+}
+legend{
+	margin-left:10px;
+}
+a{
+	color:#010532;
+}
+a:hover{
+	color:#999999;
+}
+.modulos{
+	min-height:500px;
+}
+#logos{
+	height:75px;
+}
+#menu{
+	height:100px;
+	background:url(../images/btn_bg.png) repeat;
+	padding-left:5px;
+}
+#menu_secundario{
+	height:30px;
+	background:#FFF;
+	padding-left:5px;
+	border-bottom:2px solid #010532;
+}
+#menu_secundario a{
+	text-decoration:none;
+	color:#333;
+	position:relative;
+	top:7px;
+}
+#menu_secundario a:hover{
+	color:#999;
+}
+#menu_secundario ul li{
+	list-style:none;
+	display:inline;
+	height:30px;
+}
+#menu_secundario img{
+	position:relative;
+	top:-2px;
+}
+.spacer_btn{
+	margin:0 4px 0 4px;				
+}
+#titulo_pagina{
+	color:#FFFFFF;
+	text-align:center;
+	margin-top:30px;
+}
+#contenido{
+	background-color:#FFFFFF;
+}
+#main_izq, #main_der, #acerca{
+	text-align:justify;
+}
+#footer{
+	text-align:center;
+	color:#FFFFFF;
+}
+/*------------------------------ SLIDER ------------------------------*/
+
+.main_view {
+	float: left;
+	position: relative;
+}
+.window {
+	height:297px;	
+	width: 940px;
+	overflow: hidden;
+	position: relative;
+}
+.image_reel {
+	position: absolute;
+	top: 0; left: 0;
+}
+.image_reel img {float: left;}
+
+.paging {
+	position: absolute;
+	bottom: 40px; right: -6px;
+	width: 178px; height:47px;
+	z-index: 100;
+	text-align: center;
+	line-height: 40px;
+	background: url(../images/paging_bg2.png) no-repeat;
+	display: none;
+}
+.paging a{
+	padding: 5px;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+.paging a.active{
+	font-weight: bold; 
+	background: #920000; 
+	border: 1px solid #610000;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.paging a:hover {font-weight: bold;}
+/*------------------------------ SLIDER ------------------------------*/
+div.login{
+	background:#FFF url(../images/login_bg.png) center no-repeat;
+	width:610px;
+	height:458px;
+	text-align:center;
+}
+div.login h2{
+	color:#FFFFFF;
+	position:relative;
+	top:100px;
+}
+#tabla_login{
+	position:absolute;
+	left:162px;
+}
+#user_field{
+	text-align:center;
+	color:#FFF;
+	height:70px;
+	background: url(../images/btn_bg.png) repeat;
+}
+#user_field p{
+	margin-top:25px;
+	font-size:12px;
+}
+#user_field img{
+	position:relative;
+	top:-2px;
+}
+#alta_proveedor{
+	text-align:right;
+}
+table#alta_proveedores{
+	margin-bottom:0;
+	width:100%;
+}
+table#alta_proveedores tr td{
+	padding:3px;
+	vertical-align:middle;
+}
+#lada, #lada_fax{
+	width:20%;
+}
+.ErrorField {
+	border: #DD0000;
+}
+span.ValidationErrors {
+	color: #DD0000;
+	display: block;
+	font-size: 12px;
+	font-style: italic;
+	padding-left: 10px;
+}
+.msj{
+	background:#A6F16C;
+	border:1px solid #409300;
+	padding:10px 0;
+	margin-bottom:20px;
+	text-align:center;
+}
+.msjerror{
+	background:#FF0D00;
+	border:1px solid #A60800;
+	padding:10px 0;
+	margin-bottom:20px;
+	text-align:center;
+	color:#FFFFFF;
+}
+div.login_admin input.general{
+	width:210px;
+	height:35px;
+	background:#1e4f8a;
+	color:#FFFFFF;
+	border:0;
+}
+div.login_admin table tr td{
+	padding:3px;
+}
+.messagebox{
+	width:auto;
+	margin-left:30px;
+	border:1px solid #000000;
+	background:#ffc;
+	padding:3px;
+	color:#333333;
+	border-radius: 7px 7px 7px 7px;
+	padding: 3px 4px;
+}
+.messageboxok{
+	width:auto;
+	margin-left:30px;
+	border:1px solid #349534;
+	background:#C9FFCA;
+	padding:3px;
+	color:#008000;
+	border-radius: 7px 7px 7px 7px;
+	padding: 3px 4px;
+	
+}
+.messageboxerror{
+	width:auto;
+	border:1px solid #CC0000;
+	background:#F7CBCA;
+	color:#CC0000;
+	clear:both;
+	display:block;
+	border-radius: 7px 7px 7px 7px;
+	padding: 3px 4px;
+}
+
+.messageboxadmin{
+	border:1px solid #000000;
+	background:#ffc;
+	color:#333333;
+	border-radius: 7px 7px 7px 7px;
+	padding: 5px;
+}
+.messageboxokadmin{
+	width:auto;
+	margin-left:30px;
+	border:1px solid #349534;
+	background:#C9FFCA;
+	color:#008000;
+	border-radius: 7px 7px 7px 7px;
+	padding: 5px;
+	
+}
+.messageboxerroradmin{
+	border:1px solid #CC0000;
+	background:#F7CBCA;
+	color:#CC0000;
+	display:block;
+	border-radius: 7px 7px 7px 7px;
+	padding: 5px;
+}
+table#activar_proveedores{
+	width:100%
+}
+table#activar_proveedores thead tr td{
+	background:#0091E6;
+	color:#FFFFFF;
+	text-align:center;
+	min-width:70px;
+	padding:5px 0 5px 0;
+	border:1px solid #FFF;
+}
+table#activar_proveedores thead tr td#izq{
+	border-radius:5px 0 0 0;
+}
+table#activar_proveedores thead tr td#der{
+	border-radius:0 5px 0 0;
+}
+table#activar_proveedores thead tr td img{
+	margin-top:-5px;
+}
+table#activar_proveedores tbody td{
+	padding:5px;
+	border-right:1px solid #FFF;
+}
+.par{
+	background:#D6E3F9;
+}
+.non{
+	background:#94bcff;
+}
+.link_blanco{
+	color:#FFFFFF;
+}
+.general{
+	background: none repeat scroll 0 0 #1E4F8A;
+	border:0;
+	color: #FFFFFF;
+	height: 35px;
+	width: 210px;
+	border-radius: 7px 7px 7px 7px;
+	margin: 0 5px 0 0;
+  padding: 3px 4px;
+}
+.width96{
+	width:96%;
+}
+td#terreno_num{
+	background:#565656;
+	color: #FFFFFF;
+  text-align: center;
+	width:40px;
+}
+#terrenos_tabla{
+	border:1px solid #000;
+	width:820px;
+}
+#terrenos_tabla tr td{
+	border:1px solid #000;
+}
+table#terrenos_tabla tr td#terreno_nombre{
+	border-right:0;
+}
+table#terrenos_tabla tr td#terreno_botones{
+	border-left:0;
+}
+table#terrenos_tabla h5{
+	margin-bottom:0;
+}
+#terreno_datos table tr td{
+	border:none;
+	padding-right:10px;
+}
+#terreno_datos table tr td img{
+	margin-left:10px;
+}
+#terreno_num.par{
+	background:#51afe5;
+}
+#terreno_num.non{
+	background:#565656;
+}
