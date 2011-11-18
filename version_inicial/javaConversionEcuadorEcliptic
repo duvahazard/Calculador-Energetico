@@ -1,0 +1,64 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!-- hide this script tag's contents from old browsers
+function compute(form) {
+    AH=eval(form.arh.value)
+    AM=eval(form.arm.value)
+    AS=eval(form.ars.value)
+    DG=eval(form.dcg.value)
+    DM=eval(form.dcm.value)
+    DS=eval(form.dcs.value)
+    with (Math) { 
+        R =180/PI
+        OB= 23.4333334/R        
+        RA=AH+AM/60+AS/3600
+        DC=DG+DM/60+DS/3600
+        RA = RA * 15
+        EL = atan(tan(RA/R)*cos(OB)+tan(DC/R)*sin(OB)/cos(RA / R))
+        if (EL < 0) {
+                EL = EL + 2 *PI
+                }
+        EL = EL * R
+        DT = EL - RA
+        if (DT < -90)  {
+                EL = EL + 180
+                }
+        if (DT > 90) {
+                 EL = EL + 180
+                }
+        if (EL > 360) {
+                EL = EL - 360
+                }
+        ET=asin(sin(DC/R)*cos(OB)-cos(DC/R)*sin(OB)*sin(RA/R))
+        <!--conversion a gms de la longitud-->
+        G=floor(EL);
+        M=floor((EL - floor(EL)) * 60)
+        S=((EL -floor(EL)) * 60 - M) * 60
+        ET=ET*R;
+        <!--conversion a g.ms de la latitud-->
+        D = abs(ET);
+        if (ET>0) {
+                G1=floor(D)
+                } else {
+                G1=(-1)*floor(D)
+                }
+        M1=floor((D - floor(D)) * 60)
+        S1 = ((D - floor(D)) * 60 - M1) * 60
+        if (ET<0) {
+                M1=-M1;
+                S1=-S1;
+                }
+
+    }
+    form.longitud.value =EL;
+    form.latitud.value =ET;
+    form.lond.value =G;
+    form.lonm.value =M;
+    form.lons.value =S;
+    form.latg.value =G1;
+    form.latm.value =M1;
+    form.lats.value =S1;
+    
+     
+}
+// done hiding from old browsers -->
+</SCRIPT>

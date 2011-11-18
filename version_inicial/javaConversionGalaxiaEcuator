@@ -1,0 +1,64 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!-- hide this script tag's contents from old browsers
+function compute(form) {
+    LG=eval(form.lond.value)
+    LM=eval(form.lonm.value)
+    LS=eval(form.lons.value)
+    BG=eval(form.latg.value)
+    BM=eval(form.latm.value)
+    BS=eval(form.lats.value)
+    with (Math) { 
+        R =180/PI
+        GL=LG+LM/60+LS/3600
+        GT=BG+BM/60+BS/3600
+        DC=asin(cos(GT/R)*cos(27.4/R)*sin(GL/R-33/R)+sin(GT/R)*sin(27.4/R))
+        RA=atan((cos(GT/R)*cos(GL/R-33/R))/(sin(GT/R)*cos(27.4/R)-cos(GT/R)*sin(27.4/R)*
+               sin(GL/R-33/R)))
+        RA = RA * R
+        TP=cos(GT/R)*cos(GL/R-33/R)
+        BT=sin(GT/R)*cos(27.4/R)-cos(GT/R)*sin(27.4/R)*sin(GL/R-33/R)
+        if (BT<0) {
+                RA=RA+180
+                } else {
+                if (TP<0) {
+                        RA=RA+360
+                        }
+                     }
+        RA = RA + 192.25
+        if (RA>360) {
+                RA = RA - 360
+                }
+        RA = RA / 15
+        <!--conversion a hms de la ascension recta-->
+        H=floor(RA);
+        M=floor((RA - floor(RA)) * 60)
+        S=((RA -floor(RA)) * 60 - M) * 60
+        DC=DC*R;
+        <!--conversion a g.ms de la declinacion-->
+        D = abs(DC);
+        if (DC>0) {
+                G1=floor(D)
+                } else {
+                G1=(-1)*floor(D)
+                }
+        M1=floor((D - floor(D)) * 60)
+        S1 = ((D - floor(D)) * 60 - M1) * 60
+        if (DC<0) {
+                M1=-M1;
+                S1=-S1;
+                }
+
+    }
+    form.arecta.value =RA;
+    form.declin.value =DC;
+    form.arh.value =H;
+    form.arm.value =M;
+    form.ars.value =S;
+    form.dcg.value =G1;
+    form.dcm.value =M1;
+    form.dcs.value =S1;
+    
+     
+}
+// done hiding from old browsers -->
+</SCRIPT>
