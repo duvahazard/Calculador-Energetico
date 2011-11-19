@@ -16,8 +16,13 @@
 #!/usr/bin/python
 
 import MySQLdb
-import ephem
+#import ephem
 import math
+
+# en Linux se tuvo que cambiar el path donde estaba el paquete ephem pues python no lo encontraba
+import sys
+sys.path = ["/usr/local/lib/python2.7/dist-packages/ephem"] + sys.path
+import ephem
 
 #Open database connection
 db = MySQLdb.connect("localhost","root","","calculador")
