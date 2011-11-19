@@ -1,7 +1,7 @@
 <div class="grid_8 suffix_6 alpha">
 <fieldset>
 <legend>Favor de llenar los campos se&ntilde;alados</legend>
-<form action="sql.php?mod=3&act=1" method="post" class="AdvancedForm">
+<form action="sql.php?mod=1&act=4" method="post" class="AdvancedForm">
 <table id="alta_proveedores" cellpadding="0" cellspacing="0" align="center">
 	<tr>
   	<td>Nombre*</td>
@@ -36,7 +36,7 @@
     <td><input name="url" type="text" class="general width96"></td>
   </tr>
   <tr>
-  	<td colspan="2"><div align="right"><input type="image" value="" src="images/guardar.png" style="margin-right:4px;"></div></td>
+  	<td colspan="2"><div align="right"><input type="image" value="" src="../images/guardar.png" style="margin-right:4px; border:none;"></div></td>
   </tr>
 </table>
 </form>
