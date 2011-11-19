@@ -16,8 +16,8 @@
   http://creativecommons.org/licenses/by-sa/2.5/mx/
   
 */
-$fetchaIn= ;//fetcha inicio
+$fetchaIn= ;//fetcha inicio=el fetcha mas temprano en Tarrifas
 $fetchaFinal= ;//fetcha final
-//hacer una table con nombre ce_horasDelMes con mes año, numDias, numHoras,# de dias en {lunes, martes, mercioles, jueves, viernes, sabado, domingo} empesando en los fetchas mas temprano en Tarrifas hasta $fetchaFinal (entrado desde Admin)
+//hacer una table con nombre ce_horasDelMes con mes año, numDias, numHoras,# de dias en {lunes, martes, mercioles, jueves, viernes, sabado, domingo} con fetchas $fetchaIn hasta $fetchaFinal (entrado desde Admin)
 
 ?>

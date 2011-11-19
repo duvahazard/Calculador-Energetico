@@ -29,6 +29,25 @@
 
 //for rows befor the date of the lectura_actual use values from ce_CFE_recibo_XXcc value(i)=value(i+1)-ce_recibe_XXc:fetcha=(i)
 
-//for rows after the date of the lectura_actual use value(i+1)= ce_demanda_promedio_XXcc*ce_HorasDelMes:num_horas+value(i)
+//if ce_medidor_01caso ($caso=1) doesn't exist then create it (it is the baseline that we will be modifing)
+
+//for rows after the date of the lectura_actual 
+
+if($coso=1){//this is the case where nothing has been done and consumo is the same
+	//use value(i+1)= ce_demanda_promedio_XXcc*ce_HorasDelMes:num_horas+value(i)
+}
+else{ //this is the case where there have been changes in dispositivos and consumo is modified
+	//copy ce_medidorCFE_01caso and name with new caso
+	//for this caso look for all sequencias that exist and for each row 
+	$tipo=ce_dispositivos:tipo
+	if($tipo=1){
+		//ce_medidorCFE_01caso:valor-ce_fotovoltaico_respuesta_02c (- because it is producing energi)
+	}
+	if($tipo=2){
+		//ce_medidorCFE_01caso:valor+ce_lampara_01caso (+ because it is consuming more energy)
+	}
+}
+
+
 
 ?>
