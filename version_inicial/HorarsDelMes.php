@@ -18,6 +18,6 @@
 */
 $fetchaIn= ;//fetcha inicio
 $fetchaFinal= ;//fetcha final
-//hacer una table con nombre ce_horasDelMes con mes año, numDias, numHoras,# de dias en {lunes, martes, mercioles, jueves, viernes, sabado, domingo} empesando en $fetchaIn hasta $fetchaFinal
+//hacer una table con nombre ce_horasDelMes con mes año, numDias, numHoras,# de dias en {lunes, martes, mercioles, jueves, viernes, sabado, domingo} empesando en los fetchas mas temprano en Tarrifas hasta $fetchaFinal (entrado desde Admin)
 
 ?>
