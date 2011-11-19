@@ -1,23 +1,10 @@
 <div id="acerca" class="prefix_1 grid_14 suffix_1 alpha">
-  <div class="grid_10 alpha">
-  	<h2>Proveedores</h2>
-  </div><!-- grid_10 alpha -->
-  <div id="alta_proveedor" class="grid_4 omega">
-  	<a href="index.php?mod=3&act=1"><img src="images/agregar.png" border="0" /> Alta de proveedor</a>
-  </div><!-- grid_4 omega -->
   <div class="grid_14 alpha">
-  <?php
-	switch($_REQUEST['msj']){
-		case 1: echo '<div class="msj">Alta de proveedor realizada con &eacute;xito</div>'; break;
-		case 2: echo '<div class="msjerror">Hubo un error al agregar al proveedor, intentelo de nuevo.</div>'; break;
-	}
-	
-	
-	switch($_REQUEST['act']){
-		case 1: require("modulos/proveedores/alta.php");break;
-		default:require("modulos/proveedores/default.php");break;
-	}
-	?>
+  	<h2>Proveedores</h2>
+  	<p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In felis est, facilisis ut facilisis in, tincidunt at massa. 
+      Ut nec nisi mi, nec ultricies metus. Ut tincidunt blandit eros, ac dignissim risus malesuada id.
+    </p>
   </div>
 </div><!-- main_izq -->
 
