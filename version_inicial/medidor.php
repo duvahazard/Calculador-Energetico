@@ -1,5 +1,5 @@
 <?php    
-/* A program to calculate the number of each days of the week in a given range of months; for the calculado_energetico.
+/* A program to calculate the simulated reading on a CFE meter for the calculado_energetico.
  
   Project Leader Rodger Evans, 2011-11-09
   sunnycanuck@gmail.com
@@ -16,8 +16,13 @@
   http://creativecommons.org/licenses/by-sa/2.5/mx/
   
 */
-$fetchaIn= ;//fetcha inicio
-$fetchaFinal= ;//fetcha final
-//hacer una table con nombre ce_horasDelMes con mes año, numDias, numHoras,# de dias en {lunes, martes, mercioles, jueves, viernes, sabado, domingo} empesando en $fetchaIn hasta $fetchaFinal
+
+//reads ce_consumo, ce_Casos
+
+//make a table called ce_medidorCFE_01caso that is the same format in number of rows as ce_HorasDelMes with ce_medidorCFE_01caso:fetcha taken from año y mes
+
+//read the values for ce_consumo for tipo=3, if non exists then generate one (if more then one exists, delet both and make a new one).
+
+//To make 
 
 ?>
