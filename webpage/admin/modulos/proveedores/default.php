@@ -9,13 +9,13 @@ $query = mysql_query("SELECT * FROM ce_proveedores ORDER BY `ce_proveedores`.`$o
 	<thead>
   	<tr>
     	<td id="izq"><a href="index.php?mod=3&orderby=nombre" target="_self">Nombre <img src="../images/flecha_abajo.png" border="0" /></a></td>
-      <td><a href="index.php?mod=3&orderby=ciudad" target="_self">Ciudad <img src="../images/flecha_abajo.png" border="0" /></td>
-      <td><a href="index.php?mod=3&orderby=direccion" target="_self">Direcci&oacute;n <img src="../images/flecha_abajo.png" border="0" /></td>
-      <td><a href="index.php?mod=3&orderby=rfc" target="_self">R.F.C. <img src="../images/flecha_abajo.png" border="0" /></td>
-      <td><a href="index.php?mod=3&orderby=correo" target="_self">email <img src="../images/flecha_abajo.png" border="0" /></td>
-      <td><a href="index.php?mod=3&orderby=telefono" target="_self">Tel&eacute;fono <img src="../images/flecha_abajo.png" border="0" /></td>
-      <td><a href="index.php?mod=3&orderby=fax" target="_self">url <img src="../images/flecha_abajo.png" border="0" /></td>
-      <td id="der"><a href="index.php?mod=3&orderby=activado" target="_self">Acciones <img src="../images/flecha_abajo.png" border="0" /></td>
+      <td><a href="index.php?mod=3&orderby=ciudad" target="_self">Ciudad <img src="../images/flecha_abajo.png" border="0" /></a></td>
+      <td><a href="index.php?mod=3&orderby=direccion" target="_self">Direcci&oacute;n <img src="../images/flecha_abajo.png" border="0" /></a></td>
+      <td><a href="index.php?mod=3&orderby=rfc" target="_self">R.F.C. <img src="../images/flecha_abajo.png" border="0" /></a></td>
+      <td><a href="index.php?mod=3&orderby=correo" target="_self">email <img src="../images/flecha_abajo.png" border="0" /></a></td>
+      <td><a href="index.php?mod=3&orderby=telefono" target="_self">Tel&eacute;fono <img src="../images/flecha_abajo.png" border="0" /></a></td>
+      <td><a href="index.php?mod=3&orderby=fax" target="_self">url <img src="../images/flecha_abajo.png" border="0" /></a></td>
+      <td id="der"><a href="index.php?mod=3&orderby=activado" target="_self">Acciones <img src="../images/flecha_abajo.png" border="0" /></a></td>
     </tr>
   </thead>
   <tbody>
