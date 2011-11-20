@@ -106,9 +106,12 @@ javascripts();
     	<li><a href="index.php?mod=3"><img src="images/proveedor.png" border="0" /> Proveedores</a></li>
       <li><a href="index.php?mod=4"><img src="images/proveedor.png" border="0" /> Terrenos</a></li>
     </ul>
-    <?php }else{ ?>
-    	&nbsp;
-    <?php } ?>
+    <?php }else{
+    	if($_REQUEST['ide']==6){
+				echo '<div class="spacer_3"></div>';
+				echo '<h6 id="usuario_existe">El usuario ya se encuentra registrado, intentelo nuevamente.</h6>';
+			}
+     } ?>
   </div><!-- menu_secundario -->
 <!------------------------ MENU SECUNDARIO ------------------------>
 
