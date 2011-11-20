@@ -11,7 +11,8 @@ require("../functions.php");
 
 if(!empty($_REQUEST['mod']) and !empty($_REQUEST['act'])){
   switch($_REQUEST['mod']){  		
-   case 1: require("modulos/proveedores/sql.php"); break;   
+   case 1: require("modulos/proveedores/sql.php"); break;
+	 case 2: require("modulos/dispositivos/sql.php"); break;   
   }
 $url = query();
 if(empty($url) and $url == "")
