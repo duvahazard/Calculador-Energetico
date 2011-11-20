@@ -1,4 +1,5 @@
 div.spacer_2{height:2px; background:#010532;}
+div.spacer_3{height:3px;}
 div.spacer_10{height:10px;}
 div.spacer_20{height:20px;}
 div.spacer_25{height:25px;}
@@ -333,4 +334,9 @@ table#terrenos_tabla h5{
 }
 #terreno_num.non{
 	background:#565656;
+}
+h6#usuario_existe{
+	margin:0; 
+	text-align:center; 
+	color:red;
 }

@@ -1,7 +1,7 @@
 body{
 	color:#FFFFFF;	
 	font:12px/1.5 'Trebuchet MS', Arial, 'Liberation Sans', FreeSans, sans-serif;
-	background:url(../images/signin_bg.jpg) top no-repeat;
+	background:#000330 url(../images/signin_bg.jpg) top no-repeat;
 }
 div.spacer_100{
 	height:100px;
@@ -38,6 +38,12 @@ div.signin{
 div.signin h2{
 	margin-top:90px;
 }
+.signin h4{
+	margin-bottom:0;
+}
+.signin p{
+	margin-top:0;
+}
 .signin_btn, .login_btn{
 	background:none;
 	border:none;
@@ -72,4 +78,8 @@ margin-top: 10px;
 	color:#CC0000;
 	clear:both;
 	display:block;
+}
+#tipo_usuario p{
+	margin-top:0;
+	margin-left:39%;
 }
