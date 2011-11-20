@@ -104,6 +104,7 @@ $(document).ready(function()
 	<div id="menu_secundario">	
   	<?php if(isset($_SESSION['user'])){ ?>
   	<ul>
+    	<li><a href="index.php?mod=2"><img src="../images/proveedor.png" border="0" /> Dispositivos</a></li>
     	<li><a href="index.php?mod=3"><img src="../images/proveedor.png" border="0" /> Proveedores</a></li>
     </ul>
     <?php } ?>
