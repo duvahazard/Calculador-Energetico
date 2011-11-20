@@ -12,8 +12,14 @@ function query(){
 			$dy = $_REQUEST['dy'];
 			$phi = $_REQUEST['phi'];
 			
-			if(mysql_query("INSERT INTO ce_terreno (id_usuario, nombre, latitude, longitude, dx, dy, phi, ubicacion, csolar_table) VALUES('$uid', '$nombre', '$latitude', '$longitude', '$dx', '$dy', '$phi', '$ubicacion', '');")){
+			$query = mysql_query("INSERT INTO ce_terreno (id_usuario, nombre, latitude, longitude, dx, dy, phi, ubicacion, csolar_table) VALUES('$uid', '$nombre', '$latitude', '$longitude', '$dx', '$dy', '$phi', '$ubicacion', '');");			
+			if($query){
+				$tid = mysql_insert_id();				
+				//aqui se manda llamar el script para generar el camino solar
+				system('/usr/bin/python /home/voxelsol/public_html/calculador/caminoSolar.py', $retval);
+				echo $retval;
 				$url = "index.php?mod=4&msj=1";
+				
 			}else{
 				$url = "index.php?mod=4&act=1&msj=2";
 			}
