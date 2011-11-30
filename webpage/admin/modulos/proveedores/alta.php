@@ -21,7 +21,7 @@
   </tr>
   <tr>
   	<td>Correo*</td>
-    <td><input id="mail" name="mail" type="text" class="general width96"></td>
+    <td><input id="mail" name="mail" type="text" class="general width96"> <div id="search_results"></div></td>
   </tr>
   <tr>
   	<td>Tel&eacute;fono*</td>
