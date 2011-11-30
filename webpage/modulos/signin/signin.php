@@ -13,7 +13,7 @@
       </tr>
       <tr>
       	<td>Usuario:</td>
-        <td><input type="text" name="user" class="general" id="user"/></td>
+        <td><input type="text" name="user" class="general" id="user" onfocus= 'setAttribute("autocomplete","off")';/> <div id="search_results"></div></td>
       </tr>
       <tr>
       	<td>Contrase&ntilde;a:</td>
@@ -54,7 +54,9 @@
   </div><!-- login_boton -->
   </form>
   <?php }elseif($_REQUEST['tipo_usuario'] == 3){ ?>
-		<p>Favor de llenar los siguientes campos, todos son obligatorios.</p>
+	<h4>Usuario</h4>
+  <p style="margin-bottom:0;">Favor de llenar los siguientes campos, todos son obligatorios.</p>
+  <cite style="margin-bottom:20px; display:block;">Nota: El campo "usuario" es su correo electr&oacute;nico</cite>
   <div id="signin_table">
   	<form action="sql.php?mod=2&act=1" method="post" target="_parent" class="AdvancedForm">
     <input name="tipo_usuario" type="hidden" value="<?php echo $_REQUEST['tipo_usuario']; ?>" />
@@ -65,7 +67,7 @@
       </tr>
       <tr>
       	<td>Usuario:</td>
-        <td><input type="text" name="user" class="general" id="user"/></td>
+        <td><input type="text" name="user" class="general" id="user" onfocus= 'setAttribute("autocomplete","off")';/> <div id="search_results"></div></td>
       </tr>
       <tr>
       	<td>Contrase&ntilde;a:</td>
@@ -84,7 +86,7 @@
 	<?php }else{ ?>
   <h2>Registrarse</h2>
   
-  <p>Seleccion el tipo de usuario</p>
+  <p>Seleccione el tipo de usuario</p>
   <div id="tipo_usuario">
   <form action="actions.php?id=2" method="post" class="AdvancedForm">
   <p style="text-align:left; margin-bottom:0;"><input name="tipo_usuario" type="radio" value="3" />Usuario Normal</p>
