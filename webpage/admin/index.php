@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Calculadora Energetica</title>
+<title>Admin Calculadora Energetica</title>
 <link rel="stylesheet" type="text/css" href="../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 <link rel="stylesheet" href="../css/reset.css" />
 <link rel="stylesheet" href="../css/text.css" />

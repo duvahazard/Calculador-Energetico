@@ -12,11 +12,13 @@ require("../functions.php");
 if(!empty($_REQUEST['mod']) and !empty($_REQUEST['act'])){
   switch($_REQUEST['mod']){  		
    case 1: require("modulos/proveedores/sql.php"); break;
-	 case 2: require("modulos/dispositivos/sql.php"); break;   
+	 case 2: require("modulos/dispositivos/sql.php"); break;
+	 case 3: require("modulos/dispositivos_tipo/sql.php"); break;   
   }
-$url = query();
-if(empty($url) and $url == "")
-	$url = passURL($_REQUEST['url']);
+	
+	$url = query();
+	if(empty($url) and $url == "")
+		$url = passURL($_REQUEST['url']);
 }
 else if($_SERVER['HTTP_REFERER'] == "") 
 	$url = "index.php"; 
@@ -26,4 +28,5 @@ else
 //CERRAR CONEXION
 mysql_close($conn);
 header('Location: ' . $url);
+
 ?>
