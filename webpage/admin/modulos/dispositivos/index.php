@@ -1,11 +1,12 @@
 <div id="acerca" class="prefix_1 grid_14 suffix_1 alpha">
   <div class="grid_10 alpha">
-  	<h2>Dispositivos</h2>
+  	<h2 style="margin-bottom:0;">Dispositivos</h2>
   </div><!-- grid_14 alpha -->
-  <div id="alta_proveedor" class="grid_4 omega">
-    <a href="index.php?mod=2&act=1"><img src="../images/agregar.png" border="0" /> Alta de tipo de dispositivo</a><br />
-    <a href="index.php?mod=2&act=2"><img src="../images/agregar.png" border="0" /> Alta de dispositivo</a>
-  </div><!-- alta_proveedor -->  
+  <div class="grid_14 alpha">
+    <a href="index.php?mod=2&act=1"> <?php if($_REQUEST['mod']==2 and $_REQUEST['act']==1) echo '<img src="../images/arrow.png" border="0" />'; else echo '<img src="../images/blank_arrow.png" border="0" />' ?> Dispositivos</a><br />
+    <a href="index.php?mod=2&act=2"> <?php if($_REQUEST['mod']==2 and $_REQUEST['act']==2) echo '<img src="../images/arrow.png" border="0" />'; else echo '<img src="../images/blank_arrow.png" border="0" />'; ?> Tipos de dispositivos</a>
+  </div><!-- alta_proveedor -->
+  <div class="spacer_20 grid_14 alpha"></div>  
 </div><!-- main_izq -->
 <div class="grid_16 alpha">
   <?php
@@ -18,12 +19,21 @@
 	}	
 	
 	switch($_REQUEST['act']){
-		case 1: require("modulos/dispositivos/alta.php");break;
-		case 2:require("modulos/dispositivos/default.php");break;
-		default:require("modulos/dispositivos/default.php");break;
-	}
+		case 1: {
+			switch($_REQUEST['actid']){
+				case 1: require("modulos/dispositivos/alta.php");break;
+				default: require("modulos/dispositivos/default.php");break;
+			}
+		}break;// CASE 1
+		case 2: {
+			switch($_REQUEST['actid']){
+				case 1:  require("modulos/dispositivos_tipo/alta.php");break;
+				default: require("modulos/dispositivos_tipo/default.php");break;
+			}
+		}break;// CASE 2
+	}// SWITCH
 	?>
-  </div>
+</div>
 
 
     
