@@ -48,10 +48,16 @@ $(document).ready(function() {
 	});	
 });
 /*-------------------*/
+
 <?php
 javascripts();
 ?>
 </script>
+<?php
+if($_REQUEST['mod'] == 4){
+?>
+<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAYxpy0HiKBWXiyhVrpVqkshTWg_xmhpETXrjHUj59zHLsinrq_xSAmAGIHF6kJpo3mJn5WnKDztG7kw"type="text/javascript"></script>
+<?php } ?>
 
 </head>
 <body>

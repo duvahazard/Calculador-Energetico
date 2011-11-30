@@ -69,10 +69,10 @@ jQuery(function(){
 				expression: "if (VAL) return true; else return false;",
 				message: "Favor de llenar el campo"
 		});
-		jQuery("#user").validate({
+		/*jQuery("#user").validate({
 				expression: "if (VAL) return true; else return false;",
 				message: "Favor de llenar el campo"
-		});
+		});*/
 		jQuery("#email").validate({
 				expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
 				message: "Ingrese una dirección de correo válida"
@@ -96,7 +96,30 @@ jQuery(function(){
 <?php
 }
 ?>
+<!-- buscador jquery -->
+$(document).ready(function(){ 
+$("#search_results").slideUp(); 
+    $("#search_button").click(function(e){ 
+        e.preventDefault(); 
+        ajax_search(); 
+    }); 
+    $("#user").keyup(function(e){ 
+        e.preventDefault(); 
+        ajax_search(); 
+    }); 
 
+});
+
+function ajax_search(){ 
+  $("#search_results").show(); 
+  var search_val=$("#user").val(); 
+  $.post("./admin/modulos/proveedores/busqueda.sql.php", {user : search_val}, function(data){
+   if (data.length>0){
+     $("#search_results").html(data);
+   } 
+  }) 
+}
+<!-- buscador jquery -->
 </script>
 </head>
 
