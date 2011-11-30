@@ -17,7 +17,6 @@ function query(){
 				$tid = mysql_insert_id();				
 				//aqui se manda llamar el script para generar el camino solar
 				system('/usr/bin/python /home/voxelsol/public_html/calculador/caminoSolar.py', $retval);
-				echo $retval;
 				$url = "index.php?mod=4&msj=1";
 				
 			}else{
