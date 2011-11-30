@@ -2,7 +2,9 @@ div.spacer_2{height:2px; background:#010532;}
 div.spacer_3{height:3px;}
 div.spacer_10{height:10px;}
 div.spacer_20{height:20px;}
+div.spacer_23{height:23px;}
 div.spacer_25{height:25px;}
+div.spacer_30{height:30px;}
 div.spacer_50{height:50px;}
 div.spacer_100{
 	height:100px;
@@ -10,6 +12,7 @@ div.spacer_100{
 	display:block;
 }
 .center{text-align:center;}
+.right{text-align:right;}
 fieldset{
 	border:1px dashed #666666;
 	padding:10px;
