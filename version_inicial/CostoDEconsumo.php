@@ -18,7 +18,7 @@
 */
 $medidor=// is a table ce_medidorCFE_XXcaso
 $tarrifa= //=ce_consumo:factores(5)        
-$TableTarrifa= //the corresponding ce_tarrifa_($tarrifa)tt table  
+$TableTarrifa= //the corresponding ce_SIMtarrifas_($tarrifa)tt table  
 
 $FetchaInicio= //the ID of the row in $TableTarrifa with the date equal to the first date on $medidor 
 $FetchaFinal= //the earliest of the last dates in the ce_tarrifa_XXtt or ce_medidorCFE_XXcaso table
@@ -41,7 +41,10 @@ $pago=
 if($tarrifa=$domestico){//is of the list 1, 1A, 1B, 1C, 1D, 1E, 1F
 	while ($date<$FetchaFinal){         
 		
-		if(){  //add in check to see if the tarrifa should be DAC or other domestic
+		$sum12mes=//medidor($date)-medidor($date-12mes) ; sum of consumo for last 12 months
+		$limDAC=//from ce_tarrifas_tipo (tt) lim_DAC
+		if($sum12mes>=$limDAC*12){  //add in check to see if the tarrifa should be DAC or other domestic  
+			
 			$TableTarrifa=;//change to DAC or other domestic 
 			$DAC=;//a boolean value to not if the torrif to be applied is DAC
 		}                                                     
@@ -144,8 +147,7 @@ if($tarrifa=HM){
 }
     
 
-if (){ //if ce_medidorCFE_YYcaso does not exist then run medidor.php	
-}
+
 //cycle through the entries of ce_medidorCFE_YYcaso
 //take the difference between one row and the next, use as the energy used that month (if bimesual the do this for two months)
 
