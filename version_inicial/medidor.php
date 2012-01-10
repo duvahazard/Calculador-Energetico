@@ -33,7 +33,7 @@
 
 //for rows after the date of the lectura_actual 
 
-if($coso=1){//this is the case where nothing has been done and consumo is the same
+if($caso=1){//this is the case where nothing has been done and consumo is the same
 	//use value(i+1)= ce_demanda_promedio_XXcc*ce_HorasDelMes:num_horas+value(i)
 }
 else{ //this is the case where there have been changes in dispositivos and consumo is modified
@@ -41,10 +41,13 @@ else{ //this is the case where there have been changes in dispositivos and consu
 	//for this caso look for all sequencias that exist and for each row 
 	$tipo=ce_dispositivos:tipo
 	if($tipo=1){
-		//ce_medidorCFE_01caso:valor-ce_fotovoltaico_respuesta_02c (- because it is producing energi)
+		//ce_medidorCFE_01caso:valor-ce_fotovoltaico_respuesta_02c*NUM_dispositivo (- because it is producing energi)
 	}
 	if($tipo=2){
-		//ce_medidorCFE_01caso:valor+ce_lampara_01caso (+ because it is consuming more energy)
+		//ce_medidorCFE_01caso:valor+ce_lampara_01caso*NUM_dispositivo (+ because it is consuming more energy)
+	}
+	if($tipo=4){
+		//ce_medidorCFE_01caso:valor+ce_lampara_01caso*NUM_dispositivo (+ because it is consuming more energy)
 	}
 }
 

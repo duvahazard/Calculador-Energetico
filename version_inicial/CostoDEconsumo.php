@@ -18,7 +18,7 @@
 */
 $medidor=// is a table ce_medidorCFE_XXcaso
 $tarrifa= //=ce_consumo:factores(5)        
-$TableTarrifa= //the corresponding ce_tarrifa_($tarrifa)tt table
+$TableTarrifa= //the corresponding ce_tarrifa_($tarrifa)tt table  
 
 $FetchaInicio= //the ID of the row in $TableTarrifa with the date equal to the first date on $medidor 
 $FetchaFinal= //the earliest of the last dates in the ce_tarrifa_XXtt or ce_medidorCFE_XXcaso table
@@ -26,27 +26,123 @@ $tipoList= //subset of ce_tarrifas_tipo with 'tipo=$tarrifa'
 //store the winter and summer ranges
 
 //for 1, 1A, 1B, 1C, 1D, 1E, 1F
-//inverno en Baja California es 01-04 y 10-12
-//verano en Baja California es 05-09
+$veranoInicio=//desde ce_tarrifa_tipo:desde inverno en Baja California es 01-04 y 10-12
+$veranoFinal=//ce_tarrifa_tipo:hasta verano en Baja California es 05-09
 
 //for HM 
 //verano es Del 1º de mayo al sábado anterior al último domingo de octubre
 //inverno es Del último domingo de octubre al 30 de abril
 
+if (){ //if ce_medidorCFE_YYcaso does not exist then run medidor.php	
+}
+
 $date=$FetchaInicio;
+$pago=
 if($tarrifa=$domestico){//is of the list 1, 1A, 1B, 1C, 1D, 1E, 1F
-	while ($date<$FetchaFinal){
-		$value= //ce_medidorCFE_XXcaso(tiempo=$date,valor)
-		if($value<$lim_BASICO){//apyly BajoConsumo
+	while ($date<$FetchaFinal){         
+		
+		if(){  //add in check to see if the tarrifa should be DAC or other domestic
+			$TableTarrifa=;//change to DAC or other domestic 
+			$DAC=;//a boolean value to not if the torrif to be applied is DAC
+		}                                                     
+		
+		$valor= //ce_medidorCFE_XXcaso(tiempo=$date,valor)     
+		$TableTarrifaFTCH=//$TableTarrifa at $date
+		//add in modifier to set tarrifas 1 to DAQ
+		
+		if($DAC=false){//apply regular domestic tarrifs  
+			
+			if($veranoInicio<$date<$veranoFinal){//el fetcha esta en temporada de verano, si no estaciones en este tarrifa el default es verano.
+				$tarrifaClave=//el row de ce_tarrifa_tipo con epoca=verano; tipo=$tarrifa=
+			}
+			else(){
+				$tarrifaClave=//el row de ce_tarrifa_tipo con epoca=inverno; tipo=$tarrifa=
+			}
+		
+			if($valor<$lim_BASICO){//apyly BajoConsumo 
+				$Pbb=;//basico_Bajo
+				$Pib=;//intermedio_Bajo
+				$Peb=;//excedente_Bajo
+				$Bb=;//tt(lim_basico_B)
+				$Ib=;//tt(lim_int_B)
+				$Eb=;//tt(lim_Exc_B)
+			
+				$pago=$Pbb*min($valor-$Bb)+$Pib*max(0,min($valor, $Ib)-$Bb)+$Peb*max(0,min($valor,$Eb)-$Ib);
+				}
+				else(){//alta consumo
+					$Pba=;//basico_Alta
+					$Pia=;//intedmedio_Alta
+					$Paa=;//alta_Alta
+					$Pea=;//excedente_Alta
+					$Ba=;//tt(lim_basico_A)
+					$Ia=;//tt(lime_int_A)
+					$Aa=;//tt(Alt_A)
+					$Ea=;//tt(lim_Exc_A) 
+			
+					$pago=$Pba*min($valor,$Ba)+$Pia*max(0,min($valor, $Ia)-$Ba)+$Paa*max(0,min($valor,$Aa)-$Ia)+$Pea*max(0,min($valor,$Ea)-$Aa);
+				}
+			}
+			else{//apply DAC 
+				$Cfijo=;//ce_tarrifas_DACtt(carga_fijo)
+				   
+				if($veranoInicio<$date<$veranoFinal){//verano
+					$Pp=;//ce_tarifas_DACtt(consumo)
+				}
+				else{//inverno
+					$Pp=;
+				}
+				
+				$pago=$P*$valor+$Cfijo;  
+			}
 		}
-		else{//apply AltaConsumo
-		}
-	}
-
 }//app
+if($tarrifa=2){//is comercial 2,3
+	while ($date<$FetchaFinal){ 
 
-$epoca= //string with start and stop dates for 
-//epoc divids the year to summer and winter pricing, in our case it is used with 'tipo' to select a in the 'ce_tarrifas_tipos' table       
+	$valor= //ce_medidorCFE_XXcaso(tiempo=$date,valor)     
+	$TableTarrifaFTCH=//$TableTarrifa at $date
+	//add in modifier to set tarrifas 1 to DAQ
+		$Pbb=;//Tarifa_2tt(Basico)
+		$Pib=;//Tarifa_2tt(Intermedio)
+		$Peb=;//Tarifa_2tt(excidente)
+		$Bb=; //tt(lim_basico_B)
+		$Ib=;//tt(lim_int_B)
+		$pago=$Pbb*min($valor-$Bb)+$Pib*max(0,min($valor, $Ib)-$Bb)+$Peb*max(0,$valor-$Ib);
+
+	 }   
+}
+if($tarrifa=3){
+	while ($date<$FetchaFinal){ 
+		$valor= //ce_medidorCFE_XXcaso(tiempo=$date,valor)     
+		$TableTarrifaFTCH=//$TableTarrifa at $date	   
+		 
+		$Pp=;//Tarifa_3tt(consumo)
+		$Dd=
+		$pago=$P*$valor;
+	}
+}
+ 
+if($tarrifa=OM){
+	while ($date<$FetchaFinal){ 
+		$consumo= //ce_medidorCFE_XXcaso(tiempo=$date,consumo)    
+		$demanda= //ce_medidorCFE_XXcaso(tiempo=$date,demanda)     
+		$TableTarrifaFTCH=//$TableTarrifa at $date	   
+		 
+		$Pp=;//ce_tarifa_OMtt:consumo
+		$Dd=;//ce_tarrifas_OMtt:demanda
+		$pago=$P*$valor+$Dd*;
+	}
+}
+
+if($tarrifa=HM){
+	while ($date<$FetchaFinal){ 
+		$consumo= //ce_medidorCFE_XXcaso(tiempo=$date,consumo)    
+		$demanda= //ce_medidorCFE_XXcaso(tiempo=$date,demanda)
+		    
+	  
+	}
+}
+    
 
 if (){ //if ce_medidorCFE_YYcaso does not exist then run medidor.php	
 }
