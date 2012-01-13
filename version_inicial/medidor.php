@@ -40,14 +40,14 @@ else{ //this is the case where there have been changes in dispositivos and consu
 	//copy ce_medidorCFE_01caso and name with new caso
 	//for this caso look for all sequencias that exist and for each row 
 	$tipo=ce_dispositivos:tipo
-	if($tipo=1){
+ //   if($tipo=1){      //not using this because only grid tie will be included
 		//ce_medidorCFE_01caso:valor-ce_fotovoltaico_respuesta_02c*NUM_dispositivo (- because it is producing energi)
-	}
+   // }
 	if($tipo=2){
 		//ce_medidorCFE_01caso:valor+ce_lampara_01caso*NUM_dispositivo (+ because it is consuming more energy)
 	}
 	if($tipo=4){
-		//ce_medidorCFE_01caso:valor+ce_lampara_01caso*NUM_dispositivo (+ because it is consuming more energy)
+		//ce_medidorCFE_01caso:valor-ce_gridtie_XXc*NUM_dispositivo (- because it is producing energy)
 	}
 }
 
