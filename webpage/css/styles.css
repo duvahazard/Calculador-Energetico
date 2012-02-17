@@ -146,11 +146,19 @@ div.login h2{
 #user_field p{
 	margin-top:25px;
 	font-size:12px;
+	margin-bottom:0;
 }
 #user_field img{
 	position:relative;
 	top:-2px;
 }
+#user_field a{
+	color:#FFFFFF;
+}
+#user_field a:hover{
+	color:#999;
+}
+
 #alta_proveedor{
 	text-align:right;
 }
@@ -281,6 +289,13 @@ table#activar_proveedores tbody td{
 	padding:5px;
 	border-right:1px solid #FFF;
 }
+table#activar_proveedores tr td table tr td{
+	border:none
+}
+table#activar_proveedores tr td table{
+	width:100%;
+	margin-bottom:0;
+}
 .par{
 	background:#D6E3F9;
 }
@@ -297,6 +312,16 @@ table#activar_proveedores tbody td{
 	height: 35px;
 	width: 210px;
 	border-radius: 7px 7px 7px 7px;
+	margin: 0 5px 0 0;
+  padding: 3px 4px;
+}
+.general2{
+	background: none repeat scroll 0 0 #1E4F8A;
+	border:0;
+	color: #FFFFFF;
+	height: 25px;
+	width: 210px;
+	border-radius: 4px 4px 4px 4px;
 	margin: 0 5px 0 0;
   padding: 3px 4px;
 }
@@ -332,6 +357,17 @@ table#terrenos_tabla h5{
 #terreno_datos table tr td img{
 	margin-left:10px;
 }
+#casos_tabla{
+	width:820px;
+	margin-bottom:0;
+}
+#casos_tabla tr td{
+	border-right:1px solid #000;
+	padding-top:5px;
+}
+#casos_tabla tr td:last-child{
+	border-right:0;
+}
 #terreno_num.par{
 	background:#51afe5;
 }
@@ -342,4 +378,73 @@ h6#usuario_existe{
 	margin:0; 
 	text-align:center; 
 	color:red;
+}
+.texto_rojo{
+	color:#F00;
+}
+.pasos_recibo_cfe{
+	font-size:30px;
+	font-weight:bold;
+	color:#CCC;
+	position:relative;
+	top:5px;
+}
+.historialdeconsumo li{
+	list-style:none;
+	margin-left:0;
+}
+.historial, .consumo_historico{
+	width:80px;
+}
+ul#list_nota{
+margin-bottom:5px;
+}
+.alert{
+	color:red;
+}
+#fechas_generador table tr td{
+	padding:2px;
+	text-align:center;
+}
+#fechas_generador table tr td.par{
+	background:#D6E3F9;
+}
+#fechas_generador table tr td.non{
+	background:#94BCFF;
+}
+
+#fechas_generador table tr{
+	border:1px solid #FFF;
+}
+#tarifas{
+	width:100%;
+}
+table#tarifas tr{
+	border:1px solid #FFF;
+}
+table#tarifas tr td, table#tarifas tr th{
+	text-align:center;
+}
+.msj_ok{
+	color:#090;
+}
+.msj_error{
+	color:#993300;
+}
+#mensajes{
+	text-align:center;
+}
+#casos_terrenos{
+	border:1px solid #000;
+}
+span#casos_titulo_terreno{
+	font-size:18px;
+	font-weight:bold;
+}
+#activar_proveedores tr td.var_dis{
+	min-width:20px;
+	width:20px;
+}
+#activar_proveedores tr td table.horarios tr td{
+	border:0;
 }
