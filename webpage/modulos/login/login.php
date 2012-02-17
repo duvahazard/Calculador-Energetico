@@ -15,7 +15,7 @@
         <form action="" method="post" id="login_form" target="_parent">
         <table cellpadding="0" cellspacing="0" border="0" id="t_login">
           <tr>
-            <td>Usuario:</td>
+            <td>email:</td>
             <td><input type="text" name="username" id="username" class="general"/></td>
           </tr>
           <tr>

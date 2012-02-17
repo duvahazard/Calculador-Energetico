@@ -3,7 +3,6 @@ session_start();
 require("../../conexion.php");
 $sid = session_id();
 
-
 $user=htmlspecialchars($_REQUEST['username'],ENT_QUOTES);
 
 $pass=md5($_REQUEST['password']);
@@ -21,6 +20,7 @@ if(mysql_num_rows($sql)>0){
 			$_SESSION['log'] = $sid;
 			$_SESSION['mail'] = $row['usuario'];
 			$_SESSION['userid'] = $row['id'];
+			$_SESSION['tipo'] = $row['tipo'];
 		
 		}
 		echo "continue";
