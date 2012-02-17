@@ -2,7 +2,6 @@
 	<?php if($_REQUEST['tipo_usuario'] == 2){ ?>
   <h4>Proveedor</h4>
   <p style="margin-bottom:0;">Favor de llenar los siguientes campos, todos son obligatorios.</p>
-  <cite style="margin-bottom:20px; display:block;">Nota: El campo "usuario" es su correo electr&oacute;nico</cite>
   <div id="signin_table">
   	<form action="sql.php?mod=2&act=1" method="post" target="_parent" class="AdvancedForm">
     <input name="tipo_usuario" type="hidden" value="<?php echo $_REQUEST['tipo_usuario']; ?>" />
@@ -12,7 +11,7 @@
         <td width="69%"><input type="text" name="name" class="general" id="name"/></td>
       </tr>
       <tr>
-      	<td>Usuario:</td>
+      	<td>email:</td>
         <td><input type="text" name="user" class="general" id="user" onfocus= 'setAttribute("autocomplete","off")';/> <div id="search_results"></div></td>
       </tr>
       <tr>
@@ -56,7 +55,6 @@
   <?php }elseif($_REQUEST['tipo_usuario'] == 3){ ?>
 	<h4>Usuario</h4>
   <p style="margin-bottom:0;">Favor de llenar los siguientes campos, todos son obligatorios.</p>
-  <cite style="margin-bottom:20px; display:block;">Nota: El campo "usuario" es su correo electr&oacute;nico</cite>
   <div id="signin_table">
   	<form action="sql.php?mod=2&act=1" method="post" target="_parent" class="AdvancedForm">
     <input name="tipo_usuario" type="hidden" value="<?php echo $_REQUEST['tipo_usuario']; ?>" />
@@ -66,7 +64,7 @@
         <td width="69%"><input type="text" name="name" class="general" id="name"/></td>
       </tr>
       <tr>
-      	<td>Usuario:</td>
+      	<td>email:</td>
         <td><input type="text" name="user" class="general" id="user" onfocus= 'setAttribute("autocomplete","off")';/> <div id="search_results"></div></td>
       </tr>
       <tr>
