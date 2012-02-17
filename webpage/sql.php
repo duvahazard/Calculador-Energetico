@@ -14,7 +14,9 @@ if(!empty($_REQUEST['mod']) and !empty($_REQUEST['act'])){
    case 1: require("modulos/login/sql.php"); break;
 	 case 2: require("modulos/signin/sql.php"); break;
 	 case 3: require("modulos/proveedores/sql.php"); break; 
-	 case 4: require("modulos/terrenos/sql.php"); break;   
+	 case 4: require("modulos/terrenos/sql.php"); break;
+	 case 5: require("modulos/recibos/cfe.sql.php"); break;
+	 case 6: require("modulos/casos/sql.php"); break;   
   }
 $url = query();
 if(empty($url) and $url == "")
