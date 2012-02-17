@@ -64,6 +64,63 @@ $(document).ready(function()
 	});
 });
 </script>
+<?php }
+if($_REQUEST['mod']==4){ ?>
+	<link rel="stylesheet" href="../js/themes/base/jquery.ui.all.css">
+	<link href="../js/themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
+	<script src="../ui/jquery.ui.core.js"></script>
+	<script src="../ui/jquery.ui.widget.js"></script>
+	<script src="../ui/jquery.ui.datepicker.js"></script>
+  
+  <script>
+		$(function() {
+			var dates = $( "#from, #to" ).datepicker({
+				defaultDate: "+1w",
+				changeMonth: true,
+				numberOfMonths: 2,
+				onSelect: function( selectedDate ) {
+					var option = this.id == "from" ? "minDate" : "maxDate",
+						instance = $( this ).data( "datepicker" ),
+						date = $.datepicker.parseDate(
+							instance.settings.dateFormat ||
+							$.datepicker._defaults.dateFormat,
+							selectedDate, instance.settings );
+					dates.not( this ).datepicker( "option", option, date );
+				}
+			});
+		});
+	</script>
+<?php	
+}if($_REQUEST['mod']==5){
+
+?>
+<link rel="stylesheet" href="../js/themes/base/jquery.ui.all.css">
+<link href="../js/themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
+<script src="../ui/jquery.ui.core.js"></script>
+<script src="../ui/jquery.ui.widget.js"></script>
+<script src="../ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.tarifas').datepicker( {
+				changeMonth: true,
+				changeYear: true,
+				showButtonPanel: true,
+				dateFormat: 'M-y',
+				monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+				onClose: function(dateText, inst) { 
+						var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+						var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+						$(this).datepicker('setDate', new Date(year, month, 1));
+				}
+		});
+	});
+
+</script>
+<style>
+.ui-datepicker-calendar{
+	display: none;
+	}
+</style>
 <?php } ?>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -106,6 +163,9 @@ $(document).ready(function()
   	<ul>
     	<li><a href="index.php?mod=2"><img src="../images/proveedor.png" border="0" /> Dispositivos</a></li>
     	<li><a href="index.php?mod=3"><img src="../images/proveedor.png" border="0" /> Proveedores</a></li>
+      <li><a href="index.php?mod=4"><img src="../images/proveedor.png" border="0" /> Generar Fechas</a></li>
+      <li><a href="index.php?mod=5"><img src="../images/proveedor.png" border="0" /> Tarifas</a></li>
+      <li><a href="index.php?mod=6"><img src="../images/proveedor.png" border="0" /> Camino Solar</a></li>
     </ul>
     <?php } ?>
   </div><!-- menu_secundario -->

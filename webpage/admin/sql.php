@@ -13,7 +13,9 @@ if(!empty($_REQUEST['mod']) and !empty($_REQUEST['act'])){
   switch($_REQUEST['mod']){  		
    case 1: require("modulos/proveedores/sql.php"); break;
 	 case 2: require("modulos/dispositivos/sql.php"); break;
-	 case 3: require("modulos/dispositivos_tipo/sql.php"); break;   
+	 case 3: require("modulos/dispositivos_tipo/sql.php"); break;
+	 case 4: require("modulos/fechas/sql.php"); break;
+	 case 5: require("modulos/tarifas/sql.php"); break;   
   }
 	
 	$url = query();
