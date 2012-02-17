@@ -20,22 +20,32 @@ $long = $ubicacion[1];
     </tr>
     <tr>
       <td>Latitud*</td>
-      <td><input id="latitude" name="latitude" type="text" class="general width96" value="<?php echo $lat; ?>"></td>
+      <td>
+      	<input id="latitude" name="latitude" type="text" class="general width96" value="<?php echo $lat; ?>"><br />
+		Ej. 32º23'34.5" = 32.39292
+      </td>
     </tr>
     <tr>
       <td>Longitud*</td>
-      <td><input id="longitude" name="longitude" type="text" class="general width96" value="<?php echo $long; ?>"></td>
+      <td>
+      	<input id="longitude" name="longitude" type="text" class="general width96" value="<?php echo $long; ?>"><br />
+		Ej. 32º23'34.5" = 32.39292 
+      </td>
     </tr>
     <tr>
-      <td>dx*</td>
-      <td><input id="dx" name="dx" type="text" class="general width96"></td>
+      <td>Ancho (dx)(Metros)</td>
+      <td>
+      	<input id="dx" name="dx" type="text" class="general width96">		
+      </td>
     </tr>
     <tr>
-      <td>dy*</td>
-      <td><input id="dy" name="dy" type="text" class="general width96"></td>
+      <td>Largo (dy)(Metros)</td>
+      <td>
+      	<input id="dy" name="dy" type="text" class="general width96">
+      </td>
     </tr>
     <tr>
-      <td>Phi*</td>
+      <td>Orientaci&oacute;n (Phi)</td>
       <td><input id="phi" name="phi" type="text" class="general width96"></td>
     </tr>
     <tr>

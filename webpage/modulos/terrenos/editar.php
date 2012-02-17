@@ -4,8 +4,6 @@
 	$uid = $_SESSION['userid'];
 	$tid = $_REQUEST['tid'];
 	$row = mysql_fetch_array(mysql_query("SELECT * FROM ce_terreno WHERE id=$tid AND id_usuario=$uid;"));
-	
-	
 	?>
   
   <form action="sql.php?mod=4&act=2&tid=<?php echo $row['id']; ?>" method="post">
@@ -45,16 +43,16 @@
           	<td><img src="images/icono_coordenadas.png" border="0" /></td>
           	<td>Coordenadas:</td>
 	          <td>
-            	<strong>Latitud:</strong> <input type="text" name="latitude" value="<?php echo $row['latitude']; ?>" /><br />
-							<strong>Longitud:</strong> <input type="text" name="longitude" value="<?php echo $row['longitude']; ?>" />
+            	<strong>Latitud:</strong> <span style="font-size:9px;">(Ej. 32º23'34.5" = 32.39292)</span><input type="text" name="latitude" value="<?php echo $row['latitude']; ?>" /><br />
+							<strong>Longitud:</strong> <span style="font-size:9px;">(Ej. 32º23'34.5" = 32.39292)</span><input type="text" name="longitude" value="<?php echo $row['longitude']; ?>" />
             </td>
           </tr>
           <tr>
           	<td rowspan="2"><img src="images/icono_area.png" border="0" /></td>
           	<td rowspan="2">Area:</td>
 	          <td>
-            	<strong>dx:</strong><br /><input type="text" name="dx" value="<?php echo $row['dx']; ?>" /><br />
-              <strong>dy:</strong><br /><input type="text" name="dy" value="<?php echo $row['dy']; ?>" />
+            	<strong>Ancho:</strong> <span style="font-size:9px;">(dx)(Metros)</span><br /><input type="text" name="dx" value="<?php echo $row['dx']; ?>" /><br />
+              <strong>Largo:</strong> <span style="font-size:9px;">(dy)(Metros)</span><br /><input type="text" name="dy" value="<?php echo $row['dy']; ?>" />
             </td>
           </tr>
           <tr>
