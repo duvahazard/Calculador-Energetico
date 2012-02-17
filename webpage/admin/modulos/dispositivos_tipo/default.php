@@ -23,11 +23,11 @@ $query = mysql_query("SELECT * FROM ce_dispositivos_tipo ORDER BY `ce_dispositiv
 		$i=1;
 		while($row = mysql_fetch_array($query)){
 			if($row['activado']==0){
-				$img = "activar";
+				$img = "desactivar";
 				$act = "1";
 				$title = "Activar Registro";
 			}else{
-				$img = "desactivar";
+				$img = "activar";
 				$act = "2";
 				$title = "Desactivar Registro";
 			}
@@ -45,8 +45,8 @@ $query = mysql_query("SELECT * FROM ce_dispositivos_tipo ORDER BY `ce_dispositiv
 			echo '<td>'.$row['medio_Ambiente'].'</td>';
 			echo '<td>
 							<div align="center">
-								<a href="sql.php?mod=3&act='.$act.'&pid='.$row['id'].'"><img src="../images/'.$img.'.png" border="0" title="'.$title.'" /></a> 
-								<a href="sql.php?mod=3&act=3&pid='.$row['id'].'"><img src="../images/borrar.png" width="16" border="0" title="Eliminar Registro" /></a>
+								<a href="sql.php?mod=3&act='.$act.'&pid='.$row['id_tipo'].'"><img src="../images/'.$img.'.png" border="0" title="'.$title.'" /></a> 
+								<a href="sql.php?mod=3&act=3&pid='.$row['id_tipo'].'"><img src="../images/borrar.png" width="16" border="0" title="Eliminar Registro" /></a>
 							</div>
 						</td>';
 			echo '</tr>';
