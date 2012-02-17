@@ -5,7 +5,7 @@ function query(){
 		//------------------------ACTIVAR REGISTRO ------------------------
 		case 1:{
 			$pid = $_REQUEST['pid'];
-			if(mysql_query("UPDATE ce_dispositivos SET activado=1 WHERE tipo_id=$pid;")){
+			if(mysql_query("UPDATE ce_dispositivos SET activado=1 WHERE id=$pid;")){
 				$url = "index.php?mod=2&act=1&msj=3";
 			}else{
 				$url = "index.php?mod=2&act=1&msj=4";
@@ -15,7 +15,7 @@ function query(){
 		//------------------------DESACTIVAR REGISTRO ------------------------
 		case 2:{
 			$pid = $_REQUEST['pid'];
-			if(mysql_query("UPDATE ce_dispositivos SET activado =0 WHERE tipo_id=$pid;")){
+			if(mysql_query("UPDATE ce_dispositivos SET activado =0 WHERE id=$pid;")){
 				$url = "index.php?mod=2&act=1&msj=3";
 			}else{
 				$url = "index.php?mod=2&act=1&msj=4";
@@ -25,7 +25,7 @@ function query(){
 		//------------------------BORRAR REGISTRO ------------------------
 		case 3:{
 			$pid = $_REQUEST['pid'];
-			if(mysql_query("DELETE FROM ce_dispositivos WHERE tipo_id=$pid;")){
+			if(mysql_query("DELETE FROM ce_dispositivos WHERE id=$pid;")){
 				$url = "index.php?mod=2&act=1&msj=3";
 			}else{
 				$url = "index.php?mod=2&act=1&msj=5";
