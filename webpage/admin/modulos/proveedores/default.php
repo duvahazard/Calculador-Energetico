@@ -23,11 +23,11 @@ $query = mysql_query("SELECT * FROM ce_proveedores ORDER BY `ce_proveedores`.`$o
 		$i=1;
 		while($row = mysql_fetch_array($query)){
 			if($row['activado']==0){
-				$img = "activar";
+				$img = "desactivar";
 				$act = "1";
 				$title = "Activar Registro";
 			}else{
-				$img = "desactivar";
+				$img = "activar";
 				$act = "2";
 				$title = "Desactivar Registro";
 			}
