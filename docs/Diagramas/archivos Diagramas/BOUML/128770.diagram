@@ -1,0 +1,87 @@
+format 74
+
+continuation 134530 "Read Terreno"
+  xyzwh 28 52 2005 108 32
+classinstancecanvas 134658 classinstance_ref 128770 // SQL
+  xyz 384 10 2005 life_line_z 2000
+end
+classinstancecanvas 134786 classinstance_ref 128002 // Usuario
+  xyz 10 5 2005 life_line_z 2000
+end
+classinstancecanvas 134914 classinstance_ref 128130 // index
+  xyz 116 11 2005 life_line_z 2000
+end
+classinstancecanvas 135042 classinstance_ref 128898 // modulos
+  xyz 228 9 2005 life_line_z 2000
+end
+durationcanvas 135170 classinstance_ref 134658 // SQL:SQL
+  xyzwh 410 199 2010 11 47
+end
+durationcanvas 135298 classinstance_ref 134914 // index:index
+  xyzwh 148 86 2010 11 202
+  overlappingdurationcanvas 135426
+    xyzwh 154 97 2020 11 31
+  end
+  overlappingdurationcanvas 135682
+    xyzwh 154 133 2020 11 52
+  end
+  overlappingdurationcanvas 135810
+    xyzwh 154 188 2020 11 39
+  end
+  overlappingdurationcanvas 135938
+    xyzwh 154 235 2020 11 45
+  end
+end
+durationcanvas 136066 classinstance_ref 135042 // modulos:modulos
+  xyzwh 277 112 2010 11 41
+end
+durationcanvas 136194 classinstance_ref 134786 // Usuario:Usuario
+  xyzwh 51 104 2010 11 188
+end
+msg 136834 synchronous
+  from durationcanvas_ref 135170
+  to durationcanvas_ref 135938
+  yz 235 2025 explicitmsg "Confirmacion"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 248.5 223
+msg 137218 return
+  from durationcanvas_ref 135682
+  to durationcanvas_ref 136194
+  yz 171 2025 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 137346 asynchronous
+  from durationcanvas_ref 135426
+  to durationcanvas_ref 136066
+  yz 117 2030 explicitmsg "4 -> 1"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 203.5 101
+msg 137474 asynchronous
+  from durationcanvas_ref 136066
+  to durationcanvas_ref 135682
+  yz 135 2035 explicitmsg "Muestra Forma"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 178.5 126
+msg 137730 synchronous
+  from durationcanvas_ref 135810
+  to durationcanvas_ref 135170
+  yz 210 2030 explicitmsg "Registro"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 262.5 200
+msg 137858 synchronous
+  from durationcanvas_ref 136194
+  to durationcanvas_ref 135426
+  yz 114 2025 explicitmsg "Click Agregar"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 69.5 102
+msg 137986 return
+  from durationcanvas_ref 135938
+  to durationcanvas_ref 136194
+  yz 267 2030 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 138114 synchronous
+  from durationcanvas_ref 136194
+  to durationcanvas_ref 135810
+  yz 188 2025 explicitmsg "Llena Forma"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 71.5 177
+end

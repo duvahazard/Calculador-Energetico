@@ -1,0 +1,126 @@
+format 74
+
+classinstancecanvas 128002 classinstance_ref 128002 // Usuario
+  xyz 18 4 2005 life_line_z 2000
+end
+classinstancecanvas 128130 classinstance_ref 128258 // actions
+  xyz 245 4 2005 life_line_z 2000
+end
+classinstancecanvas 128258 classinstance_ref 128642 // SignIn
+  xyz 374 4 2005 life_line_z 2000
+end
+classinstancecanvas 128386 classinstance_ref 128770 // SQL
+  xyz 492 4 2005 life_line_z 2000
+end
+classinstancecanvas 128898 classinstance_ref 128130 // index
+  xyz 136 4 2010 life_line_z 2000
+end
+durationcanvas 129026 classinstance_ref 128002 // Usuario:Usuario
+  xyzwh 59 64 2010 11 282
+end
+durationcanvas 129154 classinstance_ref 128898 // index:index
+  xyzwh 168 63 2010 11 26
+end
+durationcanvas 129410 classinstance_ref 128130 // actions:actions
+  xyzwh 286 77 2010 11 51
+end
+durationcanvas 129666 classinstance_ref 128898 // index:index
+  xyzwh 168 107 2010 11 32
+end
+durationcanvas 130050 classinstance_ref 128898 // index:index
+  xyzwh 168 153 2010 11 25
+end
+durationcanvas 130306 classinstance_ref 128130 // actions:actions
+  xyzwh 286 167 2010 11 32
+end
+durationcanvas 130562 classinstance_ref 128258 // SignIn:SingIn
+  xyzwh 411 188 2010 11 38
+end
+durationcanvas 130818 classinstance_ref 128898 // index:index
+  xyzwh 168 214 2010 11 32
+end
+durationcanvas 131202 classinstance_ref 128898 // index:index
+  xyzwh 168 263 2010 11 31
+end
+durationcanvas 131458 classinstance_ref 128386 // SQL:SQL
+  xyzwh 518 283 2010 11 32
+end
+durationcanvas 131714 classinstance_ref 128898 // index:index
+  xyzwh 168 304 2010 11 28
+end
+msg 129282 synchronous
+  from durationcanvas_ref 129026
+  to durationcanvas_ref 129154
+  yz 64 2015 explicitmsg "Click Registro"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 80 48
+msg 129538 synchronous
+  from durationcanvas_ref 129154
+  to durationcanvas_ref 129410
+  yz 77 2015 explicitmsg "Registro"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 208 61
+msg 129794 synchronous
+  from durationcanvas_ref 129410
+  to durationcanvas_ref 129666
+  yz 107 2020 explicitmsg "Mostrar Tipo Usuario"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 174 91
+msg 129922 return
+  from durationcanvas_ref 129666
+  to durationcanvas_ref 129026
+  yz 126 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 130178 synchronous
+  from durationcanvas_ref 129026
+  to durationcanvas_ref 130050
+  yz 153 2015 explicitmsg "Selecciona tipo Usuario"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 53 137
+msg 130434 synchronous
+  from durationcanvas_ref 130050
+  to durationcanvas_ref 130306
+  yz 167 2015 explicitmsg "Envia tipo Usuario"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 181 151
+msg 130690 synchronous
+  from durationcanvas_ref 130306
+  to durationcanvas_ref 130562
+  yz 188 2020 explicitmsg "Envia Tipo Usuario"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 301 172
+msg 130946 synchronous
+  from durationcanvas_ref 130562
+  to durationcanvas_ref 130818
+  yz 215 2015 explicitmsg "Muestra Forma Registro"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 228 199
+msg 131074 return
+  from durationcanvas_ref 130818
+  to durationcanvas_ref 129026
+  yz 233 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 131330 synchronous
+  from durationcanvas_ref 129026
+  to durationcanvas_ref 131202
+  yz 263 2015 explicitmsg "Llena Campos Forma"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 59 247
+msg 131586 synchronous
+  from durationcanvas_ref 131202
+  to durationcanvas_ref 131458
+  yz 283 2015 explicitmsg "Registro"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 324 267
+msg 131842 synchronous
+  from durationcanvas_ref 131458
+  to durationcanvas_ref 131714
+  yz 304 2020 explicitmsg "Confirmacion"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 310 288
+msg 132226 return
+  from durationcanvas_ref 131714
+  to durationcanvas_ref 129026
+  yz 321 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+end
