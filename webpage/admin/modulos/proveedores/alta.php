@@ -36,6 +36,17 @@
     <td><input name="url" type="text" class="general width96"></td>
   </tr>
   <tr>
+  	<td>Activado</td>
+    <td>
+    	<select name="activado" class="general">
+      	<optgroup label="Seleccione una opci&oacute;n">
+        <option value="1">Si</option>
+    	  <option value="0">No</option>
+        </optgroup>
+    	</select>
+    </td>
+  </tr>
+  <tr>
   	<td colspan="2"><div align="right"><input type="image" value="" src="../images/guardar.png" style="margin-right:4px; border:none;"></div></td>
   </tr>
 </table>
