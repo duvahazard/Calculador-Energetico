@@ -1,0 +1,70 @@
+format 74
+
+classinstancecanvas 128002 classinstance_ref 128130 // index
+  xyz 120.5 16 2005 life_line_z 2000
+end
+classinstancecanvas 128258 classinstance_ref 128898 // modulos
+  xyz 232.5 14 2005 life_line_z 2000
+end
+classinstancecanvas 128386 classinstance_ref 128002 // Usuario
+  xyz 14.5 10 2005 life_line_z 2000
+end
+continuation 128514 "Login"
+  xyzwh 32.5 57 2005 63 32
+classinstancecanvas 131714 classinstance_ref 135426 // modulos/terrenos/index
+  xyz 360 20 2010 life_line_z 2000
+end
+durationcanvas 128642 classinstance_ref 128002 // index:index
+  xyzwh 152 102 2010 11 107
+  overlappingdurationcanvas 132354
+    xyzwh 158 173 2020 11 30
+  end
+end
+durationcanvas 129538 classinstance_ref 128386 // Usuario:Usuario
+  xyzwh 55 102 2010 11 107
+end
+durationcanvas 129794 classinstance_ref 128258 // modulos:modulos
+  xyzwh 281 119 2010 11 71
+  overlappingdurationcanvas 132098
+    xyzwh 287 153 2020 11 31
+  end
+end
+durationcanvas 131842 classinstance_ref 131714 // modulos/terrenos/index:index
+  xyzwh 441 135 2010 11 29
+end
+msg 130178 synchronous
+  from durationcanvas_ref 129538
+  to durationcanvas_ref 128642
+  yz 102 2015 explicitmsg "Click Terrenos"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 68 90
+msg 130562 synchronous
+  from durationcanvas_ref 128642
+  to durationcanvas_ref 129794
+  yz 119 2015 explicitmsg "4"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 217 103
+msg 131970 synchronous
+  from durationcanvas_ref 129794
+  to durationcanvas_ref 131842
+  yz 135 2015 explicitmsg "Consulta Base Datos"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 307 119
+msg 132226 synchronous
+  from durationcanvas_ref 131842
+  to durationcanvas_ref 132098
+  yz 153 2025 explicitmsg "Datos Terreno"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 329 141
+msg 132482 synchronous
+  from durationcanvas_ref 132098
+  to durationcanvas_ref 132354
+  yz 173 2030 explicitmsg "Terrenos"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 202 157
+msg 132610 return
+  from durationcanvas_ref 132354
+  to durationcanvas_ref 129538
+  yz 192 2025 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+end

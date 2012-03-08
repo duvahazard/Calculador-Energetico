@@ -1,0 +1,15 @@
+window_sizes 1275 672 318 951 478 120
+show_stereotypes
+selected sequencediagram_ref 128898 // Read Terreno
+open
+  class_ref 128386 // login
+  class_ref 128258 // actions
+  class_ref 128130 // index
+  usecase_ref 128002 // CRUD Terreno
+  usecase_ref 128258 // CRUD Recibos
+  usecase_ref 128770 // Registrar Usuario
+  usecase_ref 128898 // Usar Foro
+  usecaseview_ref 128386 // Proveedor
+  usecaseview_ref 128514 // Admin
+end
+end

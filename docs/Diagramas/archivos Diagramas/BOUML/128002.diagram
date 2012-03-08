@@ -1,0 +1,47 @@
+format 74
+
+classcanvas 128002 class_ref 128002 // Usuario
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 324 149 2000
+end
+usecasecanvas 128130 usecase_ref 128002 // CRUD Terreno
+  xyzwh 295 25 3005 64 32 label_xy 286 57
+end
+usecasecanvas 128258 usecase_ref 128130 // Login
+  xyzwh 106 150 3005 64 32 label_xy 122 182
+end
+usecasecanvas 128642 usecase_ref 128258 // CRUD Recibos
+  xyzwh 283 265 3005 64 32 label_xy 274 297
+end
+usecasecanvas 128770 usecase_ref 128386 // CRUD Casos
+  xyzwh 446 56 3005 64 32 label_xy 441 88
+end
+usecasecanvas 128898 usecase_ref 128514 // Ver Resultados
+  xyzwh 448 259 3005 64 32 label_xy 438 291
+end
+usecasecanvas 129026 usecase_ref 128642 // Ver Reporte
+  xyzwh 505 148 3005 64 32 label_xy 504 180
+end
+usecasecanvas 129154 usecase_ref 128770 // Registrar Usuario
+  xyzwh 141 59 3011 64 32 label_xy 125 91
+end
+usecasecanvas 129282 usecase_ref 128898 // Usar Foro
+  xyzwh 136 238 3005 64 32 label_xy 141 270
+end
+line 128386 --->
+  from ref 128002 z 3006 to ref 128130
+line 128514 --->
+  from ref 128002 z 3006 to ref 128258
+line 129410 --->
+  from ref 128002 z 3012 to ref 129154
+line 129538 --->
+  from ref 128002 z 3006 to ref 129282
+line 129666 --->
+  from ref 128002 z 3006 to ref 128642
+line 129794 --->
+  from ref 128002 z 3006 to ref 128770
+line 129922 --->
+  from ref 128002 z 3006 to ref 128898
+line 130050 --->
+  from ref 128002 z 3006 to ref 129026
+end
