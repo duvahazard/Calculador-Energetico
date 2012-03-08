@@ -1,0 +1,141 @@
+format 74
+
+classinstancecanvas 128002 classinstance_ref 128002 // Usuario
+  xyz 5 4 2005 life_line_z 2000
+end
+classinstancecanvas 128130 classinstance_ref 128130 // index
+  xyz 180 4 2005 life_line_z 2000
+end
+classinstancecanvas 128258 classinstance_ref 128258 // actions
+  xyz 322 4 2005 life_line_z 2000
+end
+classinstancecanvas 128386 classinstance_ref 128386 // modulos/login/jquery_login
+  xyz 436 5 2010 life_line_z 2000
+end
+fragment 132098 "if (login == TRUE)"
+  xyzwh 10 250 3005 645 166
+end
+classinstancecanvas 132226 classinstance_ref 128514 // log
+  xyz 584 260 2015 life_line_z 2000
+end
+fragment 133890 "Else"
+  xyzwh 10 415 3010 645 93
+end
+durationcanvas 128514 classinstance_ref 128002 // Usuario:Usuario
+  xyzwh 46 61 2010 11 440
+end
+durationcanvas 128642 classinstance_ref 128130 // index:index
+  xyzwh 212 58 2010 11 28
+end
+durationcanvas 128898 classinstance_ref 128258 // actions:actions
+  xyzwh 363 74 2010 11 52
+end
+durationcanvas 130562 classinstance_ref 128130 // index:index
+  xyzwh 212 115 2010 11 37
+end
+durationcanvas 130818 classinstance_ref 128002 // Usuario:Usuario
+  xyzwh 46 174 2010 11 52
+end
+durationcanvas 131074 classinstance_ref 128130 // index:index
+  xyzwh 212 168 2010 11 30
+end
+durationcanvas 131330 classinstance_ref 128258 // actions:actions
+  xyzwh 363 185 2010 11 28
+end
+durationcanvas 131586 classinstance_ref 128386 // modulos/login/jquery_login:login
+  xyzwh 525 202 2010 11 46
+end
+durationcanvas 131842 classinstance_ref 128258 // actions:actions
+  xyzwh 363 234 2010 11 42
+end
+durationcanvas 132354 classinstance_ref 128258 // actions:actions
+  xyzwh 363 304 2010 11 38
+end
+durationcanvas 132482 classinstance_ref 132226 // log:login
+  xyzwh 608 307 2010 11 68
+end
+durationcanvas 132738 classinstance_ref 128130 // index:index
+  xyzwh 212 364 2010 11 39
+end
+durationcanvas 133250 classinstance_ref 128258 // actions:actions
+  xyzwh 363 431 2010 11 40
+end
+durationcanvas 133378 classinstance_ref 128130 // index:index
+  xyzwh 212 453 2010 11 39
+end
+msg 128770 synchronous
+  from durationcanvas_ref 128514
+  to durationcanvas_ref 128642
+  yz 61 2015 explicitmsg "Click mi cuenta"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 91 45
+msg 129026 synchronous
+  from durationcanvas_ref 128642
+  to durationcanvas_ref 128898
+  yz 74 2020 explicitmsg "click en cuenta"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 236 58
+msg 130690 synchronous
+  from durationcanvas_ref 128898
+  to durationcanvas_ref 130562
+  yz 115 2025 explicitmsg "forma login"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 246 99
+msg 131202 synchronous
+  from durationcanvas_ref 130818
+  to durationcanvas_ref 131074
+  yz 176 2020 explicitmsg "Ingresa Login & Password"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 61 160
+msg 131458 synchronous
+  from durationcanvas_ref 131074
+  to durationcanvas_ref 131330
+  yz 185 2025 explicitmsg "Envia Login & Password"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 224 170
+msg 131714 synchronous
+  from durationcanvas_ref 131330
+  to durationcanvas_ref 131586
+  yz 202 2015 explicitmsg "Consulta Base de Datos"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 375 186
+msg 131970 synchronous
+  from durationcanvas_ref 131586
+  to durationcanvas_ref 131842
+  yz 234 2020 explicitmsg "Respuesta Base de Datos"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 375 221
+msg 132610 synchronous
+  from durationcanvas_ref 132354
+  to durationcanvas_ref 132482
+  yz 321 2015 explicitmsg "Registra session"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 444 305
+msg 132866 synchronous
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 132738
+  yz 364 2015 explicitmsg "Confirmacion Login"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 360 348
+msg 133506 synchronous
+  from durationcanvas_ref 133250
+  to durationcanvas_ref 133378
+  yz 457 2015 explicitmsg "Error en Login"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 253 441
+msg 134018 return
+  from durationcanvas_ref 130562
+  to durationcanvas_ref 128514
+  yz 141 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 134146 return
+  from durationcanvas_ref 132738
+  to durationcanvas_ref 128514
+  yz 392 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 134274 return
+  from durationcanvas_ref 133378
+  to durationcanvas_ref 128514
+  yz 481 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+end
