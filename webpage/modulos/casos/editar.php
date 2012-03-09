@@ -7,17 +7,90 @@
 	if(!empty($_REQUEST['dispositivo_tipo'])){
 	
 	$id_dispositivo = $_REQUEST['dispositivo_tipo'];
+	
 	$row = mysql_fetch_array(mysql_query("SELECT * FROM `ce_dispositivos_tipo` WHERE id_tipo = $id_dispositivo"));
 	
 		switch($row['nombre']){
-			case 'fotovoltaico':{ ?>
-				<h2>Dispositivo: <?php echo $row['nombre']; ?></h2>
-        <form action="sql.php?mod=6&act=1" method="post">
-        <input type="hidden" name="table" value="<?php echo $_REQUEST['table'] ?>" />
-        <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno'] ?>" />
-        <input type="hidden" name="dispositivo_tipo" value="<?php echo $_REQUEST['dispositivo_tipo'] ?>" />
-        <input type="hidden" name="id_tipo" value="<?php echo $row['id_tipo']; ?>" />
-        <input type="hidden" name="caso" value="<?php echo $_REQUEST['caso']; ?>" />
+			case 'fotovoltaico':{ 
+				echo '<h2 style="margin-bottom:0;">Dispositivo: '.ucfirst($row['nombre']).'</h2>';
+				if(empty($_REQUEST['gtie']) or $_REQUEST['gtie']!=1)
+					$_REQUEST['gtie'] == 0;				
+				
+				if($_REQUEST['gtie']==md5(1)){
+					
+					extract(mysql_fetch_array(mysql_query("SELECT COUNT(id) AS total FROM `ce_dispositivos` WHERE tipo = 4 AND activado = 1;")));
+					if($total == 0){
+						echo "No hay dispositivos tipo Gridtie que mostrar, consulte a su administrador."."\r";
+						echo "<div><a href=\"javascript: history.go(-1)\">Regresar</a></div>";
+					}else{
+					
+						$query = mysql_query("SELECT * FROM `ce_dispositivos` WHERE tipo = 4 AND activado = 1;");
+						
+				?>
+						<img src="images/pasos_gridtie_fv1.jpg" border="0" />
+            <div class="spacer_10"></div>
+            <form action="index.php?mod=6&act=3" method="post">
+            	<input type="hidden" name="table" value="<?php echo $_REQUEST['table'] ?>" />
+              <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno'] ?>" />
+              <input type="hidden" name="dispositivo_tipo" value="<?php echo $_REQUEST['dispositivo_tipo'] ?>" />
+              <input type="hidden" name="id_tipo" value="<?php echo $row['id_tipo']; ?>" />
+              <input type="hidden" name="caso" value="<?php echo $_REQUEST['caso']; ?>" />
+						<table border="0" cellpadding="0" cellspacing="0" id="activar_proveedores">
+							<thead>
+								<tr>
+									<td id="izq">Cantidad</td>
+									<td>Marca</td>
+									<td>Modelo</td>
+									<td>Precio</td>
+									<td>Instalaci&oacute;n</td>
+									<td>Proveedor</td>
+									<td id="der">Variables</td>
+								</tr>
+							</thead>
+							
+              <?php
+							$i = 0;
+							while($row = mysql_fetch_array($query)){ 
+							if($i%2==0)
+								$clase = 'par';
+							else
+								$clase = 'non';	
+							?>
+            	<tr class="<?php echo $clase; ?>">
+              	<td><div align="center"><input name="gtid" value="<?php echo $row['id']; ?>" type="radio" /></div></td>
+              	<td><div align="center"><?php echo $row['marca']; ?></div></td>
+                <td><div align="center"><?php echo $row['modelo']; ?></div></td>
+                <td><div align="center"><?php echo $row['precio_dispocitivo']; ?></div></td>
+                <td><div align="center"><?php echo $row['precio_instalacion']; ?></div></td>
+                <td><div align="center"><?php echo $row['proveedor']; ?></div></td>
+                <td><div align="center"><?php echo $row['variables']; ?></div></td>
+              </tr>
+			<?php    
+						}// while
+			?>
+      				<tr>
+              	<td colspan="11"><div align="right"><input type="image" src="images/btn_siguiente.png" style="border:0;" /></div></td>
+            	</tr>
+      			</table>
+            </form>
+      <?php
+						
+					}//else
+				
+			?>
+					
+      <?php
+				}else{				
+			?>       
+				<form action="sql.php?mod=6&act=1" method="post">
+          <input type="hidden" name="table" value="<?php echo $_REQUEST['table'] ?>" />
+          <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno'] ?>" />
+          <input type="hidden" name="dispositivo_tipo" value="<?php echo $_REQUEST['dispositivo_tipo'] ?>" />
+          <input type="hidden" name="id_tipo" value="<?php echo $row['id_tipo']; ?>" />
+          <input type="hidden" name="caso" value="<?php echo $_REQUEST['caso']; ?>" />
+          <input type="hidden" name="gtid" value="<?php echo $_REQUEST['gtid']; ?>" />
+          <img src="images/pasos_gridtie_fv2.jpg" border="0" />
+          <div class="spacer_10"></div>
           <table border="0" cellpadding="0" cellspacing="0" id="activar_proveedores">
             <thead>
               <tr>
@@ -88,16 +161,18 @@
              } 
             ?>
             <tr>
-              <td colspan="11"><div align="right"><input type="image" src="images/btn_siguiente.png" style="border:0;" /></div></td>
+              <td colspan="11"><div align="right"><input type="image" src="images/guardar.png" style="border:0;" /></div></td>
             </tr>
           </table>
         </form> 
 				
-			<?php };
+			<?php 				
+				}//else
+			};
 			break;
 			// FOTOVOLTAICO =====================================
 			case 'lampara':{?>
- 				<h2>Dispositivo: <?php echo $row['nombre']; ?></h2>
+ 				<h2>Dispositivo: <?php echo ucfirst($row['nombre']); ?></h2>
   			<form action="sql.php?mod=6&act=5" method="post">
         <input type="hidden" name="table" value="<?php echo $_REQUEST['table'] ?>" />
         <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno'] ?>" />
