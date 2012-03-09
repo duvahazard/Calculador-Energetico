@@ -25,8 +25,8 @@
 				</td>
 				<td width="203">
 					<div align="center">
-						<div class="spacer_10"></div>
-						<a href="index.php?mod=6&act=2&terreno=<?php echo $row['nombre']; ?>&table=ce_casos_<?php echo $row['id']; ?>t"><img src="images/btn_agregar.png" border="0" /></a>
+						<div class="spacer_5"></div>
+						<a href="index.php?mod=6&act=2&terreno=<?php echo $row['nombre']; ?>&table=ce_casos_<?php echo $row['id']; ?>t"><img src="images/btn_seleccionar.png" border="0" /></a>
 					</div>
 				</td>
 			</tr>
