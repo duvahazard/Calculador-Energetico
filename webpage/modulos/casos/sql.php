@@ -15,17 +15,16 @@ function query(){
 			$equis = $_REQUEST['equis'];
 			$ye = $_REQUEST['ye'];
 			$zeta = $_REQUEST['zeta'];
+			$gridtie = $_REQUEST['gtid'];
 			
 			$num_dis = count($dis);
 			$i=0;
 			while($i <= $num_dis){
 				if(!empty($dis[$i])){					
-					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $dis[$i], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis[$i];$ye[$i];$zeta[$i]','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
-					
+					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente, gridtie_id) VALUES($caso, $dis[$i], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis[$i];$ye[$i];$zeta[$i]','', '', $gridtie)") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
 				}else{
 					break;
-				}
-				
+				}				
 				$i++;
 			}
 			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';
@@ -126,11 +125,25 @@ function query(){
 				
 				$i++;
 			}
-			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';
-				
-			
-			
+			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';			
 		}// CASE 5
+		break;
+		case 6:{
+			$cid = $_REQUEST['cid'];
+			$table = $_REQUEST['table'];
+			$terreno = $_REQUEST['terreno'];
+			extract(mysql_fetch_array(mysql_query("SELECT MAX( `caso` ) AS ultimo FROM $table;")));
+			$caso = $ultimo + 1;
+			$query = mysql_query("SELECT * FROM $table WHERE caso = $cid;");
+			while($row = mysql_fetch_array($query)){
+				mysql_query("
+					INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) 
+					VALUES(".$caso.", ".$row['id_dispositivo'].", ".$row['id_tipo'].", ".$row['dispositivos'].",'".$row['dispositivos_variables']."','', '')
+				") 
+				or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
+			}
+			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&msj=1';
+		}// CASE 6
 		break;
 	}//SWITCH
 	
