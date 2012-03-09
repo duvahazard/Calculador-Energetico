@@ -23,5 +23,23 @@ function mensajes(){
 		case 4: echo '<h6 class="msj_error">El usuario ya se encuentra registrado, intentelo nuevamente.</h6>';break;
 	}
 }
+function titulo(){
+	switch($_REQUEST['mod']){
+		case 1: echo "Calculador Energ&eacute;tico";break;
+		case 2: echo "Acerca de";break;
+		case 3: echo "Proveedores";break;
+		case 4: echo "Terrenos";break;
+		case 5: echo "Recibos";break;
+		case 6: echo "Casos";break;
+		default: echo "Calculador Energ&eacute;tico";break;
+	}
+}
+
+function javascripts(){
+	switch($_REQUEST['mod']){
+		case 3: require("js/proveedores.js");break;
+		case 4: require("js/terrenos.js");break;
+	}
+}
 
 ?>
