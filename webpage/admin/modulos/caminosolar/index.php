@@ -13,7 +13,7 @@
     </thead>
     <?php
 		$i = 0;
-		$query = mysql_query("SELECT * FROM ce_camino_solar_32t ORDER BY id DESC LIMIT 500");
+		$query = mysql_query("SELECT * FROM ce_camino_solar_48t ORDER BY id DESC LIMIT 500");
 		while($row = mysql_fetch_array($query)){
 			if($i%2==0){
 				$clase = 'par';
