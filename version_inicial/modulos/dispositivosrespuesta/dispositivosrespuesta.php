@@ -1,6 +1,6 @@
 <?php
 /*
- *  Autor: Héctor Mora
+ *  Autor: Héctor Mora 
  *  Fecha: 07-Marzo-2012
  *  Descripción: Manda llamar a generación de respuesta de dispositivos fotovoltaicos, grid tie, lámparas, y
  *  demás elementos involucrados en el armado de casos.
