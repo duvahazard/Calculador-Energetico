@@ -11,6 +11,7 @@ $siguiente = $total + 1;
   <form action="index.php?mod=6&act=3" method="post" class="altaTerreno" id="casos">
     <input type="hidden" name="table" value="<?php echo $table; ?>" />
     <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno']; ?>" />
+    <input type="hidden" name="gtie" value="c4ca4238a0b923820dcc509a6f75849b" />
     <table id="alta_proveedores" cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td>Tipo de dispositivo*</td>
@@ -52,8 +53,34 @@ $siguiente = $total + 1;
   </form>
   </fieldset>
   <div class="spacer_20"></div>
-	
-  
+	<div class="grid_8 alpha"><h6 style="margin-bottom:0;">Caso #1</h6></div>
+  <div class="grid_5 omega" align="right"></div>
+  <table cellpadding="0" cellspacing="0" border="0" id="activar_proveedores">
+  	<thead>
+      <tr>
+        <td id="izq">Caso</td>
+        <td>Secuencia</td>
+        <td id="der">&nbsp;</td>
+      </tr>
+      </thead>
+      <tr class="par">
+      	<?php
+					$query = mysql_query("SELECT * FROM $table WHERE caso = 1 LIMIT 1;");
+					while($row = mysql_fetch_array($query)){
+						echo "<td>1</td>";
+						echo "<td>".$row['secuencia']."</td>";
+						echo "<td>
+										<div align=\"center\">
+											<a href=\"index.php?mod=6&act=5&tid=".$row['secuencia']."\">
+												<img src=\"images/graficas.png\" border=\"0\" /><br />
+												Ver Gr&aacute;fica
+											</a>
+										</div>
+									</td>";
+					}
+				?>
+      </tr>
+  </table>
     <?php
 			
 			
@@ -67,7 +94,10 @@ $siguiente = $total + 1;
 				
 		?>
         <div class="grid_8 alpha"><h6 style="margin-bottom:0;">Caso #<?php echo $i; ?></h6></div>
-        <div class="grid_5 omega" align="right"><a href="sql.php?mod=6&act=4&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno'] ?>"><img src="images/eliminar_btn.jpg" border="0" /></a></div>
+        <div class="grid_5 omega" align="right">
+        	<a href="sql.php?mod=6&act=4&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>"><img src="images/eliminar_btn.jpg" border="0" /></a>
+          <a href="sql.php?mod=6&act=6&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>"><img src="images/btn_duplicar.jpg" border="0" /></a>
+        </div>
 				<table cellpadding="0" cellspacing="0" border="0" width="100%" id="activar_proveedores">
           <thead>
             <tr>
@@ -84,9 +114,9 @@ $siguiente = $total + 1;
 					<?php
 					while($row = mysql_fetch_array($query)){ 
 						if($j%2==0)
-							$clase = 'par';
-						else
 							$clase = 'non';
+						else
+							$clase = 'par';
 						
 						$variables = explode(";", $row['dispositivos_variables']);
 						$cuantos = count($variables);

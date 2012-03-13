@@ -37,13 +37,13 @@ while ($mes<=12){//cycle through the months
 	$numAno=length($tarrifaMES);//numero de anos que estamos usando
 	$avDevMes= //The AVEDEV function returns the average of the difference of a collection of numbers from their average (arithmetic mean).
 	
-	$tarrifaMesSIM=;//filter list $tarrifaSIM for months=$mes
+	$tarifaMesSIM=;//filter list $tarrifaSIM for months=$mes
  	$anoFinalSIM=;//final ano en lista $tarrifaMesSIM
 	$numAnoSIM=length($tarrifaMES);//numero de anos que estamos simulando
 	
 	$ano=;//first year in $tarrifaMesSIM
 	while($ano<=$anoFinalSIM){
-		ce_SIMtarrifas_XX:($valore, $ano)=ce_tarrifa_XXtt:($valor,$anoFinal)+($ano-$anoFinal)*$avDevMes;
+		ce_SIMtarrifas_XX:($valores, $ano)=ce_tarrifa_XXtt:($valor,$anoFinal)+($ano-$anoFinal)*$avDevMes;
 	}
 }
 

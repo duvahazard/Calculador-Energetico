@@ -3,7 +3,6 @@ $uid = $_SESSION['userid'];
 $terreno = $_REQUEST['terreno'];
 $tarifa = $_REQUEST['tarifa'];
 $table = "ce_cfe_consumohistorico_".$_REQUEST['terreno'].'t';
-echo $table;
 if(!empty($terreno) || !empty($tarifa)){
 ?>
 <div class="prefix_1 grid_7 alpha">
@@ -69,9 +68,9 @@ if(!empty($terreno) || !empty($tarifa)){
 	
 	
 	
-	$sql="SELECT * FROM $table";
-	$result=@mysql_query($sql);
-	if (!$result)
+	extract(mysql_fetch_array(mysql_query("SELECT COUNT(id) AS total FROM $table;")));
+	
+	if ($total ==0)
 	{
 	// Crear tabla de recibo / terreno
 	

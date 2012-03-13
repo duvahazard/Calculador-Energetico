@@ -42,7 +42,7 @@ $query = mysql_query("SELECT * FROM ce_proveedores ORDER BY `ce_proveedores`.`$o
 			echo '<td>'.$row['direccion'].'</td>';
 			echo '<td>'.$row['rfc'].'</td>';
 			echo '<td>'.$row['correo'].'</td>';
-			echo '<td>'.$row['telefono'].'</td>';
+			echo '<td>'.$row['tel'].'</td>';
 			echo '<td>'.$row['url'].'</td>';
 			echo '<td>
 							<div align="center">

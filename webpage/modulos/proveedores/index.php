@@ -32,7 +32,7 @@
 							echo '<td>'.$row['direccion'].'</td>';
 							echo '<td>'.$row['ciudad'].'</td>';
 							echo '<td>'.$row['correo'].'</td>';
-							echo '<td>'.$row['telefono'].'</td>';
+							echo '<td>'.$row['tel'].'</td>';
 							echo '<td><a href="'.$row['url'].'" target="_blank">'.$row['url'].'</a></td>';						
 						echo '</tr>';
 						
