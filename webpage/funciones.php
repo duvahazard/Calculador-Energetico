@@ -7,13 +7,18 @@ session_start();
 
 //INCLUSION DE FUNCIONES
 require("functions.php");
+$_REQUEST['act'] = 1;
 
-if(!empty($_REQUEST['mod']) and !empty($_REQUEST['act'])){
-  switch($_REQUEST['mod']){  		
-   case 1: require("fotovolrespuesta.php"); break;
+if(!empty($_REQUEST['mod'])){
+  switch($_REQUEST['mod']){
+   case 1:{ 
+	 	require("fotovolrespuesta.php");
+		generaRespuestaDispositivos($idterreno, $idcaso);		
+		
+	 	$url = "index.php?mod=6&act=2&terreno=".$_REQUEST['terreno']."&table=".$_REQUEST['table'];
+	 }break;
   }
-	$url = query();
-	if(empty($url) and $url == "")
+if(empty($url) and $url == "")
 		$url = passURL($_REQUEST['url']);
 }
 else if($_SERVER['HTTP_REFERER'] == "") 
