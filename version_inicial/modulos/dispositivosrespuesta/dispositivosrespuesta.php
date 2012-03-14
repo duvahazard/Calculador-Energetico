@@ -19,9 +19,9 @@ include("fotovolrespuesta.php");
  * $idterreno - ID del terreno
  * $idcaso    - Número de caso
  */
- function generaRespuestaDispositivos($con, $idterreno, $idcaso){
+ function generaRespuestaDispositivos($idterreno, $idcaso){
 
-	crear_tabla_fvrespuesta( $con, $idterreno, $idcaso );
+	crear_tabla_fvrespuesta($idterreno, $idcaso );
 	//crear_tabla_gtrespuesta( $con, $idterreno, $idcaso );// No implementada aún
 	//crear_tabla_lmrespuesta( $con, $idterreno, $idcaso );// No implementada aún
  }

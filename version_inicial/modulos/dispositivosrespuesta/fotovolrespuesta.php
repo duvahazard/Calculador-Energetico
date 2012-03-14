@@ -22,22 +22,22 @@
  *$idterreno - ID del terreno
  *$idcaso    - Número de caso
  */
-function crear_tabla_fvrespuesta($con, $idterreno, $idcaso) {
+function crear_tabla_fvrespuesta($idterreno, $idcaso) {
 
-    $dispositivos = getFotovs( $con, $idterreno, $idcaso );
+    $dispositivos = getFotovs( $idterreno, $idcaso );
     $total_dispositivos = count($dispositivos);
     $nombre_tabla = "";
 
-    $caminoSolar = getCaminoSolar( $con, $idterreno );
+    $caminoSolar = getCaminoSolar( $idterreno );
     $total_caminoSolar = count ($caminoSolar );
 
 
 	for( $i = 0; $i < $total_dispositivos; $i ++ ) {
 
 		$nombre_tabla = "ce_fotovoltaico_respuesta_t". $idterreno. "c" . $idcaso . "fv". $dispositivos[$i][0];
-		borraTabla( $con, $nombre_tabla );
-		creaTabla( $con, $nombre_tabla );
-		$datos_dispositivo = getDatosDispositivo ($con, $idterreno, $dispositivos[$i][0], $dispositivos[$i][1] );
+		borraTabla( $nombre_tabla );
+		creaTabla( $nombre_tabla );
+		$datos_dispositivo = getDatosDispositivo ( $idterreno, $dispositivos[$i][0], $dispositivos[$i][1] );
 
 		//$terreno = $row['terreno'];
 		$delL    = $datos_dispositivo['delL'];
@@ -83,26 +83,26 @@ function crear_tabla_fvrespuesta($con, $idterreno, $idcaso) {
 				$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2; // QE = Eficiencia CuÃ¡ntica,,,  Aper = Area efectiva,(Efecto coseno)
 				$potenciaCS=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;//this should be CS !!  CS =Clear SKY
 
-				insertaRegistro( $con, $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL );
+				insertaRegistro( $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL );
 		} // Fin for Camino Solar
 
 	} // Fin For Dispositivos.
 }
 
 
-function insertaRegistro( $con, $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL ) {
+function insertaRegistro( $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL ) {
 
 	$sql = "INSERT INTO ". $nombre_tabla ." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
-	mysql_query( $sql, $con );
+	mysql_query( $sql );
 }
 
-function getFotovs($con, $idterreno, $idcaso ) {
+function getFotovs( $idterreno, $idcaso ) {
 
 	$dispositivos = Array();
 
 	$sql = "SELECT id as id_disp_caso, id_dispositivo as id_disp FROM ce_casos_" . $idterreno . "t WHERE caso = " . $idcaso ." AND id_tipo = 1";
 
-	$resultado = mysql_query($sql, $con);
+	$resultado = mysql_query($sql);
 
  	if( $resultado ) {
 
@@ -119,13 +119,13 @@ function getFotovs($con, $idterreno, $idcaso ) {
 	return $dispositivos;
 }
 
-function borraTabla($con, $nombre_tabla) {
+function borraTabla($nombre_tabla) {
 
 	$sql = "DROP TABLE IF EXISTS ". $nombre_tabla;
-	mysql_query($sql,$con);
+	mysql_query($sql);
 }
 
-function creaTabla( $con, $nombre_tabla ) {
+function creaTabla( $nombre_tabla ) {
 
 $sql = "CREATE TABLE ". $nombre_tabla .
 	   "(
@@ -137,17 +137,17 @@ $sql = "CREATE TABLE ". $nombre_tabla .
 			 potenciaCS FLOAT(9,3),
 			 potenciaCL FLOAT(9,3))";
 
-	mysql_query($sql,$con);
+	mysql_query($sql);
 }
 
 
-function getDatosDispositivo ($con, $idterreno, $id_dispositivo_caso, $id_dispositivo) {
+function getDatosDispositivo ($idterreno, $id_dispositivo_caso, $id_dispositivo) {
 
 	$datos = Array();
 
 	$sql    = "SELECT factores FROM ce_dispositivos WHERE id = ".$id_dispositivo;
 
-	$resultado = mysql_query($sql, $con);
+	$resultado = mysql_query($sql);
 
  	if( $resultado ) {
 
@@ -165,7 +165,7 @@ function getDatosDispositivo ($con, $idterreno, $id_dispositivo_caso, $id_dispos
 
 	$sql = "SELECT dispositivos_variables FROM ce_casos_". $idterreno ."t  WHERE id = ".$id_dispositivo_caso;
 
-	$resultado = mysql_query($sql, $con);
+	$resultado = mysql_query($sql);
 
  	if( $resultado ) {
 
@@ -186,12 +186,12 @@ function getDatosDispositivo ($con, $idterreno, $id_dispositivo_caso, $id_dispos
 }
 
 
-function getCaminoSolar( $con, $idterreno ) {
+function getCaminoSolar( $idterreno ) {
 
 	$camino_solar = Array();
 	$sql = "SELECT tiempo, az, alt, intcero, intuno FROM ce_camino_solar_".$idterreno."t";
 
-	$resultado = mysql_query($sql, $con);
+	$resultado = mysql_query($sql);
 
  	if( $resultado ) {
 
