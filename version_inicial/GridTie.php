@@ -51,7 +51,7 @@ while ($caso<=$casoLength) {  //ciclar en cada gridTie
 		while($mes<=13){ // ciclar en los meses de grid tie
 			if($mes=13){ // caso cuando sea leap year, sumar febrero pero con el 28 contado 2 veces
 				$mesList=; // filtrar la tabla fotovol para mostrar solo valores de $mes=2
-				$mesTotal($mes)=$mesTotal+; // sumar todos los valores en ce_fotorespuesta para ese mes, multiplicarlo por $eff y sumarlo al mes total
+				$mesTotal($mes)=$mesTotal+; // sumar todos los valores en ce_fotorespuesta para ese mes, multiplicarlo por $eff y sumarlo al mes total; mas un dia extra!!!
 			}
 			else(){
 				$mesList=; // filter de la tabla fotovol para mostrar los demás meses
