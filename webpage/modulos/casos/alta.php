@@ -93,8 +93,9 @@ $siguiente = $total + 1;
 															WHERE caso=$i;");
 				
 		?>
-        <div class="grid_8 alpha"><h6 style="margin-bottom:0;">Caso #<?php echo $i; ?></h6></div>
-        <div class="grid_5 omega" align="right">
+        <div class="grid_7 alpha"><h6 style="margin-bottom:0;">Caso #<?php echo $i; ?></h6></div>
+        <div class="grid_6 omega" align="right">
+        	<a href="funciones.php?mod=1&cid=<?php echo $i; ?>&tid=<?php echo $_REQUEST['tid']; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&table=<?php echo $table; ?>"><img src="images/btn_calcular.jpg" border="0" title="Calcular" alt="Calcular" /></a>
         	<a href="sql.php?mod=6&act=4&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>"><img src="images/eliminar_btn.jpg" border="0" /></a>
           <a href="sql.php?mod=6&act=6&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>"><img src="images/btn_duplicar.jpg" border="0" /></a>
         </div>
