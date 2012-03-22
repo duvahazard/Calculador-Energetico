@@ -33,7 +33,7 @@ function modulos(){
 					case 2: require("modulos/casos/alta.php");break;
 					case 3: require("modulos/casos/editar.php");break;
 					case 4: require("modulos/casos/editar2.php");break;
-					case 5: require("modulos/casos/grafica_historico_cfe.php");break;
+					case 5: require("modulos/casos/demanda_promedio.php");break;
 					default: require("modulos/casos/index.php");break;
 				}break;
 			}
