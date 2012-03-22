@@ -1,13 +1,14 @@
-If recibo every 2 months
-The value is for the month marked and the month before 
-Mes=1;
-While( Mes<=12){
+<?php
+/*If recibo every 2 months
+The value is for the month marked and the month before */
+$mes=1;
+while($mes<=12){
 Hours=;//hours from that month
-If() {//no sample at this month exists
+if() {//no sample at this month exists
   Mes=Mes+1;
   Hours=Hours+ ;// hours of that month
 }
-Else{
+else{
   Hours=Hours+ ;//hours from the month previous
 }
 EngAvg=the average consumption for each month included
@@ -18,3 +19,4 @@ Mes=Mes+1;
 }
 
 //if there is not a full history of recibos, copy the last value and fill in all with the same value.
+?>
