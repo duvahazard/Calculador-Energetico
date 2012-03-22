@@ -18,13 +18,13 @@
 /*HMN- Función para crear la respuesta a n dispositivos fotovoltaicos de un caso de un terreno
  *
  *Parametros recibidos:
- *$con       - Conexion a la base de datos
  *$idterreno - ID del terreno
  *$idcaso    - Número de caso
  */
  
  $idterreno = $_REQUEST['tid'];
  $idcaso = $_REQUEST['cid'];
+
 
 function crear_tabla_fvrespuesta($idterreno, $idcaso) {
 
@@ -92,8 +92,6 @@ function crear_tabla_fvrespuesta($idterreno, $idcaso) {
 
 	} // Fin For Dispositivos.
 	
-	
-	
 }
 
 
@@ -101,6 +99,8 @@ function insertaRegistro( $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenci
 
 	$sql = "INSERT INTO ". $nombre_tabla ." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
 	mysql_query( $sql );
+	
+	
 }
 
 function getFotovs( $idterreno, $idcaso ) {
@@ -134,8 +134,7 @@ function borraTabla($nombre_tabla) {
 
 function creaTabla( $nombre_tabla ) {
 
-$sql = "CREATE TABLE ". $nombre_tabla .
-	   "(
+$sql = "CREATE TABLE ".$nombre_tabla."(
 			 id INT PRIMARY KEY AUTO_INCREMENT,
 			 tiempo TIMESTAMP,
 			 azFVt FLOAT(9,6),
@@ -145,6 +144,7 @@ $sql = "CREATE TABLE ". $nombre_tabla .
 			 potenciaCL FLOAT(9,3))";
 
 	mysql_query($sql);
+	
 }
 
 
@@ -188,7 +188,7 @@ function getDatosDispositivo ($idterreno, $id_dispositivo_caso, $id_dispositivo)
 
 		mysql_free_result( $resultado );
 	}
-
+	
 	return $datos;
 }
 
