@@ -1,7 +1,7 @@
 <?php 
 $uid = $_SESSION['userid'];
 $table = $_REQUEST['table'];
-$sql = extract(mysql_fetch_array(mysql_query("SELECT MAX(`caso`) AS total FROM $table;")));
+extract(mysql_fetch_array(mysql_query("SELECT MAX(`caso`) AS total FROM $table;")));
 $siguiente = $total + 1;
 ?>
 <div class="prefix_1 grid_13 alpha">
