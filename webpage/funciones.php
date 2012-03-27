@@ -12,10 +12,14 @@ if(!empty($_REQUEST['mod'])){
   switch($_REQUEST['mod']){
    case 1:{ 
 	 	require("fotovolrespuesta.php");
-		generaRespuestaDispositivos($idterreno, $idcaso);
+		require("gridtierespuesta.php");
+			crear_tabla_fvrespuesta( $idterreno, $idcaso );
+			crear_tabla_gtrespuesta( $idterreno, $idcaso );
+			//crear_tabla_lmrespuesta( $idterreno, $idcaso );// No implementada aún
+		
 		$url = "index.php?mod=6&act=2&terreno=".$_REQUEST['terreno']."&table=".$_REQUEST['table']."&tid=".$_REQUEST['tid'];
 		
-	 }break;
+	 }break;	 
   }
 if(empty($url) and $url == "")
 		$url = passURL($_REQUEST['url']);
