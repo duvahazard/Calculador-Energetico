@@ -37,8 +37,7 @@ function query(){
 							dispositivos INT(11),
 							dispositivos_variables TEXT,
 							secuencia VARCHAR(45),
-							medio_ambiente VARCHAR(45),
-							gridtie_id INT(11),
+							medio_ambiente VARCHAR(45),							
 							INDEX ( `caso` )
 						);
 					') or die ("Error al generar la tabla de casos del terreno");
