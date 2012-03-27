@@ -3,6 +3,7 @@ function query(){
 	
 	switch($_REQUEST['act']){
 		case 1:{
+			// -------- Insertar Caso Nuevo de Fotovoltaico con Gridtie -----------
 			$caso = $_REQUEST['caso'];
 			$table = $_REQUEST['table'];
 			$terreno = $_REQUEST['terreno'];
@@ -20,8 +21,19 @@ function query(){
 			$num_dis = count($dis);
 			$i=0;
 			while($i <= $num_dis){
-				if(!empty($dis[$i])){					
-					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente, gridtie_id) VALUES($caso, $dis[$i], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis[$i];$ye[$i];$zeta[$i]','', '', $gridtie)") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
+				if(!empty($dis[$i])){		
+					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $dis[$i], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis[$i];$ye[$i];$zeta[$i]','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
+					$ultimo_disp_agregado = mysql_insert_id().';';
+					// ----- Inserta el gridtie --------
+					$qry = mysql_query("SELECT * FROM $table WHERE caso = $caso AND id_dispositivo = $gridtie;") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
+					if(mysql_num_rows($qry)){
+							$row = mysql_fetch_array($qry);
+							$last_one = $row['dispositivos_variables'].$ultimo_disp_agregado;
+							mysql_query("UPDATE $table SET dispositivos_variables = '$last_one' WHERE id =".$row['id'].";") or die("Error");													
+					}else{
+						mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos_variables) VALUES($caso, $gridtie, 4, '$ultimo_disp_agregado');") or die("Error");						
+					}
+					// ----- Inserta el gridtie --------
 				}else{
 					break;
 				}				
@@ -31,6 +43,7 @@ function query(){
 		}//CASE 1
 		;break;
 		case 2:{
+			// ------ Eliminar Dispositivo del Caso Seleccionado -------
 			$id = $_REQUEST['id'];
 			$table = $_REQUEST['table'];
 			mysql_query("DELETE FROM $table WHERE id = $id;") or die ("Error al eliminar dispositivo de la base de datos, consulte a su administrador.");
@@ -38,6 +51,7 @@ function query(){
 		}// CASE 2
 		break;
 		case 3:{
+			// ---------- Editar Dispositivo -------------
 			$caso = $_REQUEST['caso'];
 			$table = $_REQUEST['table'];
 			$terreno = $_REQUEST['terreno'];
@@ -54,6 +68,7 @@ function query(){
 		}// CASE 3
 		break;
 		case 4:{
+			// ----------- Eliminar Caso -------------
 			$cid = $_REQUEST['cid'];
 			$table = $_REQUEST['table'];
 			$terreno = $_REQUEST['terreno'];
@@ -62,6 +77,7 @@ function query(){
 		}// CASE 4
 		break;
 		case 5:{
+			// ---------- Insertar Dispositivos Diferentes a Fotovoltaico ---------
 			$caso = $_REQUEST['caso'];
 			$table = $_REQUEST['table'];
 			$terreno = $_REQUEST['terreno'];
@@ -128,6 +144,7 @@ function query(){
 			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';			
 		}// CASE 5
 		break;
+		// ---------- Duplicar Caso -------------
 		case 6:{
 			$cid = $_REQUEST['cid'];
 			$table = $_REQUEST['table'];
