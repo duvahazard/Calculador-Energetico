@@ -17,8 +17,8 @@
 			data.addColumn('string', 'Fecha');
 			data.addColumn('number', 'Consumo en kWh');
 			<?php
-				//$table = $_REQUEST['tid'];
-				$table = "ce_consumohistorico_prueba1";
+				$table = $_REQUEST['tid'];
+				//$table = "ce_consumohistorico_prueba1";
 				extract(mysql_fetch_array(mysql_query("SELECT COUNT(*) AS total FROM ".$table."")));					
 			?>
 			data.addRows(<?php echo $total;?>);
