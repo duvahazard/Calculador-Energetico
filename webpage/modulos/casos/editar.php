@@ -11,7 +11,7 @@
 	$row = mysql_fetch_array(mysql_query("SELECT * FROM `ce_dispositivos_tipo` WHERE id_tipo = $id_dispositivo"));
 	
 		switch($row['nombre']){
-			case 'fotovoltaico':{ 
+			case 'fotovoltaico':{
 				echo '<h2 style="margin-bottom:0;">Dispositivo: '.ucfirst($row['nombre']).'</h2>';
 				if(empty($_REQUEST['gtie']) or $_REQUEST['gtie']!=1)
 					$_REQUEST['gtie'] == 0;				
@@ -38,7 +38,7 @@
 						<table border="0" cellpadding="0" cellspacing="0" id="activar_proveedores">
 							<thead>
 								<tr>
-									<td id="izq">Cantidad</td>
+									<td id="izq">Selecionar</td>
 									<td>Marca</td>
 									<td>Modelo</td>
 									<td>Precio</td>
