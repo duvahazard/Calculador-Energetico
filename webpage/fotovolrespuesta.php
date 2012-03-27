@@ -1,5 +1,5 @@
 <?php
-/* A program to 
+/* A program to
 
   Project Leader Rodger Evans, 2011-06-01
   sunnycanuck@gmail.com
@@ -18,29 +18,29 @@
 /*HMN- Función para crear la respuesta a n dispositivos fotovoltaicos de un caso de un terreno
  *
  *Parametros recibidos:
+ *$con       - Conexion a la base de datos
  *$idterreno - ID del terreno
  *$idcaso    - Número de caso
  */
  
  $idterreno = $_REQUEST['tid'];
  $idcaso = $_REQUEST['cid'];
+ 
+function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 
-
-function crear_tabla_fvrespuesta($idterreno, $idcaso) {
-
-    $dispositivos = getFotovs( $idterreno, $idcaso );
+    $dispositivos = getFotovs(  $idterreno, $idcaso );
     $total_dispositivos = count($dispositivos);
     $nombre_tabla = "";
 
-    $caminoSolar = getCaminoSolar( $idterreno );
+    $caminoSolar = getCaminoSolar(  $idterreno );
     $total_caminoSolar = count ($caminoSolar );
 
 
 	for( $i = 0; $i < $total_dispositivos; $i ++ ) {
 
 		$nombre_tabla = "ce_fotovoltaico_respuesta_t". $idterreno. "c" . $idcaso . "fv". $dispositivos[$i][0];
-		borraTabla( $nombre_tabla );
-		creaTabla( $nombre_tabla );
+		borraTabla(  $nombre_tabla );
+		creaTabla(  $nombre_tabla );
 		$datos_dispositivo = getDatosDispositivo ( $idterreno, $dispositivos[$i][0], $dispositivos[$i][1] );
 
 		//$terreno = $row['terreno'];
@@ -87,20 +87,29 @@ function crear_tabla_fvrespuesta($idterreno, $idcaso) {
 				$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2; // QE = Eficiencia CuÃ¡ntica,,,  Aper = Area efectiva,(Efecto coseno)
 				$potenciaCS=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;//this should be CS !!  CS =Clear SKY
 
-				insertaRegistro( $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL );
+				insertaRegistro(  $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL );
+
 		} // Fin for Camino Solar
 
+		actualizaCasos(  $idterreno, $dispositivos[$i][0], $nombre_tabla );
+
 	} // Fin For Dispositivos.
-	
 }
 
+function actualizaCasos(  $idterreno, $idfv, $tabla_fv_respuesta) {
 
-function insertaRegistro( $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL ) {
+	$tabla_casos = "ce_casos_" . $idterreno . "t";
+
+	$sql = "UPDATE ". $tabla_casos ." SET secuencia = '". $tabla_fv_respuesta ."' WHERE id = " . $idfv;
+
+	mysql_query( $sql );
+
+}
+
+function insertaRegistro(  $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL ) {
 
 	$sql = "INSERT INTO ". $nombre_tabla ." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
 	mysql_query( $sql );
-	
-	
 }
 
 function getFotovs( $idterreno, $idcaso ) {
@@ -126,15 +135,16 @@ function getFotovs( $idterreno, $idcaso ) {
 	return $dispositivos;
 }
 
-function borraTabla($nombre_tabla) {
+function borraTabla( $nombre_tabla) {
 
 	$sql = "DROP TABLE IF EXISTS ". $nombre_tabla;
 	mysql_query($sql);
 }
 
-function creaTabla( $nombre_tabla ) {
+function creaTabla(  $nombre_tabla ) {
 
-$sql = "CREATE TABLE ".$nombre_tabla."(
+$sql = "CREATE TABLE ". $nombre_tabla .
+	   "(
 			 id INT PRIMARY KEY AUTO_INCREMENT,
 			 tiempo TIMESTAMP,
 			 azFVt FLOAT(9,6),
@@ -144,11 +154,10 @@ $sql = "CREATE TABLE ".$nombre_tabla."(
 			 potenciaCL FLOAT(9,3))";
 
 	mysql_query($sql);
-	
 }
 
 
-function getDatosDispositivo ($idterreno, $id_dispositivo_caso, $id_dispositivo) {
+function getDatosDispositivo ( $idterreno, $id_dispositivo_caso, $id_dispositivo) {
 
 	$datos = Array();
 
@@ -188,7 +197,7 @@ function getDatosDispositivo ($idterreno, $id_dispositivo_caso, $id_dispositivo)
 
 		mysql_free_result( $resultado );
 	}
-	
+
 	return $datos;
 }
 
@@ -219,12 +228,5 @@ function getCaminoSolar( $idterreno ) {
 
 	return $camino_solar;
 }
-
-function generaRespuestaDispositivos($idterreno, $idcaso){
-
-	crear_tabla_fvrespuesta($idterreno, $idcaso );
-	//crear_tabla_gtrespuesta( $con, $idterreno, $idcaso );// No implementada aún
-	//crear_tabla_lmrespuesta( $con, $idterreno, $idcaso );// No implementada aún
- }
 
 ?>
