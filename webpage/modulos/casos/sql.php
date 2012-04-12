@@ -1,12 +1,12 @@
 <?php
 function query(){
-	
+	$tid = $_REQUEST['tid'];
+	$table = $_REQUEST['table'];
+	$terreno = $_REQUEST['terreno'];	
 	switch($_REQUEST['act']){
 		case 1:{
 			// -------- Insertar Caso Nuevo de Fotovoltaico con Gridtie -----------
 			$caso = $_REQUEST['caso'];
-			$table = $_REQUEST['table'];
-			$terreno = $_REQUEST['terreno'];
 			$dispositivo_tipo = $_REQUEST['dispositivo_tipo'];
 			$dis = $_REQUEST['dispositivo'];
 			$id_tipo = $_REQUEST['id_tipo'];
@@ -17,11 +17,10 @@ function query(){
 			$ye = $_REQUEST['ye'];
 			$zeta = $_REQUEST['zeta'];
 			$gridtie = $_REQUEST['gtid'];
-			
 			$num_dis = count($dis);
 			$i=0;
 			while($i <= $num_dis){
-				if(!empty($dis[$i])){		
+				if(!empty($dis[$i])){	
 					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $dis[$i], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis[$i];$ye[$i];$zeta[$i]','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
 					$ultimo_disp_agregado = mysql_insert_id().';';
 					// ----- Inserta el gridtie --------
@@ -29,32 +28,33 @@ function query(){
 					if(mysql_num_rows($qry)){
 							$row = mysql_fetch_array($qry);
 							$last_one = $row['dispositivos_variables'].$ultimo_disp_agregado;
-							mysql_query("UPDATE $table SET dispositivos_variables = '$last_one' WHERE id =".$row['id'].";") or die("Error");													
+							mysql_query("UPDATE $table SET dispositivos_variables = '$last_one' WHERE id =".$row['id'].";") or die("Error");
 					}else{
-						mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos_variables) VALUES($caso, $gridtie, 4, '$ultimo_disp_agregado');") or die("Error");						
+						mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables) VALUES($caso, $gridtie, 4, 1, '$ultimo_disp_agregado');") or die("Error");
 					}
 					// ----- Inserta el gridtie --------
 				}else{
 					break;
-				}				
+				}
 				$i++;
 			}
-			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';
+			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&tid='.$tid.'&msj=1';
 		}//CASE 1
 		;break;
 		case 2:{
 			// ------ Eliminar Dispositivo del Caso Seleccionado -------
 			$id = $_REQUEST['id'];
-			$table = $_REQUEST['table'];
+			
+			extract(mysql_fetch_array(mysql_query("SELECT secuencia AS secuencia FROM $table WHERE id = $id;")));
+			mysql_query("DROP TABLE ".$secuencia) or die("Error al borrar la tabla ".$secuencia.". Consulte a su administrador");
+			
 			mysql_query("DELETE FROM $table WHERE id = $id;") or die ("Error al eliminar dispositivo de la base de datos, consulte a su administrador.");
-			$url = "index.php?mod=6&act=2&table=".$table.'&terreno='.$_REQUEST['terreno'];
+			$url = "index.php?mod=6&act=2&table=".$table.'&terreno='.$_REQUEST['terreno'].'&dispositivo_tipo='.$dispositivo_tipo.'&tid='.$tid.'&msj=1';
 		}// CASE 2
 		break;
 		case 3:{
 			// ---------- Editar Dispositivo -------------
 			$caso = $_REQUEST['caso'];
-			$table = $_REQUEST['table'];
-			$terreno = $_REQUEST['terreno'];
 			$dis = $_REQUEST['dispositivo'];			
 			$cantidad = $_REQUEST['cantidad'];
 			$alt = $_REQUEST['alt'];
@@ -64,27 +64,31 @@ function query(){
 			$zeta = $_REQUEST['zeta'];
 			
 			mysql_query("UPDATE $table SET dispositivos = '$cantidad', dispositivos_variables = '$alt;$az;$equis;$ye;$zeta' WHERE id=$dis;") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
-			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';
+			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&tid='.$tid.'&msj=1';
 		}// CASE 3
 		break;
 		case 4:{
 			// ----------- Eliminar Caso -------------
 			$cid = $_REQUEST['cid'];
-			$table = $_REQUEST['table'];
-			$terreno = $_REQUEST['terreno'];
+			
+			$query = mysql_query("SELECT secuencia FROM $table WHERE caso = $cid AND id_tipo!=4;");
+			while($row = mysql_fetch_array($query)){
+				mysql_query("DROP TABLE ".$row['secuencia'].";") or die("Error al eliminar la tabla ".$row['secuencia']);
+			}			
+			extract(mysql_fetch_array(mysql_query("SELECT id AS gtid FROM $table WHERE caso = $cid AND id_tipo = 4 LIMIT 1;")));
+			mysql_query("DROP TABLE ce_gridtie_".$_REQUEST['tid']."t_".$gtid."g;") or die("Error al eliminar la tabla ce_gridtie_".$_REQUEST['tid']."t_".$gtid."g");
 			mysql_query("DELETE FROM $table WHERE caso = $cid;") or die ("Error al eliminar el caso de la base de datos, consulte a su administrador.");
-			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';
+			
+			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&tid='.$tid.'&msj=1';
 		}// CASE 4
 		break;
 		case 5:{
 			// ---------- Insertar Dispositivos Diferentes a Fotovoltaico ---------
 			$caso = $_REQUEST['caso'];
-			$table = $_REQUEST['table'];
-			$terreno = $_REQUEST['terreno'];
 			$dispositivo_tipo = $_REQUEST['dispositivo_tipo'];
 			$dis = $_REQUEST['dispositivo'];
 			$id_tipo = $_REQUEST['id_tipo'];
-			$cantidad = $_REQUEST['cantidad'];
+			$cantidad = $_REQUEST['cantidad'];			
 			
 			$lunes_hr_ini = $_REQUEST['lunes_hr_ini'];
 			$lunes_min_ini = $_REQUEST['lunes_min_ini']; 
@@ -137,29 +141,26 @@ function query(){
 					
 				}else{
 					break;
-				}
-				
+				}				
 				$i++;
 			}
-			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&msj=1';			
+			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&tid='.$tid.'&msj=1';			
 		}// CASE 5
 		break;
 		// ---------- Duplicar Caso -------------
 		case 6:{
 			$cid = $_REQUEST['cid'];
-			$table = $_REQUEST['table'];
-			$terreno = $_REQUEST['terreno'];
 			extract(mysql_fetch_array(mysql_query("SELECT MAX( `caso` ) AS ultimo FROM $table;")));
 			$caso = $ultimo + 1;
 			$query = mysql_query("SELECT * FROM $table WHERE caso = $cid;");
 			while($row = mysql_fetch_array($query)){
 				mysql_query("
 					INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) 
-					VALUES(".$caso.", ".$row['id_dispositivo'].", ".$row['id_tipo'].", ".$row['dispositivos'].",'".$row['dispositivos_variables']."','', '')
+					VALUES(".$caso.", ".$row['id_dispositivo'].", ".$row['id_tipo'].", '".$row['dispositivos']."','".$row['dispositivos_variables']."','".$row['secuencia']."', '')
 				") 
 				or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
 			}
-			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&msj=1';
+			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&tid='.$tid.'&msj=1';
 		}// CASE 6
 		break;
 	}//SWITCH

@@ -1,7 +1,6 @@
 <?php
-//$table = $_REQUEST['tid'];
-$table = "ce_cfe_consumohistorico_prueba1";
-$nombre_tabla = "ce_demandapromedio_t73_c1";
+$tid = $_REQUEST['tid'];
+$nombre_tabla = "ce_demandapromedio_t".$tid."_c1";
 
 mysql_query("DROP TABLE IF EXISTS ". $nombre_tabla) or die("Error al borrar la tabla.");
 mysql_query(
@@ -12,9 +11,9 @@ mysql_query(
 	
 
 $i = 1;
-while($i <= 12){	
+while($i <= 12){
 	$mes_anterior = $i - 1;
-	$query = mysql_query("SELECT * FROM ce_cfe_consumohistorico_prueba1 WHERE mes = $i ORDER BY ano ASC;");
+	$query = mysql_query("SELECT * FROM $nombre_tabla WHERE mes = $i ORDER BY ano ASC;");
 	$consumo = 0;
 	$sum_horas_mes = 0;
 	while($row = mysql_fetch_array($query)){

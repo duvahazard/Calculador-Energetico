@@ -11,7 +11,8 @@ $siguiente = $total + 1;
   <form action="index.php?mod=6&act=3" method="post" class="altaTerreno" id="casos">
     <input type="hidden" name="table" value="<?php echo $table; ?>" />
     <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno']; ?>" />
-    <input type="hidden" name="gtie" value="c4ca4238a0b923820dcc509a6f75849b" />
+    <input type="hidden" name="tid" value="<?php echo $_REQUEST['tid']; ?>" />
+    <input type="hidden" name="gtie" value="<?php echo md5(1); ?>" />
     <table id="alta_proveedores" cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td>Tipo de dispositivo*</td>
@@ -71,7 +72,7 @@ $siguiente = $total + 1;
 						echo "<td>".$row['secuencia']."</td>";
 						echo "<td>
 										<div align=\"center\">
-											<a href=\"index.php?mod=6&act=5&tid=".$row['secuencia']."\">
+											<a href=\"index.php?mod=6&act=5&tid=".$_REQUEST['tid']."\">
 												<img src=\"images/graficas.png\" border=\"0\" /><br />
 												Ver Gr&aacute;fica
 											</a>
@@ -96,8 +97,8 @@ $siguiente = $total + 1;
         <div class="grid_7 alpha"><h6 style="margin-bottom:0;">Caso #<?php echo $i; ?></h6></div>
         <div class="grid_6 omega" align="right">
         	<a href="funciones.php?mod=1&cid=<?php echo $i; ?>&tid=<?php echo $_REQUEST['tid']; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&table=<?php echo $table; ?>"><img src="images/btn_calcular.jpg" border="0" title="Calcular" alt="Calcular" /></a>
-        	<a href="sql.php?mod=6&act=4&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>"><img src="images/eliminar_btn.jpg" border="0" /></a>
-          <a href="sql.php?mod=6&act=6&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>"><img src="images/btn_duplicar.jpg" border="0" /></a>
+        	<a href="sql.php?mod=6&act=4&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/eliminar_btn.jpg" border="0" /></a>
+          <a href="sql.php?mod=6&act=6&cid=<?php echo $i; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/btn_duplicar.jpg" border="0" /></a>
         </div>
 				<table cellpadding="0" cellspacing="0" border="0" width="100%" id="activar_proveedores">
           <thead>
@@ -167,10 +168,10 @@ $siguiente = $total + 1;
             <td><?php echo $row['precio_dispositivo']; ?></td>
             <td>
             	<div align="center">
-              	<a href="index.php?mod=6&act=4&id_dispositivo=<?php echo $row['id']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno'] ?>">
+              	<a href="index.php?mod=6&act=4&id_dispositivo=<?php echo $row['id']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno'] ?>&tid=<?php echo $_REQUEST['tid']; ?>">
                 	<img src="images/btn_editar.png" border="0" width="16" title="Editar" alt="Editar" />
                 </a>
-              	<a href="sql.php?mod=6&act=2&id=<?php echo $row['id']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno'] ?>">
+              	<a href="sql.php?mod=6&act=2&id=<?php echo $row['id']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno'] ?>&tid=<?php echo $_REQUEST['tid']; ?>">
                 	<img src="images/borrar.png" border="0" width="16" title="Eliminar" alt="Eliminar" />
                 </a>
              	</div>

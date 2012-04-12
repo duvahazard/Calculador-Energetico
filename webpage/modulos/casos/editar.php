@@ -34,6 +34,7 @@
               <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno'] ?>" />
               <input type="hidden" name="dispositivo_tipo" value="<?php echo $_REQUEST['dispositivo_tipo'] ?>" />
               <input type="hidden" name="id_tipo" value="<?php echo $row['id_tipo']; ?>" />
+              <input type="hidden" name="tid" value="<?php echo $_REQUEST['tid']; ?>" />
               <input type="hidden" name="caso" value="<?php echo $_REQUEST['caso']; ?>" />
 						<table border="0" cellpadding="0" cellspacing="0" id="activar_proveedores">
 							<thead>
@@ -89,6 +90,7 @@
           <input type="hidden" name="id_tipo" value="<?php echo $row['id_tipo']; ?>" />
           <input type="hidden" name="caso" value="<?php echo $_REQUEST['caso']; ?>" />
           <input type="hidden" name="gtid" value="<?php echo $_REQUEST['gtid']; ?>" />
+          <input type="hidden" name="tid" value="<?php echo $_REQUEST['tid']; ?>" />
           <img src="images/pasos_gridtie_fv2.jpg" border="0" />
           <div class="spacer_10"></div>
           <table border="0" cellpadding="0" cellspacing="0" id="activar_proveedores">
@@ -179,6 +181,7 @@
         <input type="hidden" name="dispositivo_tipo" value="<?php echo $_REQUEST['dispositivo_tipo'] ?>" />
         <input type="hidden" name="id_tipo" value="<?php echo $row['id_tipo']; ?>" />
         <input type="hidden" name="caso" value="<?php echo $_REQUEST['caso']; ?>" />
+        <input type="hidden" name="tid" value="<?php echo $_REQUEST['tid']; ?>" />
 				<table border="0" cellpadding="0" cellspacing="0" id="activar_proveedores">
           <thead>
             <tr>
