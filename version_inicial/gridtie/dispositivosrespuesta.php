@@ -12,12 +12,12 @@ include("gridtierespuesta.php");
 //include("lampararespuesta.php"); // No implementada aún
 
 
-include("db.inc.php"); // BORRAR
+//include("db.inc.php"); // BORRAR
 
-$idterreno = (isset( $_GET["idterreno"] ) ? $_GET["idterreno"] : ""); // Borrar
-$idcaso    = (isset( $_GET["idcaso"] )    ? $_GET["idcaso"]    : ""); // Borrar
-generaRespuestaDispositivos( $con, $idterreno, $idcaso );             // Borrar
-mysql_close($con);
+//$idterreno = (isset( $_GET["idterreno"] ) ? $_GET["idterreno"] : ""); // Borrar
+//$idcaso    = (isset( $_GET["idcaso"] )    ? $_GET["idcaso"]    : ""); // Borrar
+//generaRespuestaDispositivos( $con, $idterreno, $idcaso );             // Borrar
+//mysql_close($con);
 
 
  /**

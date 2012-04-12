@@ -22,6 +22,10 @@
  *$idterreno - ID del terreno
  *$idcaso    - Número de caso
  */
+ 
+ $idterreno = $_REQUEST['tid'];
+ $idcaso = $_REQUEST['cid'];
+ 
 function crear_tabla_fvrespuesta($con, $idterreno, $idcaso) {
 
     $dispositivos = getFotovs( $con, $idterreno, $idcaso );
