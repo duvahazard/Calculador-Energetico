@@ -4,6 +4,21 @@
 <form action="sql.php?mod=2&act=4" method="post" class="AdvancedForm">
 <table id="alta_proveedores" cellpadding="0" cellspacing="0" align="center">
 	<tr>
+  	<td>Tipo de Dispositivo</td>
+    <td>
+    	<select name="dispositivo_tipo" class="general">
+      	<optgroup label="Seleccione una opci&oacute;n">
+        	<?php
+						$query = mysql_query("SELECT id_tipo, nombre FROM ce_dispositivos_tipo");
+						while($row = mysql_fetch_array($query)){
+							echo '<option value="'.$row['id_tipo'].'">'.ucfirst($row['nombre']).'</option>';
+						}
+					?>
+        </optgroup>
+    	</select>
+    </td>
+  </tr>
+	<tr>
   	<td width="157">Marca*</td>
     <td width="307"><input id="marca" name="marca" type="text" class="general width96"></td>
   </tr>

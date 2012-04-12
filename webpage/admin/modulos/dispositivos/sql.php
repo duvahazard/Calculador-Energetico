@@ -34,6 +34,7 @@ function query(){
 		;break;
 		//------------------------AGREGAR REGISTRO ------------------------
 		case 4:{
+			$dispositivo_tipo = $_REQUEST['dispositivo_tipo'];
 			$marca =  $_REQUEST['marca'];
 			$modelo =	$_REQUEST['modelo'];
 			$precio_dispositivo = $_REQUEST['precio_dispositivo'];
@@ -43,8 +44,8 @@ function query(){
 			$variables = $_REQUEST['variables'];
 				
 			
-			if(mysql_query("INSERT INTO ce_dispositivos (marca, modelo, precio_dispositivo, precio_instalacion, proveedor, factores, variables) 
-											VALUES ('$marca', '$modelo', '$precio_dispositivo', '$precio_instalacion', '$proveedor', '$factores', '$variables');")){
+			if(mysql_query("INSERT INTO ce_dispositivos (tipo, marca, modelo, precio_dispositivo, precio_instalacion, proveedor, factores, variables) 
+											VALUES ($dispositivo_tipo, '$marca', '$modelo', '$precio_dispositivo', '$precio_instalacion', '$proveedor', '$factores', '$variables');")){
 				$url = "index.php?mod=2&act=1&msj=1";
 			}else{
 				$url = "index.php?mod=2&act=1&msj=2";
