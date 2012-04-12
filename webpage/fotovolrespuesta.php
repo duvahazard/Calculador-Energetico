@@ -61,8 +61,8 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 				$tiempo = $caminoSolar[$j]['tiempo'];
 				$azS    = $caminoSolar[$j]['az'];
 				$altS   = $caminoSolar[$j]['alt'];
-				$Icl    = $caminoSolar[$j]['intcero']; // Iradiacion del Sol. (Intensidad)
-				$Ics    = $caminoSolar[$j]['intuno'];
+				$Icl    = (float)$caminoSolar[$j]['intcero']/1000; // Iradiacion del Sol. (Intensidad)
+				$Ics    = (float)$caminoSolar[$j]['intuno']/1000;
 
 
 				$area = $delL * $delH;    //desde FotoVoltaico
