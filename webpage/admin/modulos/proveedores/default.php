@@ -3,7 +3,7 @@ if(empty($_REQUEST['orderby']))
 	$_REQUEST['orderby'] = 'nombre';
 
 $orderby = $_REQUEST['orderby'];
-$query = mysql_query("SELECT * FROM ce_proveedores ORDER BY `ce_proveedores`.`$orderby` ASC ");
+$query = mysql_query("SELECT * FROM `ce_usuarios` WHERE `ce_usuarios`.`tipo` = 2 ORDER BY `ce_usuarios`.`$orderby` ASC ");
 ?>
 <table id="activar_proveedores" cellpadding="0" cellspacing="0" border="0" width="940">
 	<thead>
@@ -41,13 +41,13 @@ $query = mysql_query("SELECT * FROM ce_proveedores ORDER BY `ce_proveedores`.`$o
 			echo '<td>'.$row['ciudad'].'</td>';
 			echo '<td>'.$row['direccion'].'</td>';
 			echo '<td>'.$row['rfc'].'</td>';
-			echo '<td>'.$row['correo'].'</td>';
+			echo '<td>'.$row['usuario'].'</td>';
 			echo '<td>'.$row['tel'].'</td>';
 			echo '<td>'.$row['url'].'</td>';
 			echo '<td>
 							<div align="center">
-								<a href="sql.php?mod=1&act='.$act.'&pid='.$row['id'].'"><img src="../images/'.$img.'.png" border="0" title="'.$title.'" /></a> 
-								<a href="sql.php?mod=1&act=3&pid='.$row['id'].'"><img src="../images/borrar.png" width="16" border="0" title="Eliminar Registro" /></a>
+								<a href="sql.php?mod=1&act='.$act.'&pid='.$row['id_usuario'].'"><img src="../images/'.$img.'.png" border="0" title="'.$title.'" /></a> 
+								<a href="sql.php?mod=1&act=3&pid='.$row['id_usuario'].'"><img src="../images/borrar.png" width="16" border="0" title="Eliminar Registro" /></a>
 							</div>
 						</td>';
 			echo '</tr>';

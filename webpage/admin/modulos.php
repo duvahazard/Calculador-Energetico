@@ -1,10 +1,13 @@
 <?php
 function modulos(){
+		
 	$sid = $_SESSION['log'];
 	$id = $_SESSION['userid'];
-	$query = mysql_fetch_array(mysql_query("SELECT COUNT(id) AS total FROM `ce_usuarios` WHERE id = '$id' AND session = '$sid';"));
 	
-	if($query['total']==0){
+		
+	$query = extract(mysql_fetch_array(mysql_query("SELECT COUNT(id_usuario) AS total FROM `ce_usuarios` WHERE id_usuario = '".$id."' AND session = '".$sid."';")));
+	 
+	if($total==0){
 		require("modulos/index/index.php");
 	}else{	
 		switch($_REQUEST['mod']){

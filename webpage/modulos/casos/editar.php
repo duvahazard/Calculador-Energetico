@@ -5,11 +5,10 @@
 	$uid = $_SESSION['userid'];
 	
 	if(!empty($_REQUEST['dispositivo_tipo'])){
-	
 	$id_dispositivo = $_REQUEST['dispositivo_tipo'];
 	
-	$row = mysql_fetch_array(mysql_query("SELECT * FROM `ce_dispositivos_tipo` WHERE id_tipo = $id_dispositivo"));
 	
+	$row = mysql_fetch_array(mysql_query("SELECT * FROM `ce_dispositivos_tipo` WHERE id_tipo = $id_dispositivo"));
 		switch($row['nombre']){
 			case 'fotovoltaico':{
 				echo '<h2 style="margin-bottom:0;">Dispositivo: '.ucfirst($row['nombre']).'</h2>';
@@ -18,7 +17,7 @@
 				
 				if($_REQUEST['gtie']==md5(1)){
 					
-					extract(mysql_fetch_array(mysql_query("SELECT COUNT(id) AS total FROM `ce_dispositivos` WHERE tipo = 4 AND activado = 1;")));
+					extract(mysql_fetch_array(mysql_query("SELECT COUNT(id_dis) AS total FROM `ce_dispositivos` WHERE tipo = 4 AND activado = 1;")));
 					if($total == 0){
 						echo "No hay dispositivos tipo Gridtie que mostrar, consulte a su administrador."."\r";
 						echo "<div><a href=\"javascript: history.go(-1)\">Regresar</a></div>";
@@ -58,10 +57,10 @@
 								$clase = 'non';	
 							?>
             	<tr class="<?php echo $clase; ?>">
-              	<td><div align="center"><input name="gtid" value="<?php echo $row['id']; ?>" type="radio" /></div></td>
+              	<td><div align="center"><input name="gtid" value="<?php echo $row['id_dis']; ?>" type="radio" /></div></td>
               	<td><div align="center"><?php echo $row['marca']; ?></div></td>
                 <td><div align="center"><?php echo $row['modelo']; ?></div></td>
-                <td><div align="center"><?php echo $row['precio_dispocitivo']; ?></div></td>
+                <td><div align="center"><?php echo $row['precio_dispositivo']; ?></div></td>
                 <td><div align="center"><?php echo $row['precio_instalacion']; ?></div></td>
                 <td><div align="center"><?php echo $row['proveedor']; ?></div></td>
                 <td><div align="center"><?php echo $row['variables']; ?></div></td>
@@ -111,7 +110,7 @@
             </thead>
             <?php
             $i = 0;
-            $query = mysql_query("SELECT id, marca, modelo, precio_dispositivo, precio_instalacion, proveedor FROM `ce_dispositivos` WHERE tipo = $id_dispositivo; "); 
+            $query = mysql_query("SELECT id_dis, marca, modelo, precio_dispositivo, precio_instalacion, proveedor FROM `ce_dispositivos` WHERE tipo = $id_dispositivo AND activado = 1;"); 
             while($row= mysql_fetch_array($query)){
               if($i%2==0){
                 $clase = 'par';
@@ -120,7 +119,7 @@
               }
             ?>
             <tr class="<?php echo $clase; ?>">
-              <td><div align="center"><input type="checkbox" name="dispositivo[]" value="<?php echo $row['id']; ?>" /><input name="cantidad[]" type="text" value="1" maxlength="2" style="width:30px;" /></div></td>
+              <td><div align="center"><input type="checkbox" name="dispositivo[]" value="<?php echo $row['id_dis']; ?>" /><input name="cantidad[]" type="text" value="1" maxlength="2" style="width:30px;" /></div></td>
               <td><?php echo $row['marca']; ?></td>
               <td><?php echo $row['modelo']; ?></td>
               <td>$<?php echo $row['precio_dispositivo']; ?></td>
@@ -129,13 +128,13 @@
               <td>
                 <div align="center">
                   <input name="alt[]" type="text" style="width:40px;"/><br />
-                  RAD
+                  Grados
                 </div>
               </td>
               <td>
                 <div align="center">
                   <input name="az[]" type="text" style="width:40px;"/><br />
-                  RAD
+                  Grados
                 </div>
               </td>
               <td>
@@ -197,7 +196,7 @@
           </thead>
           <?php
             $i = 0;
-            $query = mysql_query("SELECT id, marca, modelo, precio_dispositivo, precio_instalacion, proveedor FROM `ce_dispositivos` WHERE tipo = $id_dispositivo; "); 
+            $query = mysql_query("SELECT id_dis, marca, modelo, precio_dispositivo, precio_instalacion, proveedor FROM `ce_dispositivos` WHERE tipo = $id_dispositivo; "); 
             while($row= mysql_fetch_array($query)){
               if($i%2==0){
                 $clase = 'par';

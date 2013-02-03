@@ -18,7 +18,7 @@ if(mysql_num_rows($sql)>0){
 			$_SESSION['user']=$row['nombre'];
 			$_SESSION['log'] = $sid;
 			$_SESSION['mail'] = $row['usuario'];
-			$_SESSION['userid'] = $row['id'];
+			$_SESSION['userid'] = $row['id_usuario'];
 		
 		}
 		echo "continue";

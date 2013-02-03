@@ -24,6 +24,10 @@
     <td><input id="mail" name="mail" type="text" class="general width96"> <div id="search_results"></div></td>
   </tr>
   <tr>
+  	<td>Contraseña*</td>
+    <td><input id="pass" name="pass" type="text" class="general width96"></td>
+  </tr>
+  <tr>
   	<td>Tel&eacute;fono*</td>
     <td><input id="lada" name="lada" class="general" type="text" maxlength="3">- <input id="tel" class="general" name="tel" type="text" maxlength="7"></td>
   </tr>

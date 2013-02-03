@@ -74,7 +74,7 @@ a:hover{
 	background-color:#FFFFFF;
 }
 #main_izq, #main_der, #acerca{
-	text-align:justify;
+	text-align:left;
 }
 #footer{
 	text-align:center;
@@ -141,11 +141,11 @@ div.login h2{
 #user_field{
 	text-align:center;
 	color:#FFF;
-	height:70px;
+	height:40px;
 	background: url(../images/btn_bg.png) repeat;
 }
 #user_field p{
-	margin-top:25px;
+	margin-top:10px;
 	font-size:12px;
 	margin-bottom:0;
 }
@@ -276,6 +276,7 @@ table#activar_proveedores thead tr td{
 	min-width:70px;
 	padding:5px 0 5px 0;
 	border:1px solid #FFF;
+	text-shadow: 2px 1px #444;
 }
 table#activar_proveedores thead tr td#izq{
 	border-radius:5px 0 0 0;
@@ -300,8 +301,14 @@ table#activar_proveedores tr td table{
 .par{
 	background:#D6E3F9;
 }
+.par2{
+	background:#EAECEE;
+}
 .non{
 	background:#94bcff;
+}
+.non2{
+	background:#B4D1FD;
 }
 .link_blanco{
 	color:#FFFFFF;
@@ -328,6 +335,9 @@ table#activar_proveedores tr td table{
 }
 .width96{
 	width:96%;
+}
+.widthsmall{
+	width:30px;
 }
 td#terreno_num{
 	background:#565656;
@@ -448,4 +458,68 @@ span#casos_titulo_terreno{
 }
 #activar_proveedores tr td table.horarios tr td{
 	border:0;
+}
+.exito, .error, .alert {
+    border: 2px solid;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.exito {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image:url('../images/exito.png');
+}
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('../images/error.png');
+}
+
+.alert {
+    color: #7C560F	;
+    background-color: #FFF5B2;
+    background-image: url('../images/alert.png');
+		min-height:50px;
+}
+.exito p, .error p{
+	margin-left:50px;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+.alert p{
+	margin-left:70px;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+#grafica_costoconsumo_titulo h5{
+	position:relative;
+	top:20px;
+}
+div#consumo_inputs ul li{
+	list-style:none;
+	margin-left:0;
+}
+.tabla{
+	margin-bottom:0;
+}
+#agregar, #eliminar{
+	cursor:pointer;
+}
+span.datos_recibo_cfe{
+	font-size: 15px;
+  font-weight: bold;
+  position: relative;
+  top: 5px;
+}
+.tabla_pqt_fotovol{
+	text-align:left;
+}
+div#factores{height:35px}
+.tipoFotovol{
+	position:relative;
+	top:-5px;
+	width:150px;
+}
+div#botonesAcerca img{
+	margin-left:20px;
 }

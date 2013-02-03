@@ -17,16 +17,17 @@
 			data.addColumn('string', 'Fecha');
 			data.addColumn('number', 'Consumo en kWh');
 			<?php
-				$table = $_REQUEST['tid'];
-				//$table = "ce_consumohistorico_prueba1";
+				//$table = $_REQUEST['tid'];
+				$table = "ce_cfe_consumohistorico_".$_REQUEST['tid']."t";
 				extract(mysql_fetch_array(mysql_query("SELECT COUNT(*) AS total FROM ".$table."")));					
 			?>
 			data.addRows(<?php echo $total;?>);
 			<?php
-				$row = mysql_query("SELECT ano, mes, dia consumo FROM ".$table."");			
+				$row = mysql_query("SELECT ano, mes, dia, consumo FROM ".$table."");			
 				$i=0;
 				while($linea = mysql_fetch_array($row)){
-					$date = date("M-Y", strtotime($linea['fecha']));
+					$fecha = $linea['dia'].'-'.$linea['mes'].'-'.$linea['ano'];
+					$date = date("M-Y", strtotime($fecha));
 					echo "data.setValue(".$i.", 0, '".$date."');"."\r";
 					echo "data.setValue(".$i.", 1, ".$linea['consumo'].");"."\r";
 					$i++;

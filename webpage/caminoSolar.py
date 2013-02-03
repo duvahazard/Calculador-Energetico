@@ -61,7 +61,7 @@ id_terreno = sys.argv[1] #argumento enviado desde archivo de php con el tid=id d
 cursor.execute("""DROP TABLE IF EXISTS ce_camino_solar_%st""" % (id_terreno))
 sql = """CREATE TABLE ce_camino_solar_%st (
 		 id INT PRIMARY KEY AUTO_INCREMENT,
-		 tiempo TIMESTAMP,
+		 tiempo TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		 az FLOAT(9,6),
 		 alt FLOAT(9,6),
 		 intcero INT,
@@ -108,6 +108,7 @@ for i in range(num):
 		intensidad=1370*trans
 	else:
 		intensidad=0
+	#intensidad=1 #esta linea es temporal para cuestiones de exprimentacion sabado 23 junio 2012	
 
 	sql = "INSERT INTO ce_camino_solar_%st (tiempo, alt, az, intcero) VALUES ('%s','%f','%f','%d')" % (id_terreno,vdate,valt,vaz,intensidad)
 	try:

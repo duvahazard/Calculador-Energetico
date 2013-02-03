@@ -21,14 +21,58 @@
  *$con       - Conexion a la base de datos
  *$idterreno - ID del terreno
  *$idcaso    - Número de caso
+ *----------------------------------------------------------------
+ * Modificaciones:
+ *----------------------------------------------------------------
+ * Clave: HMN01
+ * Autor: Hector Mora
+ * Descripción: Se hicieron cambios a las fórmulas petición de Rodger evans
+ * Fecha: 17 de Agosto de 2012
+ * -----------------------------------------------------------------
+ * Clave: HMN02
+ * Autor: Hector Mora
+ * Descripción: Cambios debido a adecuaciones en la base de datos.
+ * Fecha: 29  de Agosto de 2012
+ * -----------------------------------------------------------------
+ * Clave: HMN03
+ * Autor: Hector Mora
+ * Descripción: Correción a la línea 98, Division by Zero
+ *              La variable nT había sido comentada, Se cambió por IR.
+ * Fecha: 29  de Agosto de 2012
+ * -----------------------------------------------------------------
+ * clave: RE01
+ * Autor: Rodger Evans
+ * Descripción: correccion de Tper Tpar y notando con ** lineas incorrectos
+ * Fecha: 27 de sept 2012
+ * -----------------------------------------------------------------
+ * clave: HMN04
+ * Autor: Hector Mora
+ * Descripción: Se aplicaron los cambios sugeridos por Rodger.
+ * Fecha: 28 de septiembre de 2012
+ * -----------------------------------------------------------------
+ * clave: RE02
+ * Autor: Rodger Evans
+ * Descripción: fixes in fotovolrespuesta
+ * Fecha: 17 de oct 2012
+ * -------------------------------------------------------------------
+ * clave: RE03
+ * Autor: Rodger Evans
+ * Descripción: making the cosGz go in steps 
+ * Fecha: 18 de oct 2012
+ * -------------------------------------------------------------------
+ * clave: RE04
+ * Autor: Rodger Evans
+ * Descripción: adding Rs and Rp and changing Tperp to Rs etc... 
+ * Fecha: 19 de oct 2012
  */
- 
- $idterreno = $_REQUEST['tid'];
- $idcaso = $_REQUEST['cid'];
- 
+
+
 function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 
     $dispositivos = getFotovs(  $idterreno, $idcaso );
+
+	$pi = 3.141592654;
+
     $total_dispositivos = count($dispositivos);
     $nombre_tabla = "";
 
@@ -48,15 +92,21 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 		$delH    = $datos_dispositivo['delH'];
 		$azFV    = $datos_dispositivo['azFV'];
 		$altFV   = $datos_dispositivo['altFV'];
-		$IR      = $datos_dispositivo['IR'];
-		$QE      = $datos_dispositivo['QE']/100;
+		//HMN04 $indRef      = $datos_dispositivo['IR']; // HMN02
+		$indRef = 1.5; //HMN04
+
+		//$QE      = $datos_dispositivo['QE']; // HMN02
 		$x       = $datos_dispositivo['x'];
 		$y       = $datos_dispositivo['y'];
 		$z       = $datos_dispositivo['z'];
-		//$r       = $row['respuesta'];
+
+		//HMN04 $area    = $datos_dispositivo["area"]; // HMN02
+		$area = $delL * $delH; //HMN04
+		$potencia= $datos_dispositivo["potencia"]; // HMN02
+		$QE = $potencia/(1000*$area);
 
 
-		for( $j = 0; $j < $total_caminoSolar; $j++ ) {
+	for( $j = 0; $j < $total_caminoSolar; $j++ ) {
 
 				$tiempo = $caminoSolar[$j]['tiempo'];
 				$azS    = $caminoSolar[$j]['az'];
@@ -65,35 +115,95 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 				$Ics    = (float)$caminoSolar[$j]['intuno']/1000;
 
 
-				$area = $delL * $delH;    //desde FotoVoltaico
-				$nI   = 1.000277;       //indice de refracion en aire desde FotoVoltaico
-				$nT   = $IR;            //indice de refracion en vidrio desde FotoVoltaico =$IR
-				$daz  = $azFV - $azS;   //diferencia en azmuth
-				$dalt = $altFV - $altS; //diferencia en altura
-				$cosDaz = cos($daz);
-				$cosDalt= cos($dalt);
-				$dif    = acos($cosDalt-cos($altS)*cos($altFV)*(1-cos($daz))); //diferencia en angulo en la normal de la FV
+                //HMN04 Esta linea estaba comentada pero se activo
+				$refAire   = 1.000277;       //indice de refracion en aire desde FotoVoltaico
+				//HMN01 $nT   = $indRef;            //indice de refracion en vidrio desde FotoVoltaico =$indRef
+				//HMN01 $daz  = $azFV - $azS;   //diferencia en azmuth
+				//HMN01 $dalt = $altFV - $altS; //diferencia en altura
+				//HMN01 $cosDaz = cos($daz);
+				//HMN01 $cosDalt= cos($dalt);
+				//HMN01 $dif    = acos($cosDalt-cos($altS)*cos($altFV)*(1-cos($daz))); //diferencia en angulo en la normal de la FV
 
 				// y el sol igual angulo del rayo incidente
-				$Aper   = cos($dif) * $area; //area efectiva del FV (%)
-				$thetaT = asin(sin($dif)*$nI/$nT); //angulo del rayo transmitido
-				$sin2TH = sin(2*$thetaT)*sin(2*$dif);
-				$sinSQ  = (sin($dif+$thetaT))^2;
-				$cosSQ  = (cos($dif-$thetaT))^2;
+				//HMN01 $Aper   = cos($dif) * $area; //area efectiva del FV (%)
+
+			//RE02	$thetaT = asin(sin($dif)*$refAire/$indRef);//HMN03 //angulo del rayo transmitido
+			//RE02	$sin2TH = sin(2*$thetaT)*sin(2*$dif);
+			//RE02	$sinSQ  = (sin($dif+$thetaT))^2;
+			//RE02	$cosSQ  = (cos($dif-$thetaT))^2;
+
+				//HMN01 BLOQUE AGREGADO //////////////
+				$Ba = $azFV;
+				$Bz = pi()/2 - $altFV;
+				$Aa = $azS; //azmut sol
+				$Az = pi()/2 - $altS; //altitude sol
+
+				//RE03 BLOQUE AGREGADO //////
+				$cosBz=cos($Bz); 
+				$cosAz=cos($Az);
+				$sinBz=sin($Bz);
+				$sinAz=sin($Az);
+				$BaAa=$Ba-$Aa;
+				$cosBaAa=cos($BaAa);
+
+				//RE03  $CosGz=cos($Bz)*cos($Az)+sin($Bz)*sin($Az)*cos($Ba-$Aa);
+				$CosGz=($cosBz*$cosAz)+($sinBz*$sinAz*$cosBaAa); //RE03
+				$Gz=acos($CosGz); // HMN04
+				$Aper=$CosGz*$area;
+
+				//RE02 if($Gz > pi/2){
+//					$Aper = 0;
+//				}
+
+				if( $Aper < 0 ) {
+					$Aper = 0;
+				}
 
 
-				$Tpar   = 1-($sin2TH)/($sinSQ*$cosSQ); //T parallel Tpar = transmision en el vidrio. es que el vidrio tiene una reflexion de la liz
-				$Tperp  = 1-($sin2TH)/$sinSQ;  //T perpendicularr
-				$potenciaCL=$Icl*$QE*$Aper*($Tpar+$Tperp)/2; // QE = Eficiencia CuÃ¡ntica,,,  Aper = Area efectiva,(Efecto coseno)
-				$potenciaCS=$Icl*$QE*$Aper*($Tpar+$Tperp)/2;//this should be CS !!  CS =Clear SKY
+				//HMN04 $Tpar   = 1-($sin2TH)/($sinSQ*$cosSQ); //T parallel Tpar = transmision en el vidrio. es que el vidrio tiene una reflexion de la liz
+				//HMN04 $Tperp  = 1-($sin2TH)/$sinSQ;  //T perpendicularr
 
-				insertaRegistro(  $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL );
+				// HMN04 
+				//nueva nombres Rs Rp, son reflection coeficients for s and p polarizations
+				$sinGz=sin($Gz);
+				$RsBrkt= $sinGz*$refAire / $indRef ;
+				$RsSqrt= 1 - pow($RsBrkt,2);
+				$RsTop=($refAire * $CosGz) - $indRef * sqrt($RsSqrt);
+				$RsBottom=$refAire * $CosGz + $indRef * sqrt( $RsSqrt);
+				$Rs=pow(($RsTop/$RsBottom),2);
+				
+				/*$Rs = 
+					(  
+					  ( $refAire * $CosGz - $indRef * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^2))
+					  /
+					  ( $refAire * $CosGz + $indRef * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^2)) ) ^ 2;
+*/ //RE04
+				$RpBrk= $refAire / $indRef * $sinGz; 
+				$RpSqrt= 1 - pow( $RpBrk, 2);
+				$RpTop= $refAire * sqrt( $RpSqrt ) - $indRef * $CosGz ;
+				$RpBottom= $refAire * sqrt( $RpSqrt) + $indRef * $CosGz ;
+				$Rp=pow(($RpTop/$RpBottom),2);
+				
+				/*$Rp = 
+				 ( ( $refAire * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^ 2 ) - $indRef * $CosGz ) /
+
+				 ( $refAire * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^ 2 ) + $indRef * $CosGz ) )^2;//RE02
+*/
+				$Rtot=($Rs+$Rp)/2;//RE04
+				$Ttot=1-$Rtot;
+
+				$potenciaCL=$Icl*$QE*$Aper*$Ttot; // QE = Eficiencia CuÃ¡ntica,,,  Aper = Area efectiva,(Efecto coseno)
+				$potenciaCS=$Icl*$QE*$Aper*$Ttot;//this should be CS !!  CS =Clear SKY
+				//added $Ttot RE04
+
+			insertaRegistro(  $nombre_tabla, $tiempo,$area, $QE, $Aper, $potenciaCS, $potenciaCL );
 
 		} // Fin for Camino Solar
 
 		actualizaCasos(  $idterreno, $dispositivos[$i][0], $nombre_tabla );
 
 	} // Fin For Dispositivos.
+
 }
 
 function actualizaCasos(  $idterreno, $idfv, $tabla_fv_respuesta) {
@@ -106,9 +216,9 @@ function actualizaCasos(  $idterreno, $idfv, $tabla_fv_respuesta) {
 
 }
 
-function insertaRegistro(  $nombre_tabla, $tiempo, $Tperp, $Tpar, $Aper, $potenciaCS, $potenciaCL ) {
+function insertaRegistro(  $nombre_tabla, $tiempo,$area, $QE , $Aper, $potenciaCS, $potenciaCL ) {
 
-	$sql = "INSERT INTO ". $nombre_tabla ." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$Tperp','$Tpar','$Aper', '$potenciaCS', '$potenciaCL')";
+	$sql = "INSERT INTO ". $nombre_tabla ." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$area', '$QE','$Aper', '$potenciaCS', '$potenciaCL')";
 	mysql_query( $sql );
 }
 
@@ -161,7 +271,7 @@ function getDatosDispositivo ( $idterreno, $id_dispositivo_caso, $id_dispositivo
 
 	$datos = Array();
 
-	$sql    = "SELECT factores FROM ce_dispositivos WHERE id = ".$id_dispositivo;
+	$sql    = "SELECT factores FROM ce_dispositivos WHERE id_dis = ".$id_dispositivo;
 
 	$resultado = mysql_query($sql);
 
@@ -175,6 +285,9 @@ function getDatosDispositivo ( $idterreno, $id_dispositivo_caso, $id_dispositivo
 		$tok = strtok(";"); if( $tok !== false ) { $datos["delL"] = $tok; }
 		$tok = strtok(";"); if( $tok !== false ) { $datos["IR"] = $tok; }
 		$tok = strtok(";"); if( $tok !== false ) { $datos["QE"] = $tok; }
+		$tok = strtok(";"); if( $tok !== false ) { $datos["potencia"] = $tok; }
+		$tok = strtok(";"); if( $tok !== false ) { $datos["area"] = $tok; }
+		$tok = strtok(";"); if( $tok !== false ) { $datos["tipoFotovol"] = $tok; }
 
 		mysql_free_result( $resultado );
 	}

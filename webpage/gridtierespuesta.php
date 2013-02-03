@@ -388,7 +388,7 @@ function crearTabla( $nombre_tabla ) {
 function getEfectividad( $efectividad, $iddispositivo ) {
 
 	if( !isset( $efectividad[ $iddispositivo ] ) ) {
-		$sql = "SELECT factores FROM ce_dispositivos WHERE id = " . $iddispositivo;
+		$sql = "SELECT factores FROM ce_dispositivos WHERE id_dis = " . $iddispositivo;
 
 		$resultado = mysql_query($sql);
 

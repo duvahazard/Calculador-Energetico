@@ -165,7 +165,7 @@ if($_REQUEST['mod']==4){ ?>
     	<li><a href="index.php?mod=3"><img src="../images/proveedor.png" border="0" /> Proveedores</a></li>
       <li><a href="index.php?mod=4"><img src="../images/proveedor.png" border="0" /> Generar Fechas</a></li>
       <li><a href="index.php?mod=5"><img src="../images/proveedor.png" border="0" /> Tarifas</a></li>
-      <li><a href="index.php?mod=6"><img src="../images/proveedor.png" border="0" /> Camino Solar</a></li>
+      <!--<li><a href="index.php?mod=6"><img src="../images/proveedor.png" border="0" /> Camino Solar</a></li>-->
     </ul>
     <?php } ?>
   </div><!-- menu_secundario -->

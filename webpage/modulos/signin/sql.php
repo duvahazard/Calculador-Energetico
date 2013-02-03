@@ -2,7 +2,7 @@
 function query(){
 	$tipo = $_REQUEST['tipo_usuario'];
 	if($tipo == 2){		
-		$query = mysql_fetch_array(mysql_query("SELECT COUNT(id) AS total FROM ce_usuarios WHERE ce_usuarios.usuario = '$user';"));
+		$query = mysql_fetch_array(mysql_query("SELECT COUNT(id_usuario) AS total FROM ce_usuarios WHERE ce_usuarios.usuario = '".$user."';"));
 		$name = $_REQUEST['name'];
 		$user = $_REQUEST['user'];
 		$tel = $_REQUEST['tel'];
@@ -14,7 +14,7 @@ function query(){
 		$fax = $_REQUEST['fax'];
 		
 		
-		if($query['total'] != 0){
+		if($query['total'] == 0){
 			if($_REQUEST['pass'] === $_REQUEST['confirmpass']){
 				if(mysql_query("INSERT INTO ce_usuarios (nombre, usuario, tel, url, pass, tipo, ciudad, direccion, rfc, fax, activado) VALUES ('$name', '$user', '$tel', '$url', '$pass', '$tipo', '$ciudad', '$direccion', '$rfc', '$fax', 0);")){
 					$url = "index.php?mod=1&ide=1";									
@@ -35,14 +35,14 @@ function query(){
 		$user = $_REQUEST['user'];
 		$pass = md5($_REQUEST['pass']);
 		
-		$query = mysql_fetch_array(mysql_query("SELECT COUNT(id) AS total FROM ce_usuarios WHERE ce_usuarios.usuario = '$user';"));				
+		$query = mysql_fetch_array(mysql_query("SELECT COUNT(id_usuario) AS total FROM ce_usuarios WHERE ce_usuarios.usuario = '$user';"));				
 		
 		if($query['total'] == 0){
 			if($_REQUEST['pass'] === $_REQUEST['confirmpass']){
 				if(mysql_query("INSERT INTO ce_usuarios (nombre, usuario, pass, tipo, activado) VALUES ('$name', '$user', '$pass', '$tipo', 0);")){
 					$uid = mysql_insert_id();
 					if(mysql_query('
-						CREATE TABLE ce_casos_$uid(
+						CREATE TABLE ce_casos_'.$uid.'(
 							id INT PRIMARY KEY AUTO_INCREMENT,
 							caso INT,
 							id_dispositivo INT,
@@ -54,8 +54,9 @@ function query(){
 						)
 					')){
 						$url = "index.php?mod=1&ide=1";	
+					}else{
+						$url = "index.php?mod=1&ide=5";
 					}
-					
 				}else{
 					$url = "index.php?mod=1&ide=2";
 				}

@@ -29,7 +29,7 @@
       <select name="tarifa" class="general">
       	<optgroup label="Seleccione una tarifa">
 				<?php
-          $query = mysql_query("SELECT id_tarifa, tipo, epoca FROM `ce_tarifas_tipo` WHERE epoca = 'inverno';");
+          $query = mysql_query("SELECT id_tarifa, tipo, epoca FROM `ce_tarifas_tipo` WHERE epoca = 'invierno';");
           while($row = mysql_fetch_array($query)){
         ?>	<option value="<?php echo $row['id_tarifa'];?>"><?php echo $row['tipo']; ?></option>
         <?php
@@ -37,7 +37,7 @@
         ?>
         </optgroup>
       </select>
-  		<input type="image" src="images/btn_agregar.png" style="position:relative; top:10px;" />
+      <input type="image" src="images/btn_agregar.png" style="position:relative; top:14px;" />
     </form>
     <?php 
 		}//else 

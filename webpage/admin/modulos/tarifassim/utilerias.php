@@ -112,10 +112,10 @@ function indexa_horasMes($horasDelMes) {
 
 		if( isset( $arreglo[ $horasDelMes[$i][1] ] ) ) {
 			$tmp = $arreglo[ $horasDelMes[$i][1] ];
-			echo "arreglo en el mes ". $horasDelMes[$i][1] . ", tiene ";
-			var_dump( $tmp ); echo "<br>";
-			//array_push( $arreglo, $horasDelMes[$i][0]  );
-			//$arreglo[ $horasDelMes[$i][1] ] = $tmp;
+			//echo "arreglo en el mes ". $horasDelMes[$i][1] . ", tiene ";
+			//var_dump( $tmp ); echo "<br>";
+			array_push( $arreglo, $horasDelMes[$i][0]  );
+			$arreglo[ $horasDelMes[$i][1] ] = $tmp;
 		} else {
 			$arreglo[ $horasDelMes[$i][1] ] = array( $horasDelMes[$i][0] );
 		}

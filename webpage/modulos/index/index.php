@@ -1,24 +1,35 @@
 <div id="main_izq" class="prefix_1 grid_7 alpha">
-  <h2>Lorem Ipsum</h2>
+  <h2>&iquest;Qué es?</h2>
   <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In felis est, facilisis ut facilisis in, tincidunt at massa. Ut nec nisi mi, nec ultricies metus. Ut tincidunt blandit eros, ac 
-    dignissim risus malesuada id. Donec mi nunc, mollis id feugiat quis, rhoncus in lectus. In at nisl lorem, eget tincidunt arcu. Integer gravida lacinia nisi, et tincidunt eros elementum at. 
-    Fusce pellentesque hendrerit tellus sit amet sollicitudin. In eget orci quis nulla convallis suscipit. Cras porttitor neque non dui ultricies tincidunt vel non turpis. Aenean fringilla nibh 
-    sed tortor faucibus rutrum. Curabitur laoreet magna id nisl faucibus pretium. Etiam tristique tempus sem in congue. Sed et dui porttitor neque dictum ullamcorper eu in justo. Nunc blandit, 
-    lacus id ullamcorper rhoncus, ipsum velit feugiat leo, sit amet ullamcorper nunc leo et enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-    Sed fermentum, mauris ac pretium scelerisque, leo ipsum bibendum sapien, vitae pharetra nisi augue nec magna.
+   El calculador energético es una simulador de consumo y producción de energía.
+El proyecto es una sistema tipo abierto (FLOSS) fue diseñado del Laboratorio de Energía Altera, Renovable y Sostenible (LEARS) de CICESE con programadores de Voxel Soluciones para el Comisión de Energía de Baja California.
+  </p>
+  <h2>&iquest;Qué lo hace diferente de otras páginas web con calculadores?</h2>
+  <p>
+   Otras paginas usan cálculos muy sencillos, con aproximaciones de costos, consumos y producción. Este sistema es una simulador. Donde valores más exactos cada minuto de cada día están siendo calculados. El sistema es hecho para Baja California, con costos de electricidad del CFE, precios de proveedores locales, y valores del sol y clima de tu locación!
   </p>
 </div><!-- main_izq -->
 
 <div id="main_der" class="grid_7 suffix_1 omega">
-  <h2>Lorem Ipsum</h2>
+  <h2>&iquest;C&oacute;mo usarlo?</h2>
   <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In felis est, facilisis ut facilisis in, tincidunt at massa. Ut nec nisi mi, nec ultricies metus. Ut tincidunt blandit eros, ac 
-    dignissim risus malesuada id. Donec mi nunc, mollis id feugiat quis, rhoncus in lectus. In at nisl lorem, eget tincidunt arcu. Integer gravida lacinia nisi, et tincidunt eros elementum at. 
-    Fusce pellentesque hendrerit tellus sit amet sollicitudin. In eget orci quis nulla convallis suscipit. Cras porttitor neque non dui ultricies tincidunt vel non turpis. Aenean fringilla nibh 
-    sed tortor faucibus rutrum. Curabitur laoreet magna id nisl faucibus pretium. Etiam tristique tempus sem in congue. Sed et dui porttitor neque dictum ullamcorper eu in justo. Nunc blandit, 
-    lacus id ullamcorper rhoncus, ipsum velit feugiat leo, sit amet ullamcorper nunc leo et enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-    Sed fermentum, mauris ac pretium scelerisque, leo ipsum bibendum sapien, vitae pharetra nisi augue nec magna.
+   	<a href="index.php?mod=2&act=1">
+    	<img style="float:left;" src="images/users.png" width="128" />
+    	<h2 style="line-height:1.0; margin-top:50px;">Para ciudadanos <br />y Negocios</h2>
+    </a>
+  </p>
+  <div class="clear"></div>
+  <p>
+   	<a href="index.php?mod=2&act=2">
+    	<img style="float:left;" src="images/proveedores.png" width="128" />
+    	<h2 style="line-height:1.0; margin-top:50px;">Para<br />Proveedores</h2>
+   	</a>
+  </p>
+  <div class="clear"></div>
+  <p>
+   	<a href="index.php?mod=2&act=3">
+    	<img style="float:left;" src="images/instituciones.png" width="128" />
+      <h2 style="line-height:1.0; margin-top:50px;">Para<br />instituciones</h2>
+    </a>
   </p>
 </div><!-- main_der -->
-    

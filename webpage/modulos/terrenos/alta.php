@@ -1,4 +1,14 @@
-<?php 
+<?php
+/*-----------------------------------------------------------------------------
+ Modificaciones
+ ------------------------------------------------------------------------------
+ Clave: HMN01
+ Autor: Héctor Mora
+ Descripción: Se ocultaron campos dx, dy y phi
+ Fecha: 02-Noviembre-2012
+ -------------------------------------------------------------------------------
+*/
+
 $uid = $_SESSION['userid'];
 if(empty($_REQUEST['ubicacion'])){
 	$_REQUEST['ubicacion'] = "31.862396,-116.607513";
@@ -7,10 +17,23 @@ $ubicacion = explode(",", $_REQUEST['ubicacion']);
 $lat = $ubicacion[0];
 $long = $ubicacion[1];
 ?>
-<div class="prefix_1 grid_6 alpha">
-<h2>Agregar Terreno</h2>
+
+<div class="grid_7 alpha">
+  <form method="post" action="index.php?mod=4&act=1">
+  <h2 style="margin-bottom:0;">Paso 1</h2>
+  <div>
+    <input type="hidden" id="ubicacion" name="ubicacion" />
+    <input type="hidden" id="zoom" name="zoom" />
+  </div>
+  <cite>Ubique su terreno en el mapa y haga clic en "Capturar".</cite>
+  <div align="left"><input type="image" value="" src="images/btn_capturar.png" style="margin-right:4px;"></div>
+  <div id="map" style="width:400px; height:320px"></div>
+  </form>
+</div><!-- mapa -->
+<div class="prefix_1 grid_6 omega">
+<h2 style="margin-bottom:0;">Paso 2</h2>
+<p><cite>Favor de llenar los campos y haga clic en "Guardar".</cite></p>
 <fieldset>
-<legend>Favor de llenar los campos se&ntilde;alados</legend>
 <form action="sql.php?mod=4&act=1" method="post" class="altaTerreno">
 	<input type="hidden" name="uid" value="<?php echo $uid; ?>" />
   <table id="alta_proveedores" cellpadding="0" cellspacing="0" align="center">
@@ -29,28 +52,15 @@ $long = $ubicacion[1];
       <td>Longitud*</td>
       <td>
       	<input id="longitude" name="longitude" type="text" class="general width96" value="<?php echo $long; ?>"><br />
-		Ej. 32º23'34.5" = 32.39292 
+		Ej. 32º23'34.5" = 32.39292
       </td>
-    </tr>
-    <tr>
-      <td>Ancho (dx)(Metros)</td>
-      <td>
-      	<input id="dx" name="dx" type="text" class="general width96">		
-      </td>
-    </tr>
-    <tr>
-      <td>Largo (dy)(Metros)</td>
-      <td>
-      	<input id="dy" name="dy" type="text" class="general width96">
-      </td>
-    </tr>
-    <tr>
-      <td>Orientaci&oacute;n (Phi)</td>
-      <td><input id="phi" name="phi" type="text" class="general width96"></td>
     </tr>
     <tr>
       <td>Ubicaci&oacute;n</td>
       <td>
+        <input id="dx" name="dx" type="hidden" value="10">
+      	<input id="dy" name="dy" type="hidden" value="10">
+      	<input id="phi" name="phi" type="hidden" value="0">
       	<select name="ubicacion" class="general width96">
         	<option value="Ensenada">Ensenada</option>
           <option value="Mexicali">Mexicali</option>
@@ -68,24 +78,11 @@ $long = $ubicacion[1];
 </fieldset>
 </div>
 
-
-<div class="grid_7 omega">
-<form method="post" action="index.php?mod=4&act=1">
-<h2>Ubique su terreno en el mapa</h2>
-<div>
-	<input type="hidden" id="ubicacion" name="ubicacion" />
-</div>
-<div class="spacer_10"></div>
-<div id="map" style="width:400px; height:320px"></div>
-<div class="spacer_23"></div>
-<input type="image" value="" src="images/btn_capturar.png" style="margin-right:4px;">
-</form>
-
 <script type="text/javascript">
 //<![CDATA[
 
 ////map
-      
+
 
 var map = new GMap2(document.getElementById("map"));
 //var start = new GLatLng(65,25);
@@ -93,9 +90,9 @@ map.setCenter(new GLatLng(<?php echo $lat; ?>,<?php echo $long; ?>), 4);
 map.addControl(new GMapTypeControl());
 map.addControl(new GLargeMapControl());
 
-map.enableContinuousZoom();
-map.enableDoubleClickZoom();
-
+map.enableContinuousZoom(true);
+map.enableDoubleClickZoom(true);
+map.setZoom(<?php echo $_REQUEST['zoom']; ?>);
 
 
 // "tiny" marker icon
@@ -112,19 +109,16 @@ icon.infoWindowAnchor = new GPoint(5, 1);
 /////Draggable markers
 
 var point = new GLatLng(<?php echo $lat; ?>,<?php echo $long; ?>);
-var markerD2 = new GMarker(point, {icon:G_DEFAULT_ICON, draggable: true}); 
+var markerD2 = new GMarker(point, {icon:G_DEFAULT_ICON, draggable: true});
 map.addOverlay(markerD2);
 
 markerD2.enableDragging();
 
 GEvent.addListener(markerD2, "drag", function(){
 document.getElementById("ubicacion").value=markerD2.getPoint().toUrlValue();
+document.getElementById("zoom").value=map.getZoom();
 });
 
 //]]>
 
 </script>
-
-
-</div>
-</div>

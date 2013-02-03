@@ -35,6 +35,10 @@ function setTarifa( $arr_tarifas, $registro ) {
 		$pos  = strrpos( $fecha, "-");
 		$mes  = substr( $fecha, 0, $pos );
 		$anyo = substr( $fecha, $pos + 1 );
+
+		if( strlen( $anyo ) == 2 ) {
+			$anyo = "20" . $anyo;
+		}
 		////////////////////////////////////////////////////////////////////
 
 	     if( isset ( $arr_tarifas[ $meses[$mes] ] ) ) {

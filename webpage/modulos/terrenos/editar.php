@@ -1,11 +1,21 @@
 <div id="acerca" class="prefix_1 grid_14 suffix_1 alpha">
   <div class="spacer_20"></div>
   <?php
+  /*-----------------------------------------------------------------------------
+   Modificaciones
+   ------------------------------------------------------------------------------
+   Clave: HMN01
+   Autor: Héctor Mora
+   Descripción: Se ocultaron campos dx, dy y phi
+   Fecha: 02-Noviembre-2012
+   -------------------------------------------------------------------------------
+  */
+
 	$uid = $_SESSION['userid'];
 	$tid = $_REQUEST['tid'];
 	$row = mysql_fetch_array(mysql_query("SELECT * FROM ce_terreno WHERE id=$tid AND id_usuario=$uid;"));
 	?>
-  
+
   <form action="sql.php?mod=4&act=2&tid=<?php echo $row['id']; ?>" method="post">
   <table cellpadding="0" cellspacing="0" border="0" id="terrenos_tabla">
   	<tr>
@@ -48,17 +58,10 @@
             </td>
           </tr>
           <tr>
-          	<td rowspan="2"><img src="images/icono_area.png" border="0" /></td>
-          	<td rowspan="2">Area:</td>
-	          <td>
-            	<strong>Ancho:</strong> <span style="font-size:9px;">(dx)(Metros)</span><br /><input type="text" name="dx" value="<?php echo $row['dx']; ?>" /><br />
-              <strong>Largo:</strong> <span style="font-size:9px;">(dy)(Metros)</span><br /><input type="text" name="dy" value="<?php echo $row['dy']; ?>" />
-            </td>
-          </tr>
-          <tr>
             <td>
             	<div class="spacer_10"></div>
-            	<div align="right"><input type="image" value="" src="images/guardar.png" style="margin-right:4px;"></div>
+            	<div align="right"><input type="hidden" name="dx" value="<?php echo $row['dx']; ?>" /><input type="hidden" name="dy" value="<?php echo $row['dy']; ?>" />
+            	                   <input type="image" value="" src="images/guardar.png" style="margin-right:4px;"></div>
             </td>
           </tr>
           </table>
@@ -70,7 +73,7 @@
   	<tr>
   	  <td>
       	<div align="center">
-      		<iframe width="280" height="160" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+      		<iframe width="280" height="160" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
           	src="http://maps.google.com/maps?q=<?php echo $row['latitude']; ?>+<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;vpsrc=0&amp;ll=<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;output=embed">
          </iframe><br />
          <small>
@@ -86,4 +89,3 @@
 </div><!-- main_izq -->
 
 
-    
