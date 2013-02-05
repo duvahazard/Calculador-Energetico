@@ -10,8 +10,18 @@ El proyecto es una sistema tipo abierto (FLOSS) fue diseñado del Laboratorio de
   </p>
 </div><!-- main_izq -->
 
-<div id="main_der" class="grid_7 suffix_1 omega">
-  <h2>&iquest;C&oacute;mo usarlo?</h2>
+<div id="main_der" class="grid_7 suffix_1 omega" style="text-align:center;">
+    <h2 style="line-height:1.0; margin-top:50px;">&iquest;Ya est&aacute; registrado?</h2>
+    <a href="actions.php?id=1">
+      <img src="images/boton_entrar.png" width="140" height="42" />
+    </a>
+
+    <h2 style="line-height:1.0; margin-top:50px;">&iquest;Quiere utilizar este sistema?</h2>
+    <a href="actions.php?id=2">
+      <img src="images/boton_registrarse.png" width="206" height="42" />
+    </a>
+
+  <!-- <h2>&iquest;C&oacute;mo usarlo?</h2>
   <p>
    	<a href="index.php?mod=2&act=1">
     	<img style="float:left;" src="images/users.png" width="128" />
@@ -31,5 +41,5 @@ El proyecto es una sistema tipo abierto (FLOSS) fue diseñado del Laboratorio de
     	<img style="float:left;" src="images/instituciones.png" width="128" />
       <h2 style="line-height:1.0; margin-top:50px;">Para<br />instituciones</h2>
     </a>
-  </p>
+  </p> -->
 </div><!-- main_der -->
