@@ -12,12 +12,12 @@ El proyecto es una sistema tipo abierto (FLOSS) fue diseñado del Laboratorio de
 
 <div id="main_der" class="grid_7 suffix_1 omega" style="text-align:center;">
     <h2 style="line-height:1.0; margin-top:50px;">&iquest;Ya est&aacute; registrado?</h2>
-    <a href="actions.php?id=1">
+    <a class="login" href="actions.php?id=1">
       <img src="images/boton_entrar.png" width="140" height="42" />
     </a>
 
     <h2 style="line-height:1.0; margin-top:50px;">&iquest;Quiere utilizar este sistema?</h2>
-    <a href="actions.php?id=2">
+    <a class="signin" href="actions.php?id=2">
       <img src="images/boton_registrarse.png" width="206" height="42" />
     </a>
 
