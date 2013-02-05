@@ -22,7 +22,7 @@
     	<td width="16" rowspan="3" id="terreno_num" class="par">&nbsp;</td>
     	<td id="terreno_nombre" colspan="2">
       	<img src="images/icon_factory.png" border="0" style="float:left; margin:0 10px 0 10px;" />
-        <h1 style="margin:0"><input type="text" name="nombre" value="<?php echo $row['nombre']; ?>" /></h1>
+        <h5 style="margin:0">Nombre del Terreno: <input type="text" name="nombre" value="<?php echo $row['nombre']; ?>" /></h5>
       </td>
     	<td width="203" id="terreno_botones">
       	<div align="center">
@@ -58,7 +58,7 @@
             </td>
           </tr>
           <tr>
-            <td>
+            <td colspan="3">
             	<div class="spacer_10"></div>
             	<div align="right"><input type="hidden" name="dx" value="<?php echo $row['dx']; ?>" /><input type="hidden" name="dy" value="<?php echo $row['dy']; ?>" />
             	                   <input type="image" value="" src="images/guardar.png" style="margin-right:4px;"></div>
@@ -67,13 +67,13 @@
           </table>
         </div>
       </td>
-  	  <td width="153" class="center"><h5>Ubicaci&oacute;n en mapa</h5></td>
-  	  <td class="center"><h5>Camino Solar</h5></td>
+  	  <td colspan="2" class="center"><h5>Ubicaci&oacute;n en mapa</h5></td>
+  	  <!-- <td class="center"><h5>Camino Solar</h5></td> -->
 	  </tr>
   	<tr>
-  	  <td>
+  	  <td colspan="2">
       	<div align="center">
-      		<iframe width="280" height="160" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+      		<iframe width="435" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
           	src="http://maps.google.com/maps?q=<?php echo $row['latitude']; ?>+<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;vpsrc=0&amp;ll=<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;output=embed">
          </iframe><br />
          <small>
@@ -82,7 +82,7 @@
          </small>
       	</div>
       </td>
-  	  <td><div align="center"><img src="images/camino_solar_generico.jpg" border="0" /></div></td>
+  	  <!-- <td><div align="center"><img src="images/camino_solar_generico.jpg" border="0" /></div></td> -->
 	  </tr>
   </table>
   </form>
