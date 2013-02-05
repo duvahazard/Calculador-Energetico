@@ -75,10 +75,10 @@
   	  <td colspan="2">
       	<div align="center">
       		<iframe width="435" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-          	src="http://maps.google.com/maps?q=<?php echo $row['latitude']; ?>+<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;vpsrc=0&amp;ll=<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;output=embed">
+          	src="http://maps.google.com/maps?q=loc:<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=near&amp;vpsrc=0&amp;output=embed">
          </iframe><br />
          <small>
-         	<a href="http://maps.google.com/maps?q=<?php echo $row['latitude']; ?>+<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;vpsrc=0&amp;ll=<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;source=embed" target="_blank" style="color:#0000FF;text-align:left">Ver mapa mas grande
+         	<a href="http://maps.google.com/maps?q=loc:<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=near&amp;vpsrc=0&amp;output=embed" target="_blank" style="color:#0000FF;text-align:left">Ver mapa mas grande
           </a>
          </small>
       	</div>
