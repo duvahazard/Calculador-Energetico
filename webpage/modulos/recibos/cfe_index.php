@@ -13,6 +13,7 @@
 		?>
   
   	<form action="index.php?mod=5&act=2" method="post">
+      <label>Seleccione un terreno:</label>
     	<select name="terreno" class="general">
       	<optgroup label="Seleccione un terreno">
 				<?php
@@ -26,6 +27,7 @@
         ?>
         </optgroup>
       </select>
+      <label>Seleccione una tarifa:</label>
       <select name="tarifa" class="general">
       	<optgroup label="Seleccione una tarifa">
 				<?php
