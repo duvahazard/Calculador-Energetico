@@ -1,5 +1,6 @@
 <div id="acerca" class="prefix_1 grid_14 suffix_1 alpha">
-  <div class="spacer_20"></div>
+  <h1><a href="index.php?mod=4" style="text-decoration:underline;color:darkblue;">Terrenos</a> > Editar Terreno</h1>
+  <div class="spacer_10"></div>
   <?php
   /*-----------------------------------------------------------------------------
    Modificaciones
