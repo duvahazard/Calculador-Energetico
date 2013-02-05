@@ -59,13 +59,13 @@
 						</table>
 					</div>
 				</td>
-				<td width="153" class="center"><h5>Ubicaci&oacute;n en mapa</h5></td>
-				<td class="center"><h5>Camino Solar</h5></td>
+				<td class="center" colspan="2"><h5>Ubicaci&oacute;n en mapa</h5></td>
+				<!-- <td class="center"><h5>Camino Solar</h5></td> -->
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2">
 					<div align="center">
-						<iframe width="280" height="160" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+						<iframe width="466" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
 							src="http://maps.google.com/maps?q=<?php echo $row['latitude']; ?>+<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;vpsrc=0&amp;ll=<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;output=embed">
 					 </iframe><br />
 					 <small>
@@ -74,12 +74,12 @@
 					 </small>
 					</div>
 				</td>
-				<td>
+			<!-- 	<td>
         	<div class="spacer_30"></div>
           <div align="center">
           	<img src="images/camino_solar_generico.jpg" border="0" /><br /><a href="index.php?mod=4&act=3&tid=<?php echo $row['id']; ?>">Ver gr&aacute;fica</a>
           </div>
-        </td>
+        </td> -->
 			</tr>
 		</table>
 		<?php 
