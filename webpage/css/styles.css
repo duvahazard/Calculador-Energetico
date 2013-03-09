@@ -34,12 +34,10 @@ a:hover{
 	height:75px;
 }
 #menu{
-	height:100px;
+	width:100%;
 	background:url(../images/btn_bg.png) repeat;
-	padding-left:5px;
 }
 #menu_secundario{
-	height:30px;
 	background:#FFF;
 	padding-left:5px;
 	border-bottom:2px solid #010532;
@@ -49,6 +47,7 @@ a:hover{
 	color:#333;
 	position:relative;
 	top:7px;
+	font-size:23px;
 }
 #menu_secundario a:hover{
 	color:#999;
@@ -57,8 +56,27 @@ a:hover{
 	list-style:none;
 	display:inline;
 	height:30px;
+	margin-left:80px;
+}
+#menu_secundario ul li:first-child{
+	margin-left:50px;
+}
+#menu_secundario ul{
+	margin-left:auto;
+	margin-right:auto;
 }
 #menu_secundario img{
+	position:relative;
+	top:-2px;
+}
+.menu-secundario-pasos{
+	background:#690;
+	padding:4px 8px;
+	color:#FFFFFF;
+	-moz-border-radius:20px 20px 20px 20px;
+	-webkit-border-radius:20px 20px 20px 20px;
+	border-radius:20px 20px 20px 20px;
+	font-size:12px;
 	position:relative;
 	top:-2px;
 }
@@ -71,7 +89,6 @@ a:hover{
 	margin-top:30px;
 }
 #contenido{
-	background-color:#FFFFFF;
 }
 #main_izq, #main_der, #acerca{
 	text-align:left;
@@ -522,4 +539,8 @@ div#factores{height:35px}
 }
 div#botonesAcerca img{
 	margin-left:20px;
+}
+/* --------------- QTIPS ------------------*/
+.info-qtip-img{
+	cursor:pointer;
 }
