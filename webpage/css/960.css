@@ -14,8 +14,8 @@
 */
 
 body {
-  min-width: 960px;
-	background:#010532 url(../images/background.jpg) top center no-repeat;
+  width: 100%;
+	background:#FFFFFF url(../images/background1.jpg) top center no-repeat;
 }
 
 /* `Container
