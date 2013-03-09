@@ -33,7 +33,7 @@ $row = mysql_fetch_array(mysql_query("SELECT * FROM ce_dispositivos WHERE id_dis
     	<img src="images/checkedbox.png" border="0" /> <?php echo $numGridtie; ?>
     </td>
   	<td><?php echo $row['marca'];?></td>
-		<td><?php echo $row['modelo'];?></td>    
+		<td><?php echo $row['modelo'];?></td>
   </tr>
 </table>
 
@@ -75,13 +75,13 @@ $row = mysql_fetch_array(mysql_query("SELECT * FROM ce_dispositivos WHERE id_dis
         	<td><?php echo $linea2['nombre']; ?></td>
           <td>
             <div align="center">
-              <input name="alt[]" id="alt" type="text" style="width:40px;"/><br />
+              <input name="alt[]" id="alt" type="text" style="width:40px;" value="90"/><br />
               Grados
             </div>
           </td>
           <td>
             <div align="center">
-              <input name="az[]" id="az" type="text" style="width:40px;"/><br />
+              <input name="az[]" id="az" type="text" style="width:40px;" value="180"/><br />
               Grados
             </div>
           </td>
@@ -103,7 +103,7 @@ $row = mysql_fetch_array(mysql_query("SELECT * FROM ce_dispositivos WHERE id_dis
               m
             </div>
           </td>
-            </tr> 
+            </tr>
             <?php
             $j++;
           }
