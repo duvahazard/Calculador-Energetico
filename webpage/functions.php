@@ -55,7 +55,7 @@ function mensajes(){
 		case 27: $msj = '<div class="grid_16 error mensaje alpha"><p>Error al eliminar el paquete, consulte a su administrador.</p></div>'; break;
 		case 28: $msj = '<div class="grid_16 exito mensaje alpha"><p>Paquete modificacio exitosamente.</p></div>'; break;
 		case 29: $msj = '<div class="grid_16 error mensaje alpha"><p>Error al modificar el paquete, consulte a su administrador.</p></div>'; break;
-		
+
 	}
 	return '<div class="spacer_10 grid_16"></div>'.$msj.'<div class="spacer_10 grid_16"></div>';
 }
