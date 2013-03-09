@@ -64,8 +64,8 @@ Cambio: Se eliminaron las columnas X Y Z
         <td>Precio</td>
         <td>Instalaci&oacute;n</td>
         <td>Proveedor</td>
-        <td>Azimuth</td>
-        <td id="der">Altura</td>
+        <td>Azimuth <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
+        <td id="der">Altura <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
         <!--HMN03td>X</td>
         <td>Y</td>
         <td id="der">Z</td-->
@@ -90,13 +90,13 @@ Cambio: Se eliminaron las columnas X Y Z
       <td><?php echo $row['proveedor']; ?></td>
       <td>
         <div align="center">
-          <input name="alt[]" type="text" style="width:40px;"/><br />
+          <input name="alt[]" type="text" style="width:40px;" value="90"/><br />
           Grados
         </div>
       </td>
       <td>
         <div align="center">
-          <input name="az[]" type="text" style="width:40px;"/><br />
+          <input name="az[]" type="text" style="width:40px;" value="180"/><br />
           Grados
         </div>
       </td>
