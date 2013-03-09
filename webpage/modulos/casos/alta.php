@@ -66,7 +66,7 @@ $siguiente = $total + 1;
   	<thead>
       <tr>
         <td id="izq">Caso</td>
-        <td>Secuencia</td>
+        <td>Secuencia <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
         <td id="der">&nbsp;</td>
       </tr>
       </thead>
@@ -82,6 +82,7 @@ $siguiente = $total + 1;
 												<img src=\"images/graficas.png\" border=\"0\" /><br />
 												Ver Gr&aacute;fica
 											</a>
+											<a class=\"tips\" rel=\"qtip_files/burrowingowl.html\"><img class=\"info-qtip-img\" src=\"images/info.png\" /></a>
 										</div>
 									</td>";
 					}
@@ -98,9 +99,9 @@ $siguiente = $total + 1;
 					?>
 						<div class="grid_7 alpha"><h6 style="margin-bottom:0;">Caso #<?php echo $linea['caso']; ?></h6></div>
             <div class="grid_6 omega" align="right">
-              <a href="funciones.php?mod=1&cid=<?php echo $linea['caso'];; ?>&tid=<?php echo $_REQUEST['tid']; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&table=<?php echo $table; ?>">
+              <!--a href="funciones.php?mod=1&cid=<?php echo $linea['caso'];; ?>&tid=<?php echo $_REQUEST['tid']; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&table=<?php echo $table; ?>">
                 <img src="images/btn_calcular.jpg" border="0" title="Calcular" alt="Calcular" />
-              </a>
+              </a-->
               <a href="sql.php?mod=6&act=4&cid=<?php echo $linea['caso']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/eliminar_btn.jpg" border="0" /></a>
               <a href="sql.php?mod=6&act=6&cid=<?php echo $linea['caso']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/btn_duplicar.jpg" border="0" /></a>
             </div>
@@ -112,7 +113,7 @@ $siguiente = $total + 1;
                   <td>Modelo</td>
                   <td>Tipo Dispositivo</td>
                   <td># Dispositivos</td>
-                  <td>Variables</td>
+                  <td>Variables <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
                   <td>Precio</td>
                   <td id="der">Acciones</td>
                 </tr>
@@ -248,7 +249,7 @@ $siguiente = $total + 1;
 		?>
 
 		  <div id="grafica_costoconsumo_titulo" class="grid_11 alpha" align="right">
-		  	<h5>Ver gr&aacute;fica de costo de consumo</h5>
+		  	<h5>Ver gr&aacute;fica de costo de consumo <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></h5>
 		  </div><!-- fin boton grafica_costoconsumo_titulo -->
 		  <div id="grafica_costoconsumo" class="grid_2 omega" align="right">
 		  	<a href="index.php?mod=6&act=8&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/graficas.png" border="0" /></a>
