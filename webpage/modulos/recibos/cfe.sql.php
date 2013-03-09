@@ -8,6 +8,11 @@ Autor: Héctor Mora
 Fecha: 29-Nov-2012
 Descripción del cambio: Se calcula si es bimestral o mensual el recibo.
 --------------------------------------------------------------------------
+Clave: HMN02
+Autor: Héctor Mora
+Fecha: 27-Feb-2013
+Descripción del cambio: Se eliminan campos innecesarios No. de medidor, No servicio
+--------------------------------------------------------------------------
 */
 
 function query(){
@@ -42,7 +47,8 @@ function query(){
 			$consumo_watts = $_REQUEST['consumo_watts'];
 			$tipo = $_REQUEST['tipo'];
 			$demanda = $_REQUEST['demanda'];
-			$factores = $_REQUEST['terreno'].';'.$_REQUEST['no_servicio'].';'.$_REQUEST['desde'].';'.$_REQUEST['hasta'].';'.$_REQUEST['tarifa'].';'.$_REQUEST['total_pagar'].';'.$_REQUEST['consumo_watts'].';'.$demanda.';'.$_REQUEST['lectura'].';'.$_REQUEST['medidor'];
+			//HMN02 $factores = $_REQUEST['terreno'].';'.$_REQUEST['no_servicio'].';'.$_REQUEST['desde'].';'.$_REQUEST['hasta'].';'.$_REQUEST['tarifa'].';'.$_REQUEST['total_pagar'].';'.$_REQUEST['consumo_watts'].';'.$demanda.';'.$_REQUEST['lectura'].';'.$_REQUEST['medidor'];
+			$factores = $_REQUEST['terreno'].';0;'.$_REQUEST['desde'].';'.$_REQUEST['hasta'].';'.$_REQUEST['tarifa'].';'.$_REQUEST['total_pagar'].';'.$_REQUEST['consumo_watts'].';'.$demanda.';'.$_REQUEST['lectura'].';0';
 			$variable = "mes; consumo; demanda";
 			$secuencia = $_REQUEST['terreno'];
 			$table = $_REQUEST['terreno'];

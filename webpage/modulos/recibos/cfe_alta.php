@@ -7,6 +7,9 @@ $table = "ce_cfe_consumohistorico_".$_REQUEST['terreno']."t";
 if(!empty($terreno) || !empty($tarifa)){
 ?>
 <div class="prefix_1 grid_7 alpha">
+  <h1><a href="index.php?mod=5" style="text-decoration:underline;color:darkblue;">Recibos</a> > Agregar recibo</h1>
+  <div class="spacer_10"></div>
+
 	<form action="sql.php?mod=5&act=1" method="post" class="altaTerreno">
     <input type="hidden" name="tipo" value="1" />
     <input type="hidden" name="terreno" value="<?php echo $table; ?>" />
@@ -39,28 +42,28 @@ if(!empty($terreno) || !empty($tarifa)){
                 ?>
               </td>
             </tr>
-            <tr>
+            <!--tr>
               <td><span class="pasos_recibo_cfe">3</span> Numero de Servicio*</td>
               <td><input id="no_servicio" name="no_servicio" type="text" class="general width96"></td>
-            </tr>
+            </tr-->
             <tr>
-              <td><span class="pasos_recibo_cfe">4</span> Total a Pagar*</td>
+              <td><span class="pasos_recibo_cfe">3</span> Total a Pagar*</td>
               <td><input id="total_pagar" name="total_pagar" type="text" class="general width96"></td>
             </tr>
             <tr>
-              <td><span class="pasos_recibo_cfe">5</span> Consumo en kWh*</td>
+              <td><span class="pasos_recibo_cfe">4</span> Consumo en kWh*</td>
               <td><input id="consumo_watts" name="consumo_watts" type="text" class="general width96"></td>
             </tr>
             <tr>
-              <td><span class="pasos_recibo_cfe">6</span> Lectura Actual*</td>
+              <td><span class="pasos_recibo_cfe">5</span> Lectura Actual*</td>
               <td><input id="lectura" name="lectura" type="text" class="general width96"></td>
             </tr>
-            <tr>
+            <!--tr>
               <td><span class="pasos_recibo_cfe">7</span> Numero de Medidor*</td>
               <td><input id="medidor" name="medidor" type="text" class="general width96"></td>
-            </tr>
+            </tr-->
             <tr>
-              <td><span class="pasos_recibo_cfe">8</span> Periodo de Consumo*</td>
+              <td><span class="pasos_recibo_cfe">6</span> Periodo de Consumo*</td>
               <td>
                 <label for="from">De</label>
                 <input type="text" id="from" name="desde" class="general historial" style="width:80px;"/>
@@ -100,36 +103,36 @@ if(!empty($terreno) || !empty($tarifa)){
                   echo $query["tipo"]; ?></span>
                 </td>
               </tr>
-              <tr>
+              <!--tr>
                 <td><span class="pasos_recibo_cfe">3</span> Numero de Servicio*</td>
                 <td><span class="datos_recibo_cfe"><?php echo $factores[1]; ?></span></td>
-              </tr>
+              </tr-->
               <tr>
-                <td><span class="pasos_recibo_cfe">4</span> Total a Pagar*</td>
+                <td><span class="pasos_recibo_cfe">3</span> Total a Pagar*</td>
                 <td><span class="datos_recibo_cfe">$<?php echo $factores[5]; ?></span></td>
               </tr>
               <tr>
-                <td><span class="pasos_recibo_cfe">5</span> Consumo en kWh*</td>
+                <td><span class="pasos_recibo_cfe">4</span> Consumo en kWh*</td>
                 <td><span class="datos_recibo_cfe"><?php echo $factores[6]; ?></span></td>
               </tr>
               <tr>
-                <td><span class="pasos_recibo_cfe">6</span> Lectura Actual*</td>
+                <td><span class="pasos_recibo_cfe">5</span> Lectura Actual*</td>
                 <td><span class="datos_recibo_cfe"><?php echo $factores[8]; ?></span></td>
               </tr>
-              <tr>
+              <!--tr>
                 <td><span class="pasos_recibo_cfe">7</span> Numero de Medidor*</td>
                 <td><span class="datos_recibo_cfe"><?php echo $factores[9]; ?></span></td>
-              </tr>
+              </tr-->
               <tr>
-                <td><span class="pasos_recibo_cfe">8</span> Periodo de Consumo*</td>
+                <td><span class="pasos_recibo_cfe">6</span> Periodo de Consumo*</td>
                 <td>
                   <span class="datos_recibo_cfe">De <?php echo $factores[2]; ?></span>
                   <span class="datos_recibo_cfe">A <?php echo $factores[3]; ?></span>
                 </td>
               </tr>
             </table>
-            <div class="spacer_10"></div>
-            <div align="right"><a href="index.php?mod=5&act=3&rid=<?php echo $row['id']; ?>&terreno=<?php echo $terreno; ?>"><img src="images/btn_editar_l.png" /></a></div>
+            <!--div class="spacer_10"></div>
+            <div align="right"><a href="index.php?mod=5&act=3&rid=<?php echo $row['id']; ?>&terreno=<?php echo $terreno; ?>"><img src="images/btn_editar_l.png" /></a></div-->
         	</fieldset>
         </div><!-- recibo -->
     <?php
@@ -188,9 +191,8 @@ if(!empty($terreno) || !empty($tarifa)){
 	}
 
 ?>
+<div align="right"><input type="image" value="" src="images/regresar.png" style="margin-right:4px;" onclick="window.location='index.php?mod=5&act=1'" /></div>
 </div>
-
-
 <div class="grid_7 omega">
 	<h2>Explicaci&oacute;n del recibo</h2>
 	<img src="images/recibo_cfe_2.jpg" border="0" />
