@@ -18,21 +18,34 @@ $lat = $ubicacion[0];
 $long = $ubicacion[1];
 ?>
 
-<div class="grid_7 alpha">
+
+
+
+
+<!-- <div class="grid_7 alpha"> -->
+<div class="grid_14">
+  <h1><a href="index.php?mod=4" style="text-decoration:underline;color:darkblue;">Terrenos</a> > Alta de Terreno</h1>
+  <div class="spacer_10"></div>
+
   <form method="post" action="index.php?mod=4&act=1">
   <h2 style="margin-bottom:0;">Paso 1</h2>
   <div>
     <input type="hidden" id="ubicacion" name="ubicacion" />
     <input type="hidden" id="zoom" name="zoom" />
   </div>
-  <cite>Ubique su terreno en el mapa y haga clic en "Capturar".</cite>
-  <div align="left"><input type="image" value="" src="images/btn_capturar.png" style="margin-right:4px;"></div>
-  <div id="map" style="width:400px; height:320px"></div>
+  <h4>Arrastre el marcador en el mapa para ubicar su terreno y haga clic en "Capturar".</h4>
+  <div id="map" style="width:820px; height:320px"></div>
+  <br>
+  <div align="right"><input type="image" value="" src="images/btn_capturar.png" style="margin-right:4px;"></div>
   </form>
 </div><!-- mapa -->
-<div class="prefix_1 grid_6 omega">
+
+
+
+<!-- <div class="prefix_1 grid_6 omega"> -->
+<div class="grid_14">
 <h2 style="margin-bottom:0;">Paso 2</h2>
-<p><cite>Favor de llenar los campos y haga clic en "Guardar".</cite></p>
+<h4>Favor de llenar los campos y haga clic en "Guardar".</h4>
 <fieldset>
 <form action="sql.php?mod=4&act=1" method="post" class="altaTerreno">
 	<input type="hidden" name="uid" value="<?php echo $uid; ?>" />
@@ -78,6 +91,12 @@ $long = $ubicacion[1];
 </fieldset>
 </div>
 
+
+
+
+
+
+
 <script type="text/javascript">
 //<![CDATA[
 
@@ -115,8 +134,16 @@ map.addOverlay(markerD2);
 markerD2.enableDragging();
 
 GEvent.addListener(markerD2, "drag", function(){
-document.getElementById("ubicacion").value=markerD2.getPoint().toUrlValue();
+var ubicacion = markerD2.getPoint().toUrlValue();
+document.getElementById("ubicacion").value = ubicacion;
 document.getElementById("zoom").value=map.getZoom();
+
+
+var ubicaciones = ubicacion.split(",");
+document.getElementById("latitude").value = ubicaciones[0];
+document.getElementById("longitude").value = ubicaciones[1];
+
+
 });
 
 //]]>

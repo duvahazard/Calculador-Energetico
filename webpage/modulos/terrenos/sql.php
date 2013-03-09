@@ -1,6 +1,6 @@
 <?php
 function query(){
-	
+
 	switch($_REQUEST['act']){
 		case 1:{
 			$uid = $_REQUEST['uid'];
@@ -11,8 +11,8 @@ function query(){
 			$dx = $_REQUEST['dx'];
 			$dy = $_REQUEST['dy'];
 			$phi = $_REQUEST['phi'];
-			
-			$query = mysql_query("INSERT INTO ce_terreno (id_usuario, nombre, latitude, longitude, dx, dy, phi, ubicacion, csolar_table) VALUES('$uid', '$nombre', '$latitude', '$longitude', '$dx', '$dy', '$phi', '$ubicacion', '');");			
+
+			$query = mysql_query("INSERT INTO ce_terreno (id_usuario, nombre, latitude, longitude, dx, dy, phi, ubicacion, csolar_table) VALUES('$uid', '$nombre', '$latitude', '$longitude', '$dx', '$dy', '$phi', '$ubicacion', '');");
 			if($query){
 				//-------------------CREAR TABLA DE RECIBO PARA ESTE TERRENO -----------------------
 				$tid = mysql_insert_id();
@@ -24,11 +24,11 @@ function query(){
 							mes INT(10),
 							ano INT(10),
 							consumo INT(10),
-							demanda VARCHAR(45)							
+							demanda VARCHAR(45)
 						);
 					') or die ("Error al generar la tabla del recibo del terreno");
 				//-------------------CREAR TABLA DE RECIBO PARA ESTE TERRENO -----------------------
-				
+
 				//-------------------CREAR TABLA DE RECIBO PARA CASOS -----------------------
 				mysql_query('
 				CREATE TABLE ce_casos_'.$tid.'t(
@@ -44,21 +44,21 @@ function query(){
 							INDEX ( `caso` )
 						);
 					') or die ("Error al generar la tabla de casos del terreno");
-					
+
 					mysql_query("INSERT INTO ce_casos_".$tid."t (caso, secuencia) VALUES ('1','".$tabla_recibo."');") or die ("Error al insertar datos en la tabla de casos");
-				
+
 				//-------------------CREAR TABLA DE RECIBO PARA CASOS -----------------------
 				//-------------------CREAR TABLA DE DEMANDA PROMEDIO ------------------------
 				$anyo_inicio = date("Y");
 				$nombre_tabla = "ce_demandapromedio_t".$tid."_c1";
-				
+
 				mysql_query("DROP TABLE IF EXISTS ". $nombre_tabla) or die("Error al borrar la tabla de demanda promedio.");
 				mysql_query(
 					"CREATE TABLE ".$nombre_tabla."(
 					 id INT PRIMARY KEY AUTO_INCREMENT,
 					 mes INT,
 					 demanda_promedio FLOAT(9,9));") or die("Error al crear la tabla.");
-				
+
 				$i = 1;
 				while($i <= 12){
 					$mes_anterior = $i - 1;
@@ -73,11 +73,11 @@ function query(){
 						$sum_horas_mes = $resultado['num_horas'] + $resultado2['num_horas'] +  $sum_horas_mes;
 					}
 					if(!empty($consumo)){
-						
+
 						$cuantos_registros = count($ano);
 						$total_meses = $cuantos_registros*2;
-						
-						
+
+
 						//echo "Suma de consumos ".$consumo.'<br>';
 						$consumo_promedio = $consumo / $total_meses;
 						//echo "Suma de horas del mes: ".$sum_horas_mes.'<br>';
@@ -85,29 +85,29 @@ function query(){
 						//echo "Demanda promedio: ".$demanda.'<br>';
 						//echo "Mes Actual: ".$i.'<br>';
 						//echo "Mes Anterior: ".$mes_anterior.'<br><br>';
-						
+
 						mysql_query("
 							INSERT INTO ".$nombre_tabla." (mes, demanda_promedio) VALUES('".$mes_anterior."', '".$demanda."')
 						") or die ("Error al guardar en la tabla: ".$nombre_tabla);
 						mysql_query("
 							INSERT INTO ".$nombre_tabla." (mes, demanda_promedio) VALUES('".$i."', '".$demanda."')
 						") or die ("Error al guardar en la tabla: ".$nombre_tabla);
-						
-						
+
+
 					}
 					$i++;
 					unset($ano);
 				}
-				
+
 				include_once("medidor.php");
 				medidor($tid, 1, $anyo_inicio );
-				
-				//-------------------CREAR TABLA DE DEMANDA PROMEDIO ------------------------			
-				
+
+				//-------------------CREAR TABLA DE DEMANDA PROMEDIO ------------------------
+
 				//aqui se manda llamar el script para generar el camino solar
 				system('python caminoSolar.py '.$tid);
 				$url = "index.php?mod=4&msj=13";
-				
+
 			}else{
 				$url = "index.php?mod=4&act=1&msj=14";
 			}
@@ -122,9 +122,9 @@ function query(){
 			$ubicacion = $_REQUEST['ubicacion'];
 			$dx = $_REQUEST['dx'];
 			$dy = $_REQUEST['dy'];
-			
+
 			if(mysql_query("UPDATE ce_terreno SET nombre='$nombre', latitude='$latitude', longitude='$longitude', dx='$dx', dy='$dy', ubicacion='$ubicacion' WHERE id=$tid;")){
-				$url = "index.php?mod=4&act=2&tid=".$tid."&msj=15";
+				$url = "index.php?mod=4&tid=".$tid."&msj=15";
 			}else{
 				$url = "index.php?mod=4&act=2&tid=".$tid."&msj=16";
 			}
@@ -141,31 +141,31 @@ function query(){
 			$tabla_medidor = "ce_medidorCFE_".$tid;
 			$tabla_gridtie = "ce_gridtie_t".$tid;
 			$tabla_fotovoltaico_res ="ce_fotovoltaico_respuesta_t".$tid;
-			
+
 			if(mysql_query("DELETE FROM ce_terreno WHERE id=$tid;")){
-				
+
 				mysql_query("DROP TABLE IF EXISTS ".$tabla_casos.";") or die("Error al borrar la tabla de casos");
 				mysql_query("DROP TABLE IF EXISTS ".$tabla_recibo.";") or die("Error al borrar la tabla de recibos");
 				mysql_query("DROP TABLE IF EXISTS ".$tabla_csolar.";") or die("Error al borrar la tabla de camino solar");
 				mysql_query("DROP TABLE IF EXISTS ".$tabla_demanda_promedio.";") or die("Error al borrar la tabla de demanda promedio");
 				mysql_query("DROP TABLE IF EXISTS ".$tabla_costo_consumo.";") or die("Error al borrar la tabla de costo de consumo");
-				
+
 				$qry = mysql_query("SHOW TABLES FROM ".DB_REMOTE." LIKE '".$tabla_medidor."%'");
 				while($row = mysql_fetch_array($qry)){
 					mysql_query("DROP TABLE IF EXISTS ".$row[0].";") or die("Error al borrar la tabla de medidor");
 				}
-				
+
 				$qry = mysql_query("SHOW TABLES FROM ".DB_REMOTE." LIKE '".$tabla_gridtie."%'");
 				while($row = mysql_fetch_array($qry)){
 					mysql_query("DROP TABLE IF EXISTS ".$row[0].";") or die("Error al borrar la tabla de grid ties en casos");
 				}
-				
+
 				$qry = mysql_query("SHOW TABLES FROM ".DB_REMOTE." LIKE '".$tabla_fotovoltaico_res."%'");
 				while($row = mysql_fetch_array($qry)){
 					mysql_query("DROP TABLE IF EXISTS ".$row[0].";") or die("Error al borrar la tabla de fotovoltaico respuesta");
 				}
-				
-				
+
+
 				$url = "index.php?mod=4&msj=17";
 			}else{
 				$url = "index.php?mod=4&msj=18";
@@ -173,7 +173,7 @@ function query(){
 		}//CASE 3
 		;break;
 	}//SWITCH
-	
+
 	return $url;
 }
 ?>

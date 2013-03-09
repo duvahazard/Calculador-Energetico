@@ -15,6 +15,8 @@
 	$uid = $_SESSION['userid'];
 	$tid = $_REQUEST['tid'];
 	$row = mysql_fetch_array(mysql_query("SELECT * FROM ce_terreno WHERE id=$tid AND id_usuario=$uid;"));
+	$lat = $row['latitude'];
+	$long= $row['longitude'];
 	?>
 
   <form action="sql.php?mod=4&act=2&tid=<?php echo $row['id']; ?>" method="post">
@@ -53,9 +55,9 @@
           <tr>
           	<td><img src="images/icono_coordenadas.png" border="0" /></td>
           	<td>Coordenadas:</td>
-	          <td>
-            	<strong>Latitud:</strong> <span style="font-size:9px;">(Ej. 32º23'34.5" = 32.39292)</span><input type="text" name="latitude" value="<?php echo $row['latitude']; ?>" /><br />
-							<strong>Longitud:</strong> <span style="font-size:9px;">(Ej. 32º23'34.5" = 32.39292)</span><input type="text" name="longitude" value="<?php echo $row['longitude']; ?>" />
+	          <td><input type="hidden" id="ubicacion"/><input type="hidden" id="zoom"/>
+            	<strong>Latitud:</strong> <span style="font-size:9px;">(Ej. 32º23'34.5" = 32.39292)</span><input type="text" name="latitude" id="latitude" value="<?php echo $lat; ?>" /><br />
+							<strong>Longitud:</strong> <span style="font-size:9px;">(Ej. 32º23'34.5" = 32.39292)</span><input type="text" name="longitude" id="longitude" value="<?php echo $long; ?>" />
             </td>
           </tr>
           <tr>
@@ -73,12 +75,14 @@
 	  </tr>
   	<tr>
   	  <td colspan="2">
-      	<div align="center">
+  	  	<div id="map" style="width:435px; height:260px"></div>
+  	  </td>
+      	<!--div align="center">
       		<iframe width="435" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-          	src="http://maps.google.com/maps?q=loc:<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=near&amp;vpsrc=0&amp;output=embed">
+          	src="http://maps.google.com/maps?q=loc:<?php echo $lat; ?>,<?php echo $long; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=near&amp;vpsrc=0&amp;output=embed">
          </iframe><br />
          <small>
-         	<a href="http://maps.google.com/maps?q=loc:<?php echo $row['latitude']; ?>,<?php echo $row['longitude']; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=near&amp;vpsrc=0&amp;output=embed" target="_blank" style="color:#0000FF;text-align:left">Ver mapa mas grande
+         	<a href="http://maps.google.com/maps?q=loc:<?php echo $lat; ?>,<?php echo $long; ?>&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=near&amp;vpsrc=0&amp;output=embed" target="_blank" style="color:#0000FF;text-align:left">Ver mapa mas grande
           </a>
          </small>
       	</div>
@@ -90,3 +94,58 @@
 </div><!-- main_izq -->
 
 
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+////map
+
+
+var map = new GMap2(document.getElementById("map"));
+//var start = new GLatLng(65,25);
+map.setCenter(new GLatLng(<?php echo $lat; ?>,<?php echo $long; ?>), 4);
+map.addControl(new GMapTypeControl());
+map.addControl(new GLargeMapControl());
+
+map.enableContinuousZoom(true);
+map.enableDoubleClickZoom(true);
+map.setZoom(14);
+
+
+// "tiny" marker icon
+var icon = new GIcon();
+icon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
+icon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
+icon.iconSize = new GSize(12, 20);
+icon.shadowSize = new GSize(22, 20);
+icon.iconAnchor = new GPoint(6, 20);
+icon.infoWindowAnchor = new GPoint(5, 1);
+
+
+
+/////Draggable markers
+
+var point = new GLatLng(<?php echo $lat; ?>,<?php echo $long; ?>);
+var markerD2 = new GMarker(point, {icon:G_DEFAULT_ICON, draggable: true});
+map.addOverlay(markerD2);
+
+markerD2.enableDragging();
+
+GEvent.addListener(markerD2, "drag", function(){
+var ubicacion = markerD2.getPoint().toUrlValue();
+document.getElementById("ubicacion").value = ubicacion;
+document.getElementById("zoom").value=map.getZoom();
+
+
+var ubicaciones = ubicacion.split(",");
+document.getElementById("latitude").value = ubicaciones[0];
+
+document.getElementById("longitude").value = ubicaciones[1];
+
+
+});
+
+//]]>
+
+</script>
