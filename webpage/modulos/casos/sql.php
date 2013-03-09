@@ -80,6 +80,25 @@ function query(){
 			 $j ++; // HMN01
 			}
 
+
+
+		require("fotovolrespuesta.php");
+		require("gridtierespuesta.php");
+		crear_tabla_fvrespuesta( $tid, $caso );
+		crear_tabla_gtrespuesta( $tid, $caso );
+
+		$anyo_inicio = date("Y");
+	    require("medidor.php");
+		require( "modulos/casos/demanda_promedio_fn.php");
+
+        demanda_promedio($tid);
+		medidor( $tid, $caso, $anyo_inicio );
+		include_once("consumo.php");
+		require("costo_consumo.php");
+		costo_de_consumo($tid, $caso, $anyo_inicio);
+
+
+
 			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&tid='.$tid.'&msj=1';
 
 		}//CASE 1
