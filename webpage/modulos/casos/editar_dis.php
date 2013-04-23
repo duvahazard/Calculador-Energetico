@@ -2,11 +2,11 @@
   <?php
 	$uid = $_SESSION['userid'];
 	
-	if(!empty($_REQUEST['dispositivo_tipo'])){
+	//if(!empty($_REQUEST['dispositivo_tipo'])){
 	$id_dispositivo = $_REQUEST['dispositivo_tipo'];
 	
 	
-	$row = mysql_fetch_array(mysql_query("SELECT * FROM `ce_dispositivos_tipo` WHERE id_tipo = $id_dispositivo"));
+	$row = mysql_fetch_array(mysql_query("SELECT * FROM `ce_dispositivos_tipo` WHERE id_tipo = 1"));
 		switch($row['nombre']){
 			case 'fotovoltaico':{
 				echo '<h2 style="margin-bottom:0;">Dispositivo: '.ucfirst($row['nombre']).'</h2>';
@@ -713,8 +713,9 @@
 		
 		?>
   
-  <?php }// if not empty
-		else{ 
+  <?php //}// if not empty
+		//else{
+			/* 
 	?>
   	<div>
     	<h2>Seleccione tipo de dispositivo</h2>
@@ -739,7 +740,7 @@
         </fieldset>
       </form>    
 		</div>
-  <?php } ?>
+  <?php //} */ ?>
 </div><!-- acerca -->
 <div class="clear"></div>
 
