@@ -1,3 +1,6 @@
+<?php
+if(empty($_SESSION['log'])){
+?>
 <div id="main_izq" class="prefix_1 grid_7 alpha">
   <h2>&iquest;Qué es?</h2>
   <p>
@@ -43,3 +46,6 @@ El proyecto es una sistema tipo abierto (FLOSS) fue diseñado del Laboratorio de
     </a>
   </p> -->
 </div><!-- main_der -->
+<?php
+}
+?>
