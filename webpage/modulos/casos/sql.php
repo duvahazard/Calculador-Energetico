@@ -18,6 +18,7 @@ Cambio: Se eliminaron las columnas X Y Z
 */
 
 function query(){
+
 	$tid = $_REQUEST['tid'];
 	$table = $_REQUEST['table'];
 	$terreno = $_REQUEST['terreno'];
@@ -42,19 +43,15 @@ function query(){
 			$ids     = explode(",", $_REQUEST['ids'] ); // HMN01
 			$j = 0;// HMN01
 
-
 			while( $checado !== false ) { // HMN01
-
 			 if( strlen( $checado ) > 0 ) { // HMN01
-
 				 $i = $checado / 1; // HMN01
-
 				if(!empty($ids[$j])){
 					$alt[$i] = $alt[$i]*PI/180;
 					$az[$i] = $az[$i]*PI/180;
-
 					//HMN03 mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $ids[$j], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis[$i];$ye[$i];$zeta[$i]','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador."); // HMN01
-					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $ids[$j], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis;$ye;$zeta','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador."); // HMN01
+
+					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $ids[$j], '$id_tipo', $cantidad[$i],'$alt[$i];$az[$i];$equis;$ye;$zeta','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador."); // HMN01
 					$ultimo_disp_agregado = mysql_insert_id().';';
 					// ----- Inserta el gridtie --------
 					$qry = mysql_query("SELECT * FROM $table WHERE caso = $caso AND id_dispositivo = $gridtie;") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador.");
@@ -81,22 +78,20 @@ function query(){
 			}
 
 
-
 		require("fotovolrespuesta.php");
 		require("gridtierespuesta.php");
 		crear_tabla_fvrespuesta( $tid, $caso );
 		crear_tabla_gtrespuesta( $tid, $caso );
-
 		$anyo_inicio = date("Y");
 	    require("medidor.php");
 		require( "modulos/casos/demanda_promedio_fn.php");
+
 
         demanda_promedio($tid);
 		medidor( $tid, $caso, $anyo_inicio );
 		include_once("consumo.php");
 		require("costo_consumo.php");
 		costo_de_consumo($tid, $caso, $anyo_inicio);
-
 
 
 			$url = 'index.php?mod=6&act=2&table='.$table.'&terreno='.$terreno.'&dispositivo_tipo='.$dispositivo_tipo.'&tid='.$tid.'&msj=1';
