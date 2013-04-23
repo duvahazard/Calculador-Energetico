@@ -7,6 +7,10 @@ Autor: Héctor Mora
 Fecha: 29/Noviembre/2012
 Cambio: Se eliminaron las columnas X Y Z, y estaba al revés PI/180 debe ser 180/PI
 ---------------------------------------------------------------------
+clave: RE01
+Author: Rodger Evans
+Fecha: 12/Abril/2013
+cambio: names a titles
 */
 ?>
 <div id="acerca" class="prefix_1 grid_14 suffix_1 alpha">
@@ -42,7 +46,7 @@ Cambio: Se eliminaron las columnas X Y Z, y estaba al revés PI/180 debe ser 180/
           <td>Instalaci&oacute;n</td>
           <td>Proveedor</td>
           <td>Altura</td>
-          <td id="der">Azimuth</td>
+          <td id="der">Acimut</td> <!--RE01-->
           <!--HMN03td>X</td>
           <td>Y</td>
           <td id="der">Z</td-->
