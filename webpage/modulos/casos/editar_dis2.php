@@ -20,7 +20,14 @@ Autor: Héctor Mora
 Fecha: 29/Noviembre/2012
 Cambio: Se eliminaron las columnas X Y Z
 ---------------------------------------------------------------------
+clave: RE01
+Author: Rodger Evans
+Fecha: 12/Abril/2013
+cambio: names a titles
+---------------------------------------------------------------------
 */
+
+
 
 	function validaChecados() { //HMN01
 	   var total_dispositivos = document.getElementById("totaldispositivos").value/1;
@@ -64,8 +71,8 @@ Cambio: Se eliminaron las columnas X Y Z
         <td>Precio</td>
         <td>Instalaci&oacute;n</td>
         <td>Proveedor</td>
-        <td>Azimuth <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
-        <td id="der">Altura <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
+        <td>Acimut <a class="wideWidth" rel="qtip_files/casos/azimuth.html"><img class="info-qtip-img" src="images/info.png" /></a></td> <!--RE01-->
+        <td id="der">Altura <a class="wideWidth" rel="qtip_files/casos/altura.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
         <!--HMN03td>X</td>
         <td>Y</td>
         <td id="der">Z</td-->
