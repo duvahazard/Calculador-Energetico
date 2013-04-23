@@ -1,3 +1,14 @@
+<?php
+/*---------------------------------------------------------------------
+MODIFICACIONES
+---------------------------------------------------------------------
+clave: RE01
+Author: Rodger Evans
+Fecha: 12/Abril/2013
+cambio: names and titles
+-----------------------------------------------------------------------
+*/
+?>
 <div id="acerca" class="prefix_1 grid_14 suffix_1 alpha">
   <div class="spacer_20"></div>
   
@@ -102,7 +113,7 @@
                 <td>Instalaci&oacute;n</td>
                 <td>Proveedor</td>
                 <td>Altura</td>
-                <td>Azimuth</td>
+                <td>Acimut</td><!--RE01-->
                 <td>X</td>
                 <td>Y</td>
                 <td id="der">Z</td>
