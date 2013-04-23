@@ -172,7 +172,7 @@ $(document).ready(function()
         event: 'unfocus'
 			},
 			style: {
-				classes: 'qtip-wiki qtip-plain qtip-shadow'
+				classes: 'qtip-wiki qtip-plain qtip-shadow normal-width'
 			}
 		})
 	})
@@ -180,6 +180,134 @@ $(document).ready(function()
 	// Make sure it doesn't follow the link when we click it
 	.click(function(event) { event.preventDefault(); });
 });
+$(document).ready(function()
+{
+	// Make sure to only match links to wikipedia with a rel tag
+	$('a.tips-left[rel]').each(function()
+	{
+		// We make use of the .each() loop to gain access to each element via the "this" keyword...
+		$(this).qtip(
+		{
+			content: {
+				// Set the text to an image HTML string with the correct src URL to the loading image you want to use
+				text: '<img class="throbber" src="http://craigsworks.com/projects/qtip/images/throbber.gif" alt="Loading..." />',
+				ajax: {
+					url: $(this).attr('rel') // Use the rel attribute of each element for the url to load
+				},
+				title: {
+					//text: 'Titulo de : ' + $(this).text(), // Give the tooltip a title using each elements text
+					button: false
+				}
+			},
+			position: {
+				at: 'left center', // Position the tooltip above the link
+				my: 'right center',
+				viewport: $(window), // Keep the tooltip on-screen at all times
+				effect: false // Disable positioning animation
+			},
+			show: {
+				<?php if($_REQUEST['mod']!=1){ ?>event: 'click', // Don't specify a show event...<?php } ?>
+				ready: true // ... but show the tooltip when ready
+			},
+			hide:{
+				//fixed: true,
+        event: 'unfocus'
+			},
+			style: {
+				classes: 'qtip-wiki qtip-plain qtip-shadow normal-width'
+			}
+		})
+	})
+ 
+	// Make sure it doesn't follow the link when we click it
+	.click(function(event) { event.preventDefault(); });
+});
+$(document).ready(function()
+{
+	// Make sure to only match links to wikipedia with a rel tag
+	$('a.caso1[rel]').each(function()
+	{
+		// We make use of the .each() loop to gain access to each element via the "this" keyword...
+		$(this).qtip(
+		{
+			content: {
+				// Set the text to an image HTML string with the correct src URL to the loading image you want to use
+				text: '<img class="throbber" src="http://craigsworks.com/projects/qtip/images/throbber.gif" alt="Loading..." />',
+				ajax: {
+					url: $(this).attr('rel') // Use the rel attribute of each element for the url to load
+				},
+				title: {
+					//text: 'Titulo de : ' + $(this).text(), // Give the tooltip a title using each elements text
+					button: false
+				}
+			},
+			position: {
+				at: 'left center', // Position the tooltip above the link
+				my: 'right center',
+				viewport: $(window), // Keep the tooltip on-screen at all times
+				effect: false // Disable positioning animation
+			},
+			show: {
+				event: 'click', // Don't specify a show event...
+				ready: true // ... but show the tooltip when ready
+			},
+			hide:{
+				//fixed: true,
+        event: 'unfocus'
+			},
+			style: {
+				classes: 'qtip-wiki qtip-plain qtip-shadow normal-width'
+			}
+		})
+	})
+ 
+	// Make sure it doesn't follow the link when we click it
+	.click(function(event) { event.preventDefault(); });
+});
+
+$(document).ready(function()
+{
+	// Make sure to only match links to wikipedia with a rel tag
+	$('a.wideWidth[rel]').each(function()
+	{
+		// We make use of the .each() loop to gain access to each element via the "this" keyword...
+		$(this).qtip(
+		{
+			content: {
+				// Set the text to an image HTML string with the correct src URL to the loading image you want to use
+				text: '<img class="throbber" src="http://craigsworks.com/projects/qtip/images/throbber.gif" alt="Loading..." />',
+				ajax: {
+					url: $(this).attr('rel') // Use the rel attribute of each element for the url to load
+				},
+				title: {
+					//text: 'Titulo de : ' + $(this).text(), // Give the tooltip a title using each elements text
+					button: false
+				}
+			},
+			position: {
+				at: 'left center', // Position the tooltip above the link
+				my: 'right center',
+				viewport: $(window), // Keep the tooltip on-screen at all times
+				effect: false // Disable positioning animation
+			},
+			show: {
+				<?php if($_REQUEST['mod']!=1){ ?>event: 'click', // Don't specify a show event...<?php } ?>
+				ready: true // ... but show the tooltip when ready
+			},
+			hide:{
+				//fixed: true,
+        event: 'unfocus'
+			},
+			style: {
+				classes: 'qtip-wiki qtip-plain qtip-shadow wide-width'
+			}
+		})
+	})
+ 
+	// Make sure it doesn't follow the link when we click it
+	.click(function(event) { event.preventDefault(); });
+});
+
 </script>
 
 <!-- QTIP -->
@@ -261,10 +389,10 @@ if($_REQUEST['mod'] == 4){
 	<?php if(!empty($_SESSION['log'])){ ?>
   <div id="menu_secundario">
   	<ul>
-    	<li><a class="tips" href="index.php?mod=3"><span class="menu-secundario-pasos">1</span> Proveedores</a> <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
-      <li><a class="tips" href="index.php?mod=4"><span class="menu-secundario-pasos">2</span> Terrenos</a> <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
-      <li><a class="tips" href="index.php?mod=5"><span class="menu-secundario-pasos">3</span> Recibos</a> <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
-      <li><a class="tips" href="index.php?mod=6"><span class="menu-secundario-pasos">4</span> Casos</a> <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
+    	<li><a class="tips" href="index.php?mod=3"><span class="menu-secundario-pasos">1</span> Proveedores</a> <a class="tips" rel="qtip_files/index/btn_1.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
+      <li><a class="tips" href="index.php?mod=4"><span class="menu-secundario-pasos">2</span> Terrenos</a> <a class="tips" rel="qtip_files/index/btn_2.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
+      <li><a class="tips" href="index.php?mod=5"><span class="menu-secundario-pasos">3</span> Recibos</a> <a class="tips" rel="qtip_files/index/btn_3.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
+      <li><a class="tips" href="index.php?mod=6"><span class="menu-secundario-pasos">4</span> Casos</a> <a class="tips" rel="qtip_files/index/btn_4.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
     </ul>
     <?php }else{
     	if(isset($_REQUEST['ide'])){
