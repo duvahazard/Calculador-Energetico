@@ -44,11 +44,12 @@ $row = mysql_fetch_array(mysql_query("SELECT * FROM ce_dispositivos WHERE id_dis
         <td>Marca</td>
         <td>Modelo</td>
         <td>Tipo</td>
-        <td>Altura</td>
-        <td>Azimuth</td>
-        <td>X</td>
+        <td>Altura <a class="wideWidth" rel="qtip_files/casos/altura.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
+        <td id="der">Azimuth <a class="wideWidth" rel="qtip_files/casos/azimuth.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
+        <?php /*<td>X</td>
         <td>Y</td>
         <td id="der">Z</td>
+				*/?>
       </tr>
     </thead>
     <?php
@@ -85,6 +86,7 @@ $row = mysql_fetch_array(mysql_query("SELECT * FROM ce_dispositivos WHERE id_dis
               Grados
             </div>
           </td>
+          <?php /*
           <td>
             <div align="center">
               <input name="equis[]" id="equis" type="text" style="width:40px;"/><br />
@@ -103,6 +105,7 @@ $row = mysql_fetch_array(mysql_query("SELECT * FROM ce_dispositivos WHERE id_dis
               m
             </div>
           </td>
+					*/ ?>
             </tr>
             <?php
             $j++;
