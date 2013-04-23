@@ -11,8 +11,9 @@ function query(){
 			$dx = $_REQUEST['dx'];
 			$dy = $_REQUEST['dy'];
 			$phi = $_REQUEST['phi'];
+			$estacion = $_REQUEST['estacion'];
 
-			$query = mysql_query("INSERT INTO ce_terreno (id_usuario, nombre, latitude, longitude, dx, dy, phi, ubicacion, csolar_table) VALUES('$uid', '$nombre', '$latitude', '$longitude', '$dx', '$dy', '$phi', '$ubicacion', '');");
+			$query = mysql_query("INSERT INTO ce_terreno (id_usuario, nombre, latitude, longitude, dx, dy, phi, ubicacion, csolar_table, estacionid) VALUES('$uid', '$nombre', '$latitude', '$longitude', '$dx', '$dy', '$phi', '$ubicacion', '', '$estacion');");
 			if($query){
 				//-------------------CREAR TABLA DE RECIBO PARA ESTE TERRENO -----------------------
 				$tid = mysql_insert_id();
