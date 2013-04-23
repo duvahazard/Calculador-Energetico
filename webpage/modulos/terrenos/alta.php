@@ -30,6 +30,19 @@ $long = $ubicacion[1];
   <form method="post" action="index.php?mod=4&act=1">
   <h2 style="margin-bottom:0;">Paso 1</h2>
   <div>
+    <input type="hidden" id="ubicacion2" name="ubicacion" />
+    <input type="hidden" id="zoom2" name="zoom" />
+  </div>
+  <h4>Clic en la estaci&oacute;n mas crecana a su domicilio.</h4>
+  <div id="map2" style="width:820px; height:320px"></div>
+  <br>
+  </form>
+
+
+  <div class="spacer_10"></div>
+
+  <h2 style="margin-bottom:0;">Paso 2</h2>
+  <div>
     <input type="hidden" id="ubicacion" name="ubicacion" />
     <input type="hidden" id="zoom" name="zoom" />
   </div>
@@ -38,13 +51,15 @@ $long = $ubicacion[1];
   <br>
   <div align="right"><input type="image" value="" src="images/btn_capturar.png" style="margin-right:4px;"></div>
   </form>
+
+
 </div><!-- mapa -->
 
 
 
 <!-- <div class="prefix_1 grid_6 omega"> -->
 <div class="grid_14">
-<h2 style="margin-bottom:0;">Paso 2</h2>
+<h2 style="margin-bottom:0;">Paso 3</h2>
 <h4>Favor de llenar los campos y haga clic en "Guardar".</h4>
 <fieldset>
 <form action="sql.php?mod=4&act=1" method="post" class="altaTerreno">
@@ -82,6 +97,12 @@ $long = $ubicacion[1];
           <option value="Tijuana">Tijuana</option>
         </select>
       </td>
+    </tr>
+    <tr>
+    	<td>Estaci&oacute;n Clim&aacute;tica</td>
+    	<td><input id="estacion" name="estacion" type="hidden">
+    		<input type="text" id="estacionDes" name="estacionDes" class="general width96"  value="" readonly><br />
+    	</td>
     </tr>
     <tr>
       <td colspan="2"><div align="right"><input type="image" value="" src="images/guardar.png" style="margin-right:4px;"></div></td>
@@ -148,4 +169,47 @@ document.getElementById("longitude").value = ubicaciones[1];
 
 //]]>
 
+var map2 = new GMap2(document.getElementById("map2"));
+
+map2.setCenter(new GLatLng(<?php echo $lat; ?>,<?php echo $long; ?>), 4);
+map2.addControl(new GMapTypeControl());
+map2.addControl(new GLargeMapControl())
+map2.enableContinuousZoom(true);
+map2.enableDoubleClickZoom(true);
+map2.setZoom(<?php echo $_REQUEST['zoom']; ?>);
+
+<?php
+
+$query = mysql_query("SELECT idEstacion, nombre, latitud, longitud FROM ce_estacionesclima");
+$i = 2;
+
+	while( $row = mysql_fetch_array($query) ){
+		$id   = $row['idEstacion'];
+		$nm   = $row['nombre'];
+		$lat  = $row['latitud'];
+		$long = $row['longitud'];
+
+		if( strlen( $lat ) < 2 || strlen( $long ) < 2 ) {
+			continue;
+		}
+
+		echo "var icon$i = new GIcon();\n";
+		echo "icon$i.image = \"http://labs.google.com/ridefinder/images/mm_20_red.png\";\n";
+		echo "icon$i.shadow = \"http://labs.google.com/ridefinder/images/mm_20_shadow.png\";\n";
+		echo "icon$i.iconSize = new GSize(12, 20);\n";
+		echo "icon$i.shadowSize = new GSize(22, 20);\n";
+		echo "icon$i.iconAnchor = new GPoint(6, 20);\n";
+		echo "icon$i.infoWindowAnchor = new GPoint(5, 1);\n";
+
+		echo "var point$i = new GLatLng($lat, $long);\n";
+		echo "var markerD2$i = new GMarker(point$i, {icon$i:G_DEFAULT_ICON, draggable: false});\n";
+		echo "map2.addOverlay(markerD2$i);\n\n\n";
+		echo "GEvent.addListener(markerD2$i, \"click\", function() { document.getElementById('estacion').value = '$id'; document.getElementById('estacionDes').value = '$nm'; });";
+
+		$i ++;
+	}
+
+
+
+?>
 </script>
