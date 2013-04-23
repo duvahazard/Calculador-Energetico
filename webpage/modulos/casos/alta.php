@@ -23,7 +23,7 @@ $siguiente = $total + 1;
 <div class="prefix_1 grid_13 alpha">
   <h2 style="margin-bottom: 0">Agregar casos</h2>
   <p>Aqu&iacute; puede simular diferentes casos de uso. El Caso #1 es tu consumo y costos normales basados en el consumo histórico del recibo capturado. Puede crear casos nuevos con m&aacute;s de un dispositivo en cada uno. Al generar un caso nuevo y/o al modificarlo se requiere hacer clic en el bot&oacute;n "Calcular" para actualizar los resultados.</p>
-  <p>Terreno <span id="casos_titulo_terreno"><?php echo $_REQUEST['terreno'] ?></span></p>
+  <p>Terreno <span id="casos/titulo_terreno"><?php echo $_REQUEST['terreno'] ?></span></p>
   <fieldset>
   <legend>Favor de llenar los campos se&ntilde;alados</legend>
   <form action="index.php?mod=6&act=3" method="post" class="altaTerreno" id="casos">
@@ -50,7 +50,7 @@ $siguiente = $total + 1;
         </td>
       </tr>
       <tr>
-        <td colspan="2"><div align="right"><input type="image" value="" src="images/btn_agregar_l.png" style="margin-right:4px;"></div></td>
+        <td colspan="2"><div align="right"><a class="tips-left" rel="qtip_files/casos/agregar_caso.html" data-hasqtip="true"><img class="info-qtip-img" style="margin-bottom:15px;" src="images/info.png"></a><input type="image" value="" src="images/btn_agregar_l.png" style="margin-right:4px;"></div></td>
       </tr>
     </table>
   </form>
@@ -60,21 +60,26 @@ $siguiente = $total + 1;
 	$tabla_consumo = "ce_costodeconsumo_".$_REQUEST['tid']."t";
 ?>
 
-	<div class="grid_8 alpha"><h6 style="margin-bottom:0;">Caso #1</h6></div>
+	<div class="grid_8 alpha">
+  	<h6 style="margin-bottom:0;">
+  		<a class="caso1" rel="qtip_files/casos/caso1.html" data-hasqtip="true">
+    		<img class="info-qtip-img" src="images/info.png">
+			</a>
+    	Caso #1
+    </h6>
+  </div>
   <div class="grid_5 omega" align="right"></div>
   <table cellpadding="0" cellspacing="0" border="0" id="activar_proveedores">
   	<thead>
       <tr>
-        <td id="izq">Caso</td>
-        <td>Secuencia <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
-        <td id="der">&nbsp;</td>
+        <td id="izq">Secuencia <a class="tips" rel="qtip_files/casos/caso1_secuencia.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
+        <td id="der">Gr&aacute;fica</td>
       </tr>
       </thead>
       <tr class="par">
       	<?php
 					$query = mysql_query("SELECT * FROM $table WHERE caso = 1 LIMIT 1;");
 					while($row = mysql_fetch_array($query)){
-						echo "<td>1</td>";
 						echo "<td>".$row['secuencia']."</td>";
 						echo "<td>
 										<div align=\"center\">
@@ -82,7 +87,7 @@ $siguiente = $total + 1;
 												<img src=\"images/graficas.png\" border=\"0\" /><br />
 												Ver Gr&aacute;fica
 											</a>
-											<a class=\"tips\" rel=\"qtip_files/burrowingowl.html\"><img class=\"info-qtip-img\" src=\"images/info.png\" /></a>
+											<a class=\"tips\" rel=\"qtip_files/casos/caso1_grafica.html\"><img class=\"info-qtip-img\" src=\"images/info.png\" /></a>
 										</div>
 									</td>";
 					}
@@ -93,28 +98,29 @@ $siguiente = $total + 1;
 					<?php
 
 					$qry2 = mysql_query("SELECT DISTINCT caso FROM $table caso WHERE caso > 1;") or die("Error en la consulta de casos");
-
+					$i = 1;
 					while($linea = mysql_fetch_array($qry2)){
 
 					?>
-						<div class="grid_7 alpha"><h6 style="margin-bottom:0;">Caso #<?php echo $linea['caso']; ?></h6></div>
+						<div class="grid_7 alpha"><h6 style="margin-bottom:0;"><?php if($i==1){?><a class="tips-left" rel="qtip_files/casos/caso_dist_1.html" data-hasqtip="true"><img class="info-qtip-img" src="images/info.png"></a><?php } ?>Caso #<?php echo $linea['caso']; ?></h6></div>
             <div class="grid_6 omega" align="right">
               <!--a href="funciones.php?mod=1&cid=<?php echo $linea['caso'];; ?>&tid=<?php echo $_REQUEST['tid']; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&table=<?php echo $table; ?>">
                 <img src="images/btn_calcular.jpg" border="0" title="Calcular" alt="Calcular" />
               </a-->
-              <a href="sql.php?mod=6&act=4&cid=<?php echo $linea['caso']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/eliminar_btn.jpg" border="0" /></a>
+              <a href="sql.php?mod=6&act=4&cid=<?php echo $linea['caso']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/eliminar_btn_casos.jpg" border="0" /></a>
+              <a class="tips" rel="qtip_files/casos/eliminar.html" data-hasqtip="true"><img class="info-qtip-img" style="margin-left:-10px;" src="images/eliminar_info_btn.jpg"></a>
               <a href="sql.php?mod=6&act=6&cid=<?php echo $linea['caso']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno']; ?>&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/btn_duplicar.jpg" border="0" /></a>
+              <a class="tips" rel="qtip_files/casos/duplicar.html" data-hasqtip="true"><img class="info-qtip-img" style="margin-left:-10px;" src="images/eliminar_info_btn.jpg"></a>
             </div>
             <table cellpadding="0" cellspacing="0" border="0" width="100%" id="activar_proveedores">
               <thead>
                 <tr>
-                  <td id="izq">Caso</td>
-                  <td>Dispositivo</td>
+                  <td id="izq">Dispositivo</td>
                   <td>Modelo</td>
                   <td>Tipo Dispositivo</td>
                   <td># Dispositivos</td>
-                  <td>Variables <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
-                  <td>Precio</td>
+                  <td>Variables <a class="wideWidth" rel="qtip_files/casos/variables.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
+                  <td>Precio <a class="tips" rel="qtip_files/casos/precio.html"><img class="info-qtip-img" src="images/info.png" /></a></td>
                   <td id="der">Acciones</td>
                 </tr>
               </thead>
@@ -125,9 +131,10 @@ $siguiente = $total + 1;
 															JOIN ce_dispositivos ON ".$table.".id_tipo = ce_dispositivos.id
 															WHERE caso=".$i.";");*/
 							$query = mysql_query("SELECT * FROM ".$table."
-																	LEFT JOIN ce_dispositivos ON ".$table.".id_dispositivo = ce_dispositivos.id_dis
-																	WHERE caso=".$linea['caso']." AND tipo!=4;");
+																	JOIN ce_dispositivos ON ".$table.".id_dispositivo = ce_dispositivos.id_dis
+																	WHERE caso=".$linea['caso'].";");
 							$j=1;
+							$total = 0;
 							while($row = mysql_fetch_array($query)){
 								if($j%2==0)
 									$clase = 'non';
@@ -140,7 +147,6 @@ $siguiente = $total + 1;
 
 
 									<tr class="<?php echo $clase; ?>">
-										<td><?php echo $row['caso']; ?></td>
 										<td><?php echo $row['marca']; ?></td>
 										<td><?php echo $row['modelo']; ?></td>
 										<td>
@@ -203,7 +209,11 @@ $siguiente = $total + 1;
 													?>
 											</table>
 										</td>
-										<td><?php echo $row['precio_dispositivo']; ?></td>
+										<td><?php 
+													$subtotal =  ($row['precio_dispositivo']+$row['precio_instalacion'])*$row['dispositivos']; 
+													echo '$ '.$subtotal;
+												?>
+                    </td>
 										<td>
 											<div align="center">
 												<a href="index.php?mod=6&act=4&id_dispositivo=<?php echo $row['id']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno'] ?>&tid=<?php echo $_REQUEST['tid']; ?>">
@@ -212,6 +222,9 @@ $siguiente = $total + 1;
 												<a href="sql.php?mod=6&act=2&id=<?php echo $row['id']; ?>&table=<?php echo $table; ?>&terreno=<?php echo $_REQUEST['terreno'] ?>&tid=<?php echo $_REQUEST['tid']; ?>">
 													<img src="images/borrar.png" border="0" width="16" title="Eliminar" alt="Eliminar" />
 												</a>
+                        <a class="tips" rel="qtip_files/casos/grafica_casos.html" data-hasqtip="true">
+    														<img class="info-qtip-img" src="images/info.png">
+															</a>
 											</div>
 											<div class="spacer_5"></div>
 											<div align="center">
@@ -225,7 +238,7 @@ $siguiente = $total + 1;
 															<a href="index.php?mod=6&act=7&tid=<?php echo $_REQUEST['tid']; ?>&cid=<?php echo $row['caso']; ?>">
 																<img src="images/graficas.png" border="0" width="40" /><br />
 																Ver Gr&aacute;fica
-															</a>
+															</a>                              
 														<?php
 														}// if $result11
 													}// while $result11
@@ -233,15 +246,18 @@ $siguiente = $total + 1;
 											</div>
 										</td>
 									</tr>
-
-
 					<?php
+								$total += $subtotal;
 								$j++;
 							}//while 1
 					?>
+          		<tr>
+               	<td colspan="5">&nbsp;</td>
+                <td colspan="2"><div align="center">Total del Caso: $ <?php echo number_format($total); ?></div></td>
+              </tr>
           	</table>
           <?php
-
+						$i++;
 					}//while 2
            // HMN01
 		  if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '".$tabla_consumo."'")))
@@ -249,7 +265,7 @@ $siguiente = $total + 1;
 		?>
 
 		  <div id="grafica_costoconsumo_titulo" class="grid_11 alpha" align="right">
-		  	<h5>Ver gr&aacute;fica de costo de consumo <a class="tips" rel="qtip_files/burrowingowl.html"><img class="info-qtip-img" src="images/info.png" /></a></h5>
+		  	<h5>Ver gr&aacute;fica de costo de consumo <a class="tips" rel="qtip_files/casos/grafica_costo_consumo.html"><img class="info-qtip-img" src="images/info.png" /></a></h5>
 		  </div><!-- fin boton grafica_costoconsumo_titulo -->
 		  <div id="grafica_costoconsumo" class="grid_2 omega" align="right">
 		  	<a href="index.php?mod=6&act=8&tid=<?php echo $_REQUEST['tid']; ?>"><img src="images/graficas.png" border="0" /></a>
