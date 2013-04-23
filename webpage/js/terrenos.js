@@ -23,6 +23,10 @@ jQuery(function(){
 				expression: "if (VAL) return true; else return false;",
 				message: "Favor de llenar el campo"
 		});
+		jQuery("#estacion").validate({
+				expression: "if (VAL) return true; else return false;",
+				message: "Favor de llenar el campo"
+		});
 		jQuery('.altaTerreno').validated(function(){
 			liga(function(url){
 				document.location.href=url;
