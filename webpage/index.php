@@ -436,8 +436,8 @@ if($_REQUEST['mod'] == 4){
 				  <div class="image_reel">
 					<img src="images/slider_1.jpg" alt="" />
 					<img src="images/slider_2.jpg" alt="" />
-					<img src="images/slider_1.jpg" alt="" />
-					<img src="images/slider_2.jpg" alt="" />
+					<img src="images/slider_3.jpg" alt="" />
+					<img src="images/slider_4.jpg" alt="" />
 				  </div><!-- image_reel -->
 				</div><!-- window -->
 				<div class="paging">
