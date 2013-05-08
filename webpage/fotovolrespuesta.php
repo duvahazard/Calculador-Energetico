@@ -57,12 +57,12 @@
  * -------------------------------------------------------------------
  * clave: RE03
  * Autor: Rodger Evans
- * Descripción: making the cosGz go in steps 
+ * Descripción: making the cosGz go in steps
  * Fecha: 18 de oct 2012
  * -------------------------------------------------------------------
  * clave: RE04
  * Autor: Rodger Evans
- * Descripción: adding Rs and Rp and changing Tperp to Rs etc... 
+ * Descripción: adding Rs and Rp and changing Tperp to Rs etc...
  * Fecha: 19 de oct 2012
  */
 
@@ -78,7 +78,6 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 
     $caminoSolar = getCaminoSolar(  $idterreno );
     $total_caminoSolar = count ($caminoSolar );
-
 
 	for( $i = 0; $i < $total_dispositivos; $i ++ ) {
 
@@ -139,7 +138,7 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 				$Az = pi()/2 - $altS; //altitude sol
 
 				//RE03 BLOQUE AGREGADO //////
-				$cosBz=cos($Bz); 
+				$cosBz=cos($Bz);
 				$cosAz=cos($Az);
 				$sinBz=sin($Bz);
 				$sinAz=sin($Az);
@@ -163,7 +162,7 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 				//HMN04 $Tpar   = 1-($sin2TH)/($sinSQ*$cosSQ); //T parallel Tpar = transmision en el vidrio. es que el vidrio tiene una reflexion de la liz
 				//HMN04 $Tperp  = 1-($sin2TH)/$sinSQ;  //T perpendicularr
 
-				// HMN04 
+				// HMN04
 				//nueva nombres Rs Rp, son reflection coeficients for s and p polarizations
 				$sinGz=sin($Gz);
 				$RsBrkt= $sinGz*$refAire / $indRef ;
@@ -171,20 +170,20 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 				$RsTop=($refAire * $CosGz) - $indRef * sqrt($RsSqrt);
 				$RsBottom=$refAire * $CosGz + $indRef * sqrt( $RsSqrt);
 				$Rs=pow(($RsTop/$RsBottom),2);
-				
-				/*$Rs = 
-					(  
+
+				/*$Rs =
+					(
 					  ( $refAire * $CosGz - $indRef * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^2))
 					  /
 					  ( $refAire * $CosGz + $indRef * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^2)) ) ^ 2;
 */ //RE04
-				$RpBrk= $refAire / $indRef * $sinGz; 
+				$RpBrk= $refAire / $indRef * $sinGz;
 				$RpSqrt= 1 - pow( $RpBrk, 2);
 				$RpTop= $refAire * sqrt( $RpSqrt ) - $indRef * $CosGz ;
 				$RpBottom= $refAire * sqrt( $RpSqrt) + $indRef * $CosGz ;
 				$Rp=pow(($RpTop/$RpBottom),2);
-				
-				/*$Rp = 
+
+				/*$Rp =
 				 ( ( $refAire * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^ 2 ) - $indRef * $CosGz ) /
 
 				 ( $refAire * sqrt( 1 - ( $refAire / $indRef * $sinGz ) ^ 2 ) + $indRef * $CosGz ) )^2;//RE02
