@@ -209,8 +209,8 @@ $siguiente = $total + 1;
 													?>
 											</table>
 										</td>
-										<td><?php 
-													$subtotal =  ($row['precio_dispositivo']+$row['precio_instalacion'])*$row['dispositivos']; 
+										<td><?php
+													$subtotal =  ($row['precio_dispositivo']+$row['precio_instalacion'])*$row['dispositivos'];
 													echo '$ '.$subtotal;
 												?>
                     </td>
@@ -225,6 +225,7 @@ $siguiente = $total + 1;
                         <a class="tips" rel="qtip_files/casos/grafica_casos.html" data-hasqtip="true">
     														<img class="info-qtip-img" src="images/info.png">
 															</a>
+															<a href="index.php?mod=7&tid=<?php echo $_REQUEST['tid']; ?>&cid=<?php echo $row['caso']; ?>"><img src="images/reporte.png" border="0" width="16" title="Reporte" alt="Reporte" /></a>
 											</div>
 											<div class="spacer_5"></div>
 											<div align="center">
@@ -238,7 +239,7 @@ $siguiente = $total + 1;
 															<a href="index.php?mod=6&act=7&tid=<?php echo $_REQUEST['tid']; ?>&cid=<?php echo $row['caso']; ?>">
 																<img src="images/graficas.png" border="0" width="40" /><br />
 																Ver Gr&aacute;fica
-															</a>                              
+															</a>
 														<?php
 														}// if $result11
 													}// while $result11

@@ -2,7 +2,7 @@
 function modulos(){
 	$sid = $_SESSION['log'];
 	$id = $_SESSION['userid'];
-	$query = mysql_fetch_array(mysql_query("SELECT COUNT(id_usuario) AS total FROM `ce_usuarios` WHERE id_usuario = '$id' AND session = '$sid';")) or die("Error en el query por:" . mysql_error());	
+	$query = mysql_fetch_array(mysql_query("SELECT COUNT(id_usuario) AS total FROM `ce_usuarios` WHERE id_usuario = '$id' AND session = '$sid';")) or die("Error en el query por:" . mysql_error());
 	if($query['total']==1){
 		switch($_REQUEST['mod']){
 			case 1: require("modulos/index/index.php");break;
@@ -26,12 +26,12 @@ function modulos(){
 					default: require("modulos/proveedores/index.php");break;
 				}
 			}break;
-			case 4:{ 
+			case 4:{
 				switch($_REQUEST['act']){
 					case 1: require("modulos/terrenos/alta.php");break;
 					case 2: require("modulos/terrenos/editar.php");break;
 					case 3: require("modulos/terrenos/grafica_cs.php");break;
-					default: require("modulos/terrenos/index.php");break;	
+					default: require("modulos/terrenos/index.php");break;
 				}
 			}break;
 			case 5:{
@@ -57,9 +57,13 @@ function modulos(){
 					default: require("modulos/casos/index.php");break;
 				}break;
 			}
+			case 7: {
+				require("modulos/casos/reporte.php");
+				break;
+			}
 			default: require("modulos/index/index.php");break;
-		}// switch		
-	}else{	
+		}// switch
+	}else{
 		switch($_REQUEST['mod']){
 			case 2:{
 				switch($_REQUEST['act']){
