@@ -60,10 +60,12 @@ medidor($tid, 1, $anyo_inicio );
 								 'pointSize': 10,
 								 'lineWidth': 3,
 								 'fontSize': 10,
-								 'title': 'Predicción de medidor',
+								 'title': 'Consumo de energía eléctrica',
 								 'animation.easing': 'in',
 								 'animation.duration': 5000,
-								 'legend.position': 'bottom'
+								 'legend.position': 'bottom',
+								 'vAxis': {title: 'kWh/mes', fontSize:14},
+								 'hAxis': {title: 'Fecha', fontSize:14}
 								};
 
 	// Instantiate and draw our chart, passing in some options.
