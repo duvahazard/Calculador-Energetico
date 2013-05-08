@@ -16,7 +16,7 @@
 #!/usr/bin/python
 
 import os
-os.environ['PYTHON_EGG_CACHE'] = '/home/voxelsol/www/calculador/eggs_cache' # linea para establecer un directorio para los temporales del cache EGG para la biblioteca de MySQLdb
+os.environ['PYTHON_EGG_CACHE'] = '/home/energiav/www/eggs_cache' # linea para establecer un directorio para los temporales del cache EGG para la biblioteca de MySQLdb
 
 import MySQLdb
 #import ephem
@@ -29,7 +29,8 @@ import ephem
 
 #Open database connection
 #db = MySQLdb.connect("localhost","root","le3lo030","calculador")
-db = MySQLdb.connect("localhost","voxelsol_calculador","c4lcul4d0r!","voxelsol_calculador") #linea para conectarse en servidor de Voxel
+#db = MySQLdb.connect("localhost","voxelsol_calculador","c4lcul4d0r!","voxelsol_calculador") #linea para conectarse en servidor de Voxel
+db = MySQLdb.connect("localhost","energiav_calcula","c4lcul4d0r!","energiav_calculado") #linea para conectarse en servidor local de energiasim
 
 #preparar un objeto de cursor utilizando el cursor() method
 cursor = db.cursor()
