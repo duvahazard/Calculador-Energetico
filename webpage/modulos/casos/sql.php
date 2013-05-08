@@ -50,6 +50,7 @@ function query(){
 					$alt[$i] = $alt[$i]*PI/180;
 					$az[$i] = $az[$i]*PI/180;
 					//HMN03 mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $ids[$j], $id_tipo, $cantidad[$i],'$alt[$i];$az[$i];$equis[$i];$ye[$i];$zeta[$i]','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador."); // HMN01
+					$id_tipo = getIdTipo( $ids[$j] );
 
 					mysql_query("INSERT INTO $table (caso, id_dispositivo, id_tipo, dispositivos, dispositivos_variables, secuencia, medio_ambiente) VALUES($caso, $ids[$j], '$id_tipo', $cantidad[$i],'$alt[$i];$az[$i];$equis;$ye;$zeta','', '')") or die("Hubo un error al guardar la informaci&oacute;n, consulte a su administrador."); // HMN01
 					$ultimo_disp_agregado = mysql_insert_id().';';
@@ -291,5 +292,22 @@ function query(){
 	}//SWITCH
 
 	return $url;
+}
+
+
+function getIdTipo( $id ) {
+	$tipo = "" ;
+
+	$result = mysql_query( "SELECT tipo FROM ce_dispositivos WHERE id_dis = " . $id );
+
+	if( $result ){
+
+		if( $rows = mysql_fetch_array( $result ) ) {
+			$tipo = $rows["tipo"];
+		}
+
+	}
+
+	return $tipo;
 }
 ?>

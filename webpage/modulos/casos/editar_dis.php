@@ -1,11 +1,11 @@
 <div id="acerca"	>
   <?php
 	$uid = $_SESSION['userid'];
-	
+
 	//if(!empty($_REQUEST['dispositivo_tipo'])){
 	$id_dispositivo = $_REQUEST['dispositivo_tipo'];
-	
-	
+
+
 	$row = mysql_fetch_array(mysql_query("SELECT * FROM `ce_dispositivos_tipo` WHERE id_tipo = 1"));
 		switch($row['nombre']){
 			case 'fotovoltaico':{
@@ -15,21 +15,21 @@
 						echo "No hay dispositivos tipo Gridtie que mostrar, consulte a su administrador."."\r";
 						echo "<div><a href=\"javascript: history.go(-1)\">Regresar</a></div>";
 					}else{
-					
+
 						$query = mysql_query("SELECT * FROM `ce_dispositivos` WHERE tipo = 4 AND activado = 1;");
-						
-						
+
+
 				?>
 						<img src="images/pasos_gridtie_fv1.jpg" border="0" />
             <div class="spacer_10"></div>
             <form action="index.php?mod=6&act=9" method="post">
-            	
+
             	<input type="hidden" name="table" value="<?php echo $_REQUEST['table']; ?>" />
               <input type="hidden" name="id_tipo" value="<?php echo $id_dispositivo; ?>" />
               <input type="hidden" name="tid" value="<?php echo $_REQUEST['tid']; ?>" />
               <input type="hidden" name="caso" value="<?php echo $_REQUEST['caso']; ?>" />
               <input type="hidden" name="terreno" value="<?php echo $_REQUEST['terreno']; ?>" />
-              
+
 						<table border="0" cellpadding="0" cellspacing="0" id="activar_proveedores">
 							<thead>
 								<tr>
@@ -42,14 +42,14 @@
 									<td id="der">Variables</td>
 								</tr>
 							</thead>
-							
+
               <?php
 							$i = 0;
-							while($row = mysql_fetch_array($query)){ 
+							while($row = mysql_fetch_array($query)){
 							if($i%2==0)
 								$clase = 'par';
 							else
-								$clase = 'non';	
+								$clase = 'non';
 							?>
             	<tr class="<?php echo $clase; ?>">
               	<td><div align="center"><input name="gtid" value="<?php echo $row['id_dis']; ?>" type="radio" /></div></td>
@@ -60,7 +60,7 @@
                 <td><div align="center"><?php echo $row['proveedor']; ?></div></td>
                 <td><div align="center"><?php echo $row['variables']; ?></div></td>
               </tr>
-			<?php    
+			<?php
 						}// while
 			?>
       				<tr>
@@ -69,12 +69,12 @@
       			</table>
             </form>
       <?php
-						
+
 					}//else
-				
+
 			?>
-					
-      <?php			
+
+      <?php
 			};
 			break;
 			// FOTOVOLTAICO =====================================
@@ -102,7 +102,7 @@
           </thead>
           <?php
             $i = 0;
-            $query = mysql_query("SELECT id_dis, marca, modelo, precio_dispositivo, precio_instalacion, proveedor FROM `ce_dispositivos` WHERE tipo = $id_dispositivo; "); 
+            $query = mysql_query("SELECT id_dis, marca, modelo, precio_dispositivo, precio_instalacion, proveedor FROM `ce_dispositivos` WHERE tipo = $id_dispositivo; ");
             while($row= mysql_fetch_array($query)){
               if($i%2==0){
                 $clase = 'par';
@@ -691,12 +691,12 @@
                       </select>
                     </td>
                   </tr>
-                </table>             	
+                </table>
               </td>
             </tr>
             <?php
               $i++;
-             } 
+             }
             ?>
             <tr>
               <td colspan="11"><div align="right"><input type="image" src="images/btn_siguiente.png" style="border:0;" /></div></td>
@@ -708,14 +708,14 @@
       };
 			break;
 			// LAMPARA =====================================
-			
+
 		}
-		
+
 		?>
-  
+
   <?php //}// if not empty
 		//else{
-			/* 
+			/*
 	?>
   	<div>
     	<h2>Seleccione tipo de dispositivo</h2>
@@ -730,18 +730,17 @@
 					<?php
             $query = mysql_query("SELECT id_tipo, nombre FROM ce_dispositivos_tipo WHERE id_tipo !=4 AND activado = 1");
             while($row = mysql_fetch_array($query)){
-          
+
               echo "<input name=\"dispositivo_tipo\" type=\"radio\" value=\"".$row['id_tipo']."\" />".ucfirst($row['nombre']);
 							echo '<div class="spacer_10"></div>';
-          
+
             }
-          ?> 
+          ?>
           <input type="image" src="images/btn_siguiente.png" />
         </fieldset>
-      </form>    
+      </form>
 		</div>
   <?php //} */ ?>
 </div><!-- acerca -->
 <div class="clear"></div>
 
-    
