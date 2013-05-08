@@ -49,13 +49,16 @@
 							<td>
 								<strong>Latitud:</strong> <?php echo $row['latitude']; ?><br />
 								<strong>Longitud:</strong> <?php echo $row['longitude']; ?>
+                <a class="tips" rel="qtip_files/terrenos/latlong.html" data-hasqtip="true">
+									<img class="info-qtip-img" src="images/info.png" style="margin-left:0;">
+								</a>
 							</td>
 						</tr>
-						<tr>
+						<?php /*?><tr>
 							<td><img src="images/icono_area.png" border="0" /></td>
 							<td>Area:</td>
 							<td><?php echo $area; ?> m&sup2;</td>
-						</tr>
+						</tr><?php */?>
 						</table>
 					</div>
 				</td>
