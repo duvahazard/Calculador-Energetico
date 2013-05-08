@@ -19,7 +19,7 @@ function abre_conexion_servidor() {
 
 	//////////// DATOS PARA LA CONEXION A LA BASE DE DATOS ////////////
 	$conexion_basedatos_servidor = '127.0.0.1';
-	$conexion_basedatos_usuario  = 'voxelsol_calcula';
+	$conexion_basedatos_usuario  = 'energiav_calcula';
 	$conexion_basedatos_contrasenya = 'c4lcul4d0r!';
 	$conexion = null;
 	/////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ function abre_conexion_servidor() {
 
 ////////////////////////////// SELECCIONA UNA BASE DE DATOS //////////////////////////////////////
 function selecciona_base_datos() {
-	$nombre_basedatos = 'voxelsol_calculador';
+	$nombre_basedatos = 'energiav_calculado';
 
     return mysql_select_db( $nombre_basedatos );
 }
