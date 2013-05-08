@@ -10,7 +10,7 @@ require("functions.php");
 
 if(!empty($_REQUEST['mod'])){
   switch($_REQUEST['mod']){
-   case 1:{ 
+   case 1:{
 	 	$idterreno = $_REQUEST['tid'];
 		$idcaso    = $_REQUEST['cid'];
 		require("fotovolrespuesta.php");
@@ -21,19 +21,19 @@ if(!empty($_REQUEST['mod'])){
 		$anyo_inicio = date("Y");
 	  require("medidor.php");
 		require( "modulos/casos/demanda_promedio_fn.php");
-		
+
     demanda_promedio($idterreno);
 		medidor( $idterreno, $idcaso, $anyo_inicio );
 		include_once("consumo.php");
 		require("costo_consumo.php");
 		costo_de_consumo($idterreno, $idcaso, $anyo_inicio);
 			$url = "index.php?mod=6&act=2&terreno=".$_REQUEST['terreno']."&table=".$_REQUEST['table']."&tid=".$_REQUEST['tid']."&msj=19";
-	 }break;	 
+	 }break;
   }
 if(empty($url) and $url == "")
 		$url = passURL($_REQUEST['url']);
 }
-else if($_SERVER['HTTP_REFERER'] == "") 
+else if($_SERVER['HTTP_REFERER'] == "")
 	$url = "index.php";
 else
  $url = $_SERVER['HTTP_REFERER'];
