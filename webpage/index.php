@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8" />
-<title>Calculador Energetico</title>
+<title>Energía SIM - Calculador Energetico</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script type="text/javascript" src="ui/jquery-ui-1.8.16.custom.js"></script>
 <link rel="stylesheet" href="js/themes/base/jquery.ui.all.css">
@@ -350,6 +350,7 @@ if($_REQUEST['mod'] == 4){
         &nbsp;
       </div><!-- grid_4 -->
     </div><!-- logos -->
+    <div class="clear"></div>
   </div><!-- .container_16 -->
   <div class="clear"></div>
 </div><!-- #user-field -->
@@ -367,7 +368,7 @@ if($_REQUEST['mod'] == 4){
         <a href="index.php?mod=2"><img src="images/btn_acerca.png" border="0" /></a>
       </div><!-- grid_4 -->
       <div id="titulo_pagina" class="grid_8">
-        <h1><?php titulo(); ?></h1>
+        <?php titulo(); ?>
       </div><!-- titulo_pagina -->
       <div class="grid_4 omega">
         <a class="login" href="actions.php?id=1"><img src="images/btn_cuenta.png" border="0" /></a>
@@ -387,9 +388,9 @@ if($_REQUEST['mod'] == 4){
 <div class="container_16">
 <!------------------------ MENU SECUNDARIO ------------------------>
 	<?php if(!empty($_SESSION['log'])){ ?>
-  <div id="menu_secundario">
+  <div id="menu_secundario" class="grid_16">
   	<ul>
-    	<li><a class="tips" href="index.php?mod=3"><span class="menu-secundario-pasos">1</span> Proveedores</a> <a class="tips" rel="qtip_files/index/btn_1.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
+    	<li><a class="tips" href="index.php?mod=3"><span class="menu-secundario-pasos">1</span> Dispositivos</a> <a class="tips" rel="qtip_files/index/btn_1.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
       <li><a class="tips" href="index.php?mod=4"><span class="menu-secundario-pasos">2</span> Terrenos</a> <a class="tips" rel="qtip_files/index/btn_2.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
       <li><a class="tips" href="index.php?mod=5"><span class="menu-secundario-pasos">3</span> Recibos</a> <a class="tips" rel="qtip_files/index/btn_3.html"><img class="info-qtip-img" src="images/info.png" /></a></li>
       <li><a class="tips" href="index.php?mod=6"><span class="menu-secundario-pasos">4</span> Casos</a> <a class="tips" rel="qtip_files/index/btn_4.html"><img class="info-qtip-img" src="images/info.png" /></a></li>

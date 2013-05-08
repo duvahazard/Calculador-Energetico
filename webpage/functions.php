@@ -61,13 +61,13 @@ function mensajes(){
 }
 function titulo(){
 	switch($_REQUEST['mod']){
-		case 1: echo "Calculador Energ&eacute;tico";break;
-		case 2: echo "Acerca de";break;
-		case 3: echo "Proveedores";break;
-		case 4: echo "Terrenos";break;
-		case 5: echo "Recibos";break;
-		case 6: echo "Casos";break;
-		default: echo "Calculador Energ&eacute;tico";break;
+		case 1: echo "<h1 style='color:#24B5FF;font-size:36px;margin-bottom:0;'>ENERGÍA SIM</h1><h4 style='margin-top:0;margin-bottom:0;'>Calculador Energ&eacute;tico</h4>";break;
+		case 2: echo "<h1>Acerca de</h1>";break;
+		case 3: echo "<h1>Proveedores</h1>";break;
+		case 4: echo "<h1>Terrenos</h1>";break;
+		case 5: echo "<h1>Recibos</h1>";break;
+		case 6: echo "<h1>Casos</h1>";break;
+		default: echo "<h1>ENERGÍA SIM - Calculador Energ&eacute;tico</h1>";break;
 	}
 }
 
@@ -97,6 +97,6 @@ function botonesAcerca(){
 	 </div>';
 }
 define("PI", 3.1416);
-define("DB_REMOTE", "voxelsol_calculador");
+define("DB_REMOTE", "energiav_calculado");
 define("DB_LOCAL", "calculador");
 ?>
