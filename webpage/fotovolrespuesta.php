@@ -79,6 +79,9 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
     $caminoSolar = getCaminoSolar(  $idterreno );
     $total_caminoSolar = count ($caminoSolar );
 
+               //T_c=T_ambient(iFinal), ambient comes from climate data
+    $temp=20;//despues modificar a DB
+
 	for( $i = 0; $i < $total_dispositivos; $i ++ ) {
 
 		$nombre_tabla = "ce_fotovoltaico_respuesta_t". $idterreno. "c" . $idcaso . "fv". $dispositivos[$i][0];
@@ -103,6 +106,9 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 		$area = $delL * $delH; //HMN04
 		$potencia= $datos_dispositivo["potencia"]; // HMN02
 		$QE = $potencia/(1000*$area);
+                
+ 
+
 
 
 	for( $j = 0; $j < $total_caminoSolar; $j++ ) {
@@ -190,12 +196,16 @@ function crear_tabla_fvrespuesta( $idterreno, $idcaso) {
 */
 				$Rtot=($Rs+$Rp)/2;//RE04
 				$Ttot=1-$Rtot;
+                                
+                                //QE from n_e=n_r *(1-Beta*(T_c-T_noct)) 
 
 				$potenciaCL=$Icl*$QE*$Aper*$Ttot; // QE = Eficiencia Cuántica,,,  Aper = Area efectiva,(Efecto coseno)
 				$potenciaCS=$Icl*$QE*$Aper*$Ttot;//this should be CS !!  CS =Clear SKY
+                                
+                                //find temp Cell T_C from T_C=(T_NOCT -T_A,NOCT)*(G_T/G_T,NOCT )*(1-N_e/T_alpha)+T_a  (T_a,noct is contant, G_T=$aper*Icl
 				//added $Ttot RE04
 
-			insertaRegistro(  $nombre_tabla, $tiempo,$area, $QE, $Aper, $potenciaCS, $potenciaCL );
+			insertaRegistro(  $nombre_tabla, $tiempo,$area, $QE, $Aper, $potenciaCS, $potenciaCL, $temp );//add in temp
 
 		} // Fin for Camino Solar
 
@@ -215,9 +225,9 @@ function actualizaCasos(  $idterreno, $idfv, $tabla_fv_respuesta) {
 
 }
 
-function insertaRegistro(  $nombre_tabla, $tiempo,$area, $QE , $Aper, $potenciaCS, $potenciaCL ) {
+function insertaRegistro(  $nombre_tabla, $tiempo,$area, $QE , $Aper, $potenciaCS, $potenciaCL, $temp  ) {
 
-	$sql = "INSERT INTO ". $nombre_tabla ." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL) VALUES ('$tiempo','$area', '$QE','$Aper', '$potenciaCS', '$potenciaCL')";
+	$sql = "INSERT INTO ". $nombre_tabla ." (tiempo, azFVt, altFVt, aeff, potenciaCS, potenciaCL, temperatura) VALUES ('$tiempo','$area', '$QE','$Aper', '$potenciaCS', '$potenciaCL', '$temp')";
 	mysql_query( $sql );
 }
 
@@ -260,7 +270,8 @@ $sql = "CREATE TABLE ". $nombre_tabla .
 			 altFVt FLOAT(9,6),
 			 aeff FLOAT(9,6),
 			 potenciaCS FLOAT(9,3),
-			 potenciaCL FLOAT(9,3))";
+			 potenciaCL FLOAT(9,3),
+			 temperatura FLOAT(9,3))";
 
 	mysql_query($sql);
 }
