@@ -45,15 +45,9 @@ including CFE, Water, Gas LP, CO2 etc... for the calculado_energetico.
   Fecha: 08/Noviembre/2012
   Descripción: Implementación de tarifa DAC
   -------------------------------------------
-    Clave: RE01
-  Hecha por: R. Evans
-  Fecha: 10/Junio/2013
-  Descripción: buscando error
-  -------------------------------------------
 */
 
 function costo_de_consumo( $idterreno, $idcaso, $anyo_inicio ) {
-
 
   $insertar = False;
   $casos    = Array();
@@ -81,21 +75,17 @@ function costo_de_consumo( $idterreno, $idcaso, $anyo_inicio ) {
 
 
   $tarifa    = getTarifa(  $idterreno );
-  $estaciones= getEstaciones( $tarifa );
-
-
-  $sinDemanda= !tieneDemanda( $tarifa );
   $limiteDAC = getLimiteDAC( $tarifa ); //HMN04 Obtiene el Limite DAC correspondiente a la tarifa del recibo.
-  $nombre_tarifa = getNombreTarifa( $tarifa );
 
-  $medidor = getMedidor(  $idterreno, $casos, $anyo_inicio, $nombre_tarifa );
-  $medidor_caso1 = getMedidor( $idterreno, $casos_1, $anyo_inicio, $nombre_tarifa ); // Obtiene el medidor del caso1,
+  $medidor = getMedidor(  $idterreno, $casos, $anyo_inicio, $tarifa );
+  $medidor_caso1 = getMedidor( $idterreno, $casos_1, $anyo_inicio, $tarifa ); // Obtiene el medidor del caso1,
 
   $t_tipo  = getTarifasTipo(  $tarifa );
   $f_ini   = getFechaInicial(  $idterreno, $idcaso );
   $f_fin   = getFechaFinal  (  $idterreno, $idcaso );
 
- 	$total_registros = count( $medidor );
+ /// REVISAR QUE EN CE_TARIFAS_TIPO DIGA INVIERNO, y NO INVERNO
+	$total_registros = count( $medidor );
 	$estacion_anyo = "";
 	$anyo_hoy = date("Y");
 	$mes_hoy  = date("m");
@@ -115,16 +105,16 @@ function costo_de_consumo( $idterreno, $idcaso, $anyo_inicio ) {
 
 	for( $i = 0; $i < $total_registros; $i ++ ) {
 
-		$estacion_anyo = getEstacion( $estaciones, $medidor[$i] -> mes );
+		$estacion_anyo = getEstacion( $medidor[$i] -> mes );
 
 		$consumo = $medidor[$i]->v_consumo[ $casos[0] ];
 
-		$resultados[ $casos[0] ] += getPago( $medidor, $t_tipo, $consumo, $estacion_anyo, $i, $limiteDAC, $casos[0], $medidor_caso1, $sinDemanda ); //HMN03 Calcula el pago.
+		$resultados[ $casos[0] ] += getPago( $medidor, $t_tipo, $consumo, $estacion_anyo, $i, $limiteDAC, $casos[0], $medidor_caso1 ); //HMN03 Calcula el pago.
 
 		if( count($casos) > 1 ) {
 			$consumo = $medidor[$i]->v_consumo[ $casos[1] ];
-			$resultados[ $casos[1] ] +=
-			getPago( $medidor, $t_tipo, $consumo, $estacion_anyo, $i, $limiteDAC, $casos[1], $medidor_caso1, $sinDemanda ); //HMN03 Calcula el pago.
+			$resultados[ $casos[1] ] += 
+			getPago( $medidor, $t_tipo, $consumo, $estacion_anyo, $i, $limiteDAC, $casos[1], $medidor_caso1 ); //HMN03 Calcula el pago.
 
 		}
 
@@ -136,8 +126,6 @@ function costo_de_consumo( $idterreno, $idcaso, $anyo_inicio ) {
 
 
 	} // Fin For
-
-
 }
 
 // Si el promedio de consumo de los últimos 12 meses es igual o excede al limite DAC para su tarifa, se cambia la tarifa a DAC
@@ -145,7 +133,7 @@ function esDAC( $limiteDAC, $i, $medidor, $medidor_caso1, $idcaso ) {
 
     $promedio = getPromedio($i, $medidor, $medidor_caso1, $idcaso);
 
-    if( $promedio < $limiteDAC ) { //o $limiteDAC==0 **
+    if( $promedio < $limiteDAC ) {
     	return False;
     }
 
@@ -179,11 +167,10 @@ function getPagoDAC($i, $estacion, $tarifa_dac, $consumo) {
 }
 
 //HMN03 Función para calcular el pago, de acuerdo a la fórmula de máximos y mínimos.
-function getPago( $medidor, $t_tipo, $consumo, $estacion_anyo, $i, $limiteDAC, $idcaso, $tarifa_dac, $sinDemanda ) {
+function getPago( $medidor, $t_tipo, $consumo, $estacion_anyo, $i, $limiteDAC, $idcaso, $tarifa_dac ) {
 
 		$pago = 0;
-		//** if tarifa 2 carga_fijo viene de ce_tarifa_2
-		// $consumo=carga_fijo**
+
 		$carga_fijo = $t_tipo[$estacion_anyo]["carga_fijo"] ;
 
 		if( $consumo < $carga_fijo ) {
@@ -194,39 +181,42 @@ function getPago( $medidor, $t_tipo, $consumo, $estacion_anyo, $i, $limiteDAC, $
 			return getPagoDAC($i, $estacion_anyo, $tarifa_dac, $consumo );
 		}
 
-		if( $sinDemanda )  { // Si demanda = 0 (ce_tarifas)
+		if( $consumo < $t_tipo[ $estacion_anyo ]["lim_basico"]  ) { // Si el consumo es menor
+
 			$Pbb = $medidor[$i]->basicoBajo ;
 			$Pib = $medidor[$i]->intermedioBajo ;
-			$Pia = $medidor[$i]->intermedioAlto;
-			$Pea = $medidor[$i]->exedenteAlto;
-
+			$Peb = $medidor[$i]->exedenteBajo; // NOTA: La tabla ce_tarifas_1, no tiene columna exedente_Bajo
 			$Bb  = $t_tipo[$estacion_anyo]["lim_basico_B"];
 			$Ib  = $t_tipo[$estacion_anyo]["lim_int_B"];
-			$Ia  = $t_tipo[$estacion_anyo]["lim_int_A"];
+			$Eb  = $t_tipo[$estacion_anyo]["lim_exc_B"];
 
 			// FORMULA ORIGINAL: $pago=$Pbb*min($valor-$Bb)+$Pib*max(0,min($valor, $Ib)-$Bb)+$Peb*max(0,min($valor,$Eb)-$Ib);
-
-			if( $Ia == 0 ) { // Si no hay limite Excedente Bajo 1-1D o 1F, 1E, 1C, 1D invierno
-				$pago = $Pbb * min( $consumo, $Bb ) + $Pib * max( 0, min($consumo, $Ib ) - $Bb ) + $Pea*max(0, $consumo - $Ib); //new tarifa formula
-
-				//** if( es tarfia 2){
-				//$CF= $medidor[$i]->carga_fijo;
-				//$pago=$pago+$CF;
-				//}  **
-
-			} else { //esta 1F, 1E, 1C, 1D verano
-				$pago = $Pbb * min( $consumo, $Bb ) + $Pib * max( 0, min($consumo, $Ib ) - $Bb ) + $Pia * max( 0, min($consumo, $Ia)- $Ib ) + $Pea*max(0, $consumo - $Ia); //new tarifa formula //RE01 change $Ea to $Ia 
+			if( $Eb == 0 ) { // Si no hay limite Excedente Bajo
+				$pago = $Pbb * min( $consumo, $Bb ) + $Pib * max( 0, $consumo - $Bb );//RE01 si no hay limite, no hay valores  + $Peb * max( 0, $consumo - $Ib );
+			} else {
+				$pago = $Pbb * min( $consumo, $Bb ) + $Pib * max( 0, min($consumo, $Ib ) - $Bb ) + $Peb * max( 0, $consumo - $Ib );//RE01 mejorado
 			}
 
-		} else {
+		}  else {
 
-			$C = $medidor[$i]->consumo;  //consumo
+			$Pba = $medidor[$i]->basicoAlto;
+			$Pia = $medidor[$i]->intermedioAlto;
+			$Paa = $medidor[$i]->altoAlto;      //NOTA: La tabla ce_tarifas_1, no tiene columna alto_Alto
+			$Pea = $medidor[$i]->exedenteAlto;
+			$Ba  = $t_tipo[$estacion_anyo]["lim_basico_A"];
+			$Ia  = $t_tipo[$estacion_anyo]["lim_int_A"];
+			$Aa  = $t_tipo[$estacion_anyo]["lim_alt_A"];
+			$Ea  = $t_tipo[$estacion_anyo]["lim_exc_A"];
 
-			$D = $medidor[$i]->demanda;	//demanda
+			//FORMULA ORIGINAL: $pago=$Pba*min($valor,$Ba)+$Pia*max(0,min($valor, $Ia)-$Ba)+$Paa*max(0,min($valor,$Aa)-$Ia)+$Pea*max(0,min($valor,$Ea)-$Aa);
+			if( $Aa == 0 ) { // Si no hay columna alto alto
 
-			$pago = $C *$consumo + $D * $demanda;
+				$pago = $Pba * min( $consumo, $Ba ) + $Pia * max( 0, min( $consumo, $Ia ) - $Ba )  + $Pea *max (0, $consumo - $Ia);//RE01  min( ,$Ea)// + $Paa * max(0, min($consumo,$Aa)-$Ia)
+			} else {
+				$pago = $Pba * min( $consumo, $Ba ) + $Pia * max( 0, min( $consumo, $Ia ) - $Ba ) + $Paa * max(0, min($consumo,$Ea)-$Ia) + $Pea *max (0, $consumo - $Aa);//RE01
+			}
 
-		}
+		} // Fin else
 
 
 		return $pago;
@@ -305,8 +295,14 @@ function inserta_costodeconsumo(  $idterreno, $anyo, $mes, $casos, $resultados )
 }
 
 
-function getEstacion( $meses, $mes ){
-	return $meses[ $mes ];
+function getEstacion( $mes ){
+	$mes = ((int) $mes );
+
+	if( $mes >= 5 && $mes <= 9 ) {
+		return "verano";
+	}
+
+	return "invierno";
 }
 
 
@@ -443,22 +439,27 @@ function getFechaFinal(  $idterreno, $idcaso ) {
 }
 
 
-function getTarifasTipo( $tarifa ) {
+function getTarifasTipo(  $tarifa ) {
 	$salida = Array();
-	$sql = "SELECT estacion, lim_basico_B, lim_int_B, lim_int_A, lim_DAC, carga_fijo FROM ce_tarifas_tipo WHERE tipo = " . $tarifa;
+	$sql = "SELECT epoca, lim_basico_B, lim_int_B, lim_exc_B, lim_basico, lim_basico_A, lim_int_A, lim_alt_A, lim_exc_A, lim_DAC, carga_fijo FROM ce_tarifas_tipo WHERE tipo = '" . $tarifa . "'";
 
 	$resultado = mysql_query($sql);
 
 	if( $resultado ) {
 
 			while( $registro = mysql_fetch_array( $resultado ) ){
-				$estacion = $registro["estacion"];
+				$epoca = $registro["epoca"];
 
-				$salida[$estacion]["lim_basico_B"] = $registro["lim_basico_B"];
-				$salida[$estacion]["lim_int_B"]    = $registro["lim_int_B"];
-				$salida[$estacion]["lim_int_A"]    = $registro["lim_int_A"];
-				$salida[$estacion]["lim_DAC"]      = $registro["lim_DAC"];
-				$salida[$estacion]["carga_fijo"]   = $registro["carga_fijo"];
+				$salida[$epoca]["lim_basico_B"] = $registro["lim_basico_B"];
+				$salida[$epoca]["lim_int_B"]    = $registro["lim_int_B"];
+				$salida[$epoca]["lim_exc_B"]    = $registro["lim_exc_B"];
+				$salida[$epoca]["lim_basico"]   = $registro["lim_basico"];
+				$salida[$epoca]["lim_basico_A"] = $registro["lim_basico_A"];
+				$salida[$epoca]["lim_int_A"]    = $registro["lim_int_A"];
+				$salida[$epoca]["lim_alt_A"]    = $registro["lim_alt_A"];
+				$salida[$epoca]["lim_exc_A"]    = $registro["lim_exc_A"];
+				$salida[$epoca]["lim_DAC"]      = $registro["lim_DAC"];
+				$salida[$epoca]["carga_fijo"]   = $registro["carga_fijo"];
 
 
 			}
@@ -469,7 +470,7 @@ function getTarifasTipo( $tarifa ) {
   return $salida;
 }
 
-function getTarifa( $idterreno ) {
+function getTarifa(  $idterreno ) {
 
 	$tarifa = "0";
 	$sql = "SELECT tipo FROM ce_consumo WHERE secuencia = 'ce_cfe_consumohistorico_" . $idterreno . "t'";
@@ -486,86 +487,6 @@ function getTarifa( $idterreno ) {
 	}
 
   return $tarifa;
-}
-
-
-function getNombreTarifa( $idtarifa ) {
-
-	$tarifa = "";
-	$sql = "SELECT tarifa FROM ce_tarifas WHERE id_tarifa = ".  $idtarifa;
-
-	$resultado = mysql_query($sql);
-
-	if( $resultado ) {
-
-			if( $registro = mysql_fetch_array( $resultado ) ){
-				$tarifa = $registro["tarifa"];
-			}
-
-			mysql_free_result( $resultado );
-	}
-
-  return $tarifa;
-}
-
-
-function getEstaciones( $idtarifa ) {
-
-	$mesesArray = array();
-
-	$sql = "SELECT mesIncluido, estacion FROM ce_tarifas_tipo WHERE tipo = ". $idtarifa;
-	$estacion = "";
-	$mesIncluido = "";
-
-	$resultado = mysql_query($sql);
-
-	if( $resultado ) {
-
-			while( $registro = mysql_fetch_array( $resultado ) ){
-
-				$estacion    = $registro["estacion"];
-				$mesIncluido = $registro["mesIncluido"];
-
-				$mesA = explode( ";", $mesIncluido );
-				$tot = count ( $mesA );
-
-				for( $i = 0; $i < $tot; $i ++ ) {
-					$mesesArray[ $mesA[$i] ] = $estacion;
-				}
-
-
-			}
-
-			mysql_free_result( $resultado );
-	}
-
-	return $mesesArray;
-
-}
-
-
-function tieneDemanda( $idtarifa ) {
-
-	$demanda = False;
-	$sql = "SELECT demanda FROM ce_tarifas WHERE id_tarifa = ". $idtarifa;
-
-	$resultado = mysql_query($sql);
-
-	if( $resultado ) {
-
-			if( $registro = mysql_fetch_array( $resultado ) ){
-
-				if( $registro["demanda"] == 1 ) {
-                   $demanda = True;
-				}
-
-			}
-
-			mysql_free_result( $resultado );
-	}
-
-  return $demanda;
-
 }
 
 function getLimiteDAC( $tarifa ) {
@@ -708,11 +629,14 @@ $salida.="    </script>\n";
 
 }
 
-  /*****Seccion de prueba *******
+  /*****Seccion de prueba ******
   require("conexion.php");
   require("consumo.php");
-  costo_de_consumo("229", "2", "2013");
-  mysql_close($conn);********/
+  costo_de_consumo("144", "2", "2012");
+  costo_de_consumo("142", "3", "2012");
+  costo_de_consumo("142", "4", "2012");
+  costo_de_consumo("142", "5", "2012");
+  mysql_close($conn);**********/
 
 
 ?>
